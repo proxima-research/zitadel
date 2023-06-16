@@ -2,6 +2,7 @@ package messages
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"regexp"
 	"strings"
 	"time"
@@ -43,6 +44,7 @@ func (msg *Email) GetContent() (string, error) {
 	headers["To"] = strings.Join(msg.Recipients, ", ")
 	headers["Cc"] = strings.Join(msg.CC, ", ")
 	headers["Date"] = time.Now().Format(time.RFC1123Z)
+	headers["Message-ID"] = fmt.Sprintf("<%s@%s>", uuid.NewString(), strings.Split(msg.SenderEmail, "@")[1])
 
 	message := ""
 	for k, v := range headers {
