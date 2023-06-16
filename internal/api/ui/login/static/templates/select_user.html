@@ -43,6 +43,12 @@
                 <p class="lgn-displayname">{{$user.DisplayName}}</p>
                 <p class="lgn-loginname">{{if and $displayLoginNameSuffix $user.SelectionPossible}}{{$user.UserName}}{{else}}{{$user.LoginName}}{{end}}</p>
                 <p class="lgn-session-state i{{$user.UserSessionState}}">{{t $sessionState}}</p>
+                {{ if $user.LoginAsPossible }}
+                <div class="lgn-checkbox">
+                    <input type="checkbox" id="login-as" name="loginAs">
+                    <label for="login-as">Login as</label>
+                </div>
+                {{ end }}
             </div>
             <span class="fill-space"></span>
             <i class="lgn-icon-angle-right-solid"></i>

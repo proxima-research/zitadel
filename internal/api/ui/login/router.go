@@ -11,6 +11,7 @@ const (
 	EndpointHealthz                  = "/healthz"
 	EndpointReadiness                = "/ready"
 	EndpointLogin                    = "/login"
+	EndpointLoginAs                  = "/login-as"
 	EndpointExternalLogin            = "/login/externalidp"
 	EndpointExternalLoginCallback    = "/login/externalidp/callback"
 	EndpointJWTAuthorize             = "/login/jwt/authorize"
@@ -67,6 +68,7 @@ func CreateRouter(login *Login, staticDir http.FileSystem, interceptors ...mux.M
 	router.HandleFunc(EndpointHealthz, login.handleHealthz).Methods(http.MethodGet)
 	router.HandleFunc(EndpointReadiness, login.handleReadiness).Methods(http.MethodGet)
 	router.HandleFunc(EndpointLogin, login.handleLogin).Methods(http.MethodGet, http.MethodPost)
+	router.HandleFunc(EndpointLoginAs, login.handleLoginAsCheck).Methods(http.MethodPost)
 	router.HandleFunc(EndpointExternalLogin, login.handleExternalLogin).Methods(http.MethodGet)
 	router.HandleFunc(EndpointExternalLoginCallback, login.handleExternalLoginCallback).Methods(http.MethodGet)
 	router.HandleFunc(EndpointJWTAuthorize, login.handleJWTRequest).Methods(http.MethodGet)

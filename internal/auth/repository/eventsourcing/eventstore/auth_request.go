@@ -2,6 +2,8 @@ package eventstore
 
 import (
 	"context"
+	"github.com/zitadel/zitadel/internal/database"
+	"github.com/zitadel/zitadel/internal/query/projection"
 	"strings"
 	"time"
 
@@ -224,6 +226,23 @@ func (repo *AuthRequestRepo) CheckLoginName(ctx context.Context, id, loginName, 
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
+func (repo *AuthRequestRepo) CheckLoginAsName(ctx context.Context, id, loginName, userAgentID string) (err error) {
+	ctx, span := tracing.NewSpan(ctx)
+	defer func() { span.EndWithError(err) }()
+	request, err := repo.getAuthRequest(ctx, id, userAgentID)
+	if err != nil {
+		return err
+	}
+	userOrigID := request.UserID
+	err = repo.checkLoginName(ctx, request, loginName)
+	if err != nil {
+		return err
+	}
+	request.LoginAs = false
+	request.UserOrigID = userOrigID
+	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
+}
+
 func (repo *AuthRequestRepo) SelectExternalIDP(ctx context.Context, authReqID, idpConfigID, userAgentID string) (err error) {
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()
@@ -295,7 +314,7 @@ func (repo *AuthRequestRepo) setLinkingUser(ctx context.Context, request *domain
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
-func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAgentID string) (err error) {
+func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAgentID string, loginAs bool) (err error) {
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()
 	request, err := repo.getAuthRequest(ctx, id, userAgentID)
@@ -314,6 +333,7 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAge
 		username = user.PreferredLoginName
 	}
 	request.SetUserInfo(user.ID, username, user.PreferredLoginName, user.DisplayName, user.AvatarKey, user.ResourceOwner)
+	request.LoginAs = loginAs
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
@@ -947,7 +967,14 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 	if user.PreferredLoginName != "" {
 		request.LoginName = user.PreferredLoginName
 	}
-	userSession, err := userSessionByIDs(ctx, repo.UserSessionViewProvider, repo.UserEventProvider, request.AgentID, user)
+	userForSession := user
+	if request.UserOrigID != "" {
+		userForSession, err = activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserOrigID, request.LoginPolicy.IgnoreUnknownUsernames)
+		if err != nil {
+			return nil, err
+		}
+	}
+	userSession, err := userSessionByIDs(ctx, repo.UserSessionViewProvider, repo.UserEventProvider, request.AgentID, userForSession)
 	if err != nil {
 		return nil, err
 	}
@@ -1024,6 +1051,9 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 	if ok {
 		steps = append(steps, &domain.LoginSucceededStep{})
 	}
+	if request.LoginAs {
+		steps = append(steps, &domain.LoginAsStep{})
+	}
 	return append(steps, &domain.RedirectToCallbackStep{}), nil
 }
 
@@ -1040,10 +1070,14 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	if err != nil {
 		return nil, err
 	}
+	orgMembers, _ := repo.orgMembersByUserSessions(userSessions)
+	loginAsPossibleMap := userLoginAsPossibleMap(orgMembers)
 	users := make([]domain.UserSelection, 0)
 	for _, session := range userSessions {
 		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner {
+			loginAsPossible := loginAsPossibleMap[session.UserID]
 			users = append(users, domain.UserSelection{
+				LoginAsPossible:   loginAsPossible,
 				UserID:            session.UserID,
 				DisplayName:       session.DisplayName,
 				UserName:          session.UserName,
@@ -1056,6 +1090,43 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 		}
 	}
 	return users, nil
+}
+
+type orgMember struct {
+	UserID string
+	OrgID  string
+	Roles  database.StringArray
+}
+
+func (repo *AuthRequestRepo) orgMembersByUserSessions(userSessions []*user_model.UserSessionView) ([]*orgMember, error) {
+	userIDs := make([]string, len(userSessions))
+	for i, userSession := range userSessions {
+		userIDs[i] = userSession.UserID
+	}
+
+	orgMembers := make([]*orgMember, 0)
+
+	err := repo.View.Db.Table(projection.OrgMemberProjectionTable).
+		Where(projection.MemberUserIDCol+" IN (?)", userIDs).
+		Find(&orgMembers).
+		Error
+
+	return orgMembers, err
+}
+
+func userLoginAsPossibleMap(members []*orgMember) map[string]bool {
+	m := make(map[string]bool)
+
+	for _, member := range members {
+		for _, role := range member.Roles {
+			if role == "ORG_OWNER" {
+				m[member.UserID] = true
+				break
+			}
+		}
+	}
+
+	return m
 }
 
 func (repo *AuthRequestRepo) firstFactorChecked(request *domain.AuthRequest, user *user_model.UserView, userSession *user_model.UserSessionView) domain.NextStep {

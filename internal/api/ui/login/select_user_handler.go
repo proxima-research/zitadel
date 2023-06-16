@@ -13,7 +13,8 @@ const (
 )
 
 type userSelectionFormData struct {
-	UserID string `schema:"userID"`
+	UserID  string `schema:"userID"`
+	LoginAs bool   `schema:"loginAs"`
 }
 
 func (l *Login) renderUserSelection(w http.ResponseWriter, r *http.Request, authReq *domain.AuthRequest, selectionData *domain.SelectUserStep) {
@@ -47,7 +48,7 @@ func (l *Login) handleSelectUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	userAgentID, _ := http_mw.UserAgentIDFromCtx(r.Context())
-	err = l.authRepo.SelectUser(r.Context(), authSession.ID, data.UserID, userAgentID)
+	err = l.authRepo.SelectUser(r.Context(), authSession.ID, data.UserID, userAgentID, data.LoginAs)
 	if err != nil {
 		l.renderError(w, r, authSession, err)
 		return
