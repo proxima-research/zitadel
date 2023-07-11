@@ -593,6 +593,22 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
 	}
 
+	loginName := human.Username
+	loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
+	if err != nil {
+		return nil, nil, err
+	}
+	if !loginPolicy.DisableLoginWithEmail && human.EmailAddress != "" && human.IsEmailVerified {
+		loginName = string(human.EmailAddress)
+	}
+	event := events[len(events)-1]
+	switch event.(type) {
+	case *user.HumanAddedEvent:
+		event.(*user.HumanAddedEvent).LoginName = loginName
+	case *user.HumanRegisteredEvent:
+		event.(*user.HumanRegisteredEvent).LoginName = loginName
+	}
+
 	for _, link := range links {
 		event, err := c.addUserIDPLink(ctx, userAgg, link)
 		if err != nil {
@@ -606,6 +622,9 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		if err != nil {
 			return nil, nil, err
 		}
+		//if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
+		//	events = append(events, user.NewHumanEmailVerifiedEvent(ctx, userAgg))
+		//}
 		events = append(events, user.NewHumanInitialCodeAddedEvent(ctx, userAgg, initCode.Code, initCode.Expiry))
 	} else {
 		if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
