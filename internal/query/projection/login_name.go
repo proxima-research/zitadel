@@ -321,9 +321,9 @@ func (p *loginNameProjection) reduceUserCreated(event eventstore.Event) (*handle
 
 	switch e := event.(type) {
 	case *user.HumanAddedEvent:
-		userName = e.UserName
+		userName = e.LoginName
 	case *user.HumanRegisteredEvent:
-		userName = e.UserName
+		userName = e.LoginName
 	case *user.MachineAddedEvent:
 		userName = e.UserName
 	default:
