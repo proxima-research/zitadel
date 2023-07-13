@@ -218,7 +218,7 @@ body.waiting * {
 footer {
   width: 100%;
   box-sizing: border-box;
-  background: #00000020;
+  background: rgba(0, 0, 0, 0.1254901961);
   min-height: 50px;
   display: flex;
   align-items: center;
@@ -759,7 +759,7 @@ i {
   letter-spacing: 0.05em;
   font-size: 12px;
   white-space: nowrap;
-  box-shadow: 0 0 3px #0000001a;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1019607843);
   width: fit-content;
   line-height: 1rem;
 }
@@ -1211,7 +1211,7 @@ i {
 footer {
   width: 100%;
   box-sizing: border-box;
-  background: #00000020;
+  background: rgba(0, 0, 0, 0.1254901961);
   min-height: 50px;
   display: flex;
   align-items: center;
@@ -1752,7 +1752,7 @@ i {
   letter-spacing: 0.05em;
   font-size: 12px;
   white-space: nowrap;
-  box-shadow: 0 0 3px #0000001a;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1019607843);
   width: fit-content;
   line-height: 1rem;
 }
@@ -3010,6 +3010,18 @@ a:not(.lgn-stroked-button):not(.lgn-button):not(.lgn-raised-button):not(.lgn-idp
 
 .lgn-login-profile .lgn-names {
   border-color: var(--zitadel-color-divider);
+}
+
+.lgn-account-selection .lgn-account-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 -1px var(--zitadel-color-footer-line);
+}
+.lgn-account-selection .lgn-account-container .lgn-account {
+  box-shadow: none;
+}
+.lgn-account-selection .lgn-account-container .lgn-checkbox {
+  margin-left: 30px;
 }
 
 .lgn-account-selection {

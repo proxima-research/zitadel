@@ -325,7 +325,7 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAge
 	if err != nil {
 		return err
 	}
-	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner {
+	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner && !loginAs {
 		return errors.ThrowPreconditionFailed(nil, "EVENT-fJe2a", "Errors.User.NotAllowedOrg")
 	}
 	username := user.UserName
@@ -1074,8 +1074,8 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	loginAsPossibleMap := userLoginAsPossibleMap(orgMembers)
 	users := make([]domain.UserSelection, 0)
 	for _, session := range userSessions {
-		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner {
-			loginAsPossible := loginAsPossibleMap[session.UserID]
+		loginAsPossible := loginAsPossibleMap[session.UserID]
+		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner || loginAsPossible {
 			users = append(users, domain.UserSelection{
 				LoginAsPossible:   loginAsPossible,
 				UserID:            session.UserID,
