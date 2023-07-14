@@ -39,6 +39,10 @@ func (l *Login) renderUserSelection(w http.ResponseWriter, r *http.Request, auth
 func (l *Login) handleSelectUser(w http.ResponseWriter, r *http.Request) {
 	data := new(userSelectionFormData)
 	authSession, err := l.getAuthRequestAndParseData(r, data)
+	if err != nil {
+		l.renderError(w, r, authSession, err)
+		return
+	}
 
 	authSession.LoginAs = data.LoginAs
 	err = l.updateAuthRequest(r.Context(), authSession)
@@ -47,10 +51,6 @@ func (l *Login) handleSelectUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err != nil {
-		l.renderError(w, r, authSession, err)
-		return
-	}
 	if data.UserID == "0" {
 		l.renderLogin(w, r, authSession, nil)
 		return

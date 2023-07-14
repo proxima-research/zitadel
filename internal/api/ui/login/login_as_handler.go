@@ -22,11 +22,11 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 	data := new(loginAsData)
 	authReq, err := l.getAuthRequestAndParseData(r, data)
 	if err != nil {
-		l.renderLogin(w, r, authReq, err)
+		l.renderLoginAs(w, r, authReq, err)
 		return
 	}
 	if authReq == nil {
-		l.renderLogin(w, r, nil, errors.ThrowInvalidArgument(nil, "LOGIN-adrg3", "Errors.AuthRequest.NotFound"))
+		l.renderLoginAs(w, r, nil, errors.ThrowInvalidArgument(nil, "LOGIN-adrg3", "Errors.AuthRequest.NotFound"))
 		return
 	}
 
@@ -42,13 +42,13 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 
 	authReq, err = l.getAuthRequest(r)
 	if err != nil {
-		l.renderLogin(w, r, authReq, err)
+		l.renderLoginAs(w, r, authReq, err)
 		return
 	}
 	authReq.UserOrigID = userOrigID
 	err = l.updateAuthRequest(r.Context(), authReq)
 	if err != nil {
-		l.renderLogin(w, r, authReq, err)
+		l.renderLoginAs(w, r, authReq, err)
 		return
 	}
 
