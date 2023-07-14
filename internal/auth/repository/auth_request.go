@@ -15,7 +15,6 @@ type AuthRequestRepository interface {
 	DeleteAuthRequest(ctx context.Context, id string) error
 
 	CheckLoginName(ctx context.Context, id, loginName, userAgentID string) error
-	CheckLoginAsName(ctx context.Context, id, loginName, userAgentID string) error
 	CheckExternalUserLogin(ctx context.Context, authReqID, userAgentID string, user *domain.ExternalUser, info *domain.BrowserInfo) error
 	SetExternalUserLogin(ctx context.Context, authReqID, userAgentID string, user *domain.ExternalUser) error
 	SetLinkingUser(ctx context.Context, request *domain.AuthRequest, externalUser *domain.ExternalUser) error

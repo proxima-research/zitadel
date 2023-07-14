@@ -224,22 +224,6 @@ func (repo *AuthRequestRepo) CheckLoginName(ctx context.Context, id, loginName, 
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
-func (repo *AuthRequestRepo) CheckLoginAsName(ctx context.Context, id, loginName, userAgentID string) (err error) {
-	ctx, span := tracing.NewSpan(ctx)
-	defer func() { span.EndWithError(err) }()
-	request, err := repo.getAuthRequest(ctx, id, userAgentID)
-	if err != nil {
-		return err
-	}
-	userOrigID := request.UserID
-	err = repo.checkLoginName(ctx, request, loginName)
-	if err != nil {
-		return err
-	}
-	request.UserOrigID = userOrigID
-	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
-}
-
 func (repo *AuthRequestRepo) SelectExternalIDP(ctx context.Context, authReqID, idpConfigID, userAgentID string) (err error) {
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()

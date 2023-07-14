@@ -1,7 +1,6 @@
 package login
 
 import (
-	"github.com/zitadel/zitadel/internal/auth/repository/eventsourcing"
 	"net/http"
 
 	"github.com/zitadel/zitadel/internal/domain"
@@ -41,15 +40,13 @@ func (l *Login) handleSelectUser(w http.ResponseWriter, r *http.Request) {
 	data := new(userSelectionFormData)
 	authSession, err := l.getAuthRequestAndParseData(r, data)
 
-	if authRequestRepo, ok := l.authRepo.(*eventsourcing.EsRepository); ok {
-		authSession.LoginAs = data.LoginAs
-		err = authRequestRepo.AuthRequests.UpdateAuthRequest(r.Context(), authSession)
-		if err != nil {
-			l.renderError(w, r, authSession, err)
-			return
-		}
-
+	authSession.LoginAs = data.LoginAs
+	err = l.updateAuthRequest(r.Context(), authSession)
+	if err != nil {
+		l.renderError(w, r, authSession, err)
+		return
 	}
+
 	if err != nil {
 		l.renderError(w, r, authSession, err)
 		return
