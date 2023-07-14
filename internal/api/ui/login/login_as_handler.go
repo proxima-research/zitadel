@@ -63,6 +63,10 @@ func (l *Login) renderLoginAs(w http.ResponseWriter, r *http.Request, authReq *d
 
 func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, error) {
 	userTypeSearchQuery, err := query.NewUserTypeSearchQuery(int32(domain.UserTypeHuman))
+	if err != nil {
+		return nil, err
+	}
+
 	queries := &query.UserSearchQueries{
 		SearchRequest: query.SearchRequest{
 			Offset:        0,

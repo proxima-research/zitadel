@@ -312,7 +312,7 @@ func (repo *AuthRequestRepo) setLinkingUser(ctx context.Context, request *domain
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
-func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAgentID string, loginAs bool) (err error) {
+func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAgentID string) (err error) {
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()
 	request, err := repo.getAuthRequest(ctx, id, userAgentID)
@@ -323,7 +323,7 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAge
 	if err != nil {
 		return err
 	}
-	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner && !loginAs {
+	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner && !request.LoginAs {
 		return errors.ThrowPreconditionFailed(nil, "EVENT-fJe2a", "Errors.User.NotAllowedOrg")
 	}
 	username := user.UserName
@@ -331,7 +331,6 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAge
 		username = user.PreferredLoginName
 	}
 	request.SetUserInfo(user.ID, username, user.PreferredLoginName, user.DisplayName, user.AvatarKey, user.ResourceOwner)
-	request.LoginAs = loginAs
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
 
