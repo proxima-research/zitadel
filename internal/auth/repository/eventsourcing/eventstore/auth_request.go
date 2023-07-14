@@ -236,7 +236,6 @@ func (repo *AuthRequestRepo) CheckLoginAsName(ctx context.Context, id, loginName
 	if err != nil {
 		return err
 	}
-	request.LoginAs = false
 	request.UserOrigID = userOrigID
 	return repo.AuthRequests.UpdateAuthRequest(ctx, request)
 }
@@ -957,21 +956,18 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 		}
 		return steps, nil
 	}
-	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserID, request.LoginPolicy.IgnoreUnknownUsernames)
+	requestUserId := request.UserID
+	if request.UserOrigID != "" {
+		requestUserId = request.UserOrigID
+	}
+	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, requestUserId, request.LoginPolicy.IgnoreUnknownUsernames)
 	if err != nil {
 		return nil, err
 	}
 	if user.PreferredLoginName != "" {
 		request.LoginName = user.PreferredLoginName
 	}
-	userForSession := user
-	if request.UserOrigID != "" {
-		userForSession, err = activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserOrigID, request.LoginPolicy.IgnoreUnknownUsernames)
-		if err != nil {
-			return nil, err
-		}
-	}
-	userSession, err := userSessionByIDs(ctx, repo.UserSessionViewProvider, repo.UserEventProvider, request.AgentID, userForSession)
+	userSession, err := userSessionByIDs(ctx, repo.UserSessionViewProvider, repo.UserEventProvider, request.AgentID, user)
 	if err != nil {
 		return nil, err
 	}
@@ -1048,7 +1044,7 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 	if ok {
 		steps = append(steps, &domain.LoginSucceededStep{})
 	}
-	if request.LoginAs {
+	if request.LoginAs && request.UserOrigID == "" {
 		steps = append(steps, &domain.LoginAsStep{})
 	}
 	return append(steps, &domain.RedirectToCallbackStep{}), nil

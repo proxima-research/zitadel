@@ -1,8 +1,7 @@
 {{template "main-top" .}}
 
 <div class="lgn-head">
-    <h1>Login as</h1>
-    <p>Login as Description</p>
+    <h1>{{t "LoginAs.Title"}}</h1>
 
     {{ template "user-profile" . }}
 </div>
@@ -14,7 +13,7 @@
     <input type="hidden" name="authRequestID" value="{{ .AuthReqID }}" />
 
     <div class="fields">
-        <label class="lgn-label" for="login-as-name">Login name</label>
+        <label class="lgn-label" for="login-as-name">{{t "LoginAs.SelectUserLogin" }}</label>
         <select class="lgn-input" type="text" id="login-as-name" name="loginAsName" autocomplete="login-as-name" autofocus
             required {{if .ErrMessage}}shake {{end}}>
             <option value=""></option>
