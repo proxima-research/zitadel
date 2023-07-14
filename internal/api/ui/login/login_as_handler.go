@@ -1,9 +1,11 @@
 package login
 
 import (
+	"context"
 	http_mw "github.com/zitadel/zitadel/internal/api/http/middleware"
 	"github.com/zitadel/zitadel/internal/domain"
 	"github.com/zitadel/zitadel/internal/errors"
+	"github.com/zitadel/zitadel/internal/query"
 	"net/http"
 )
 
@@ -42,7 +44,53 @@ func (l *Login) renderLoginAs(w http.ResponseWriter, r *http.Request, authReq *d
 		errID, errMessage = l.getErrorMessage(r, err)
 	}
 
-	data := l.getUserData(r, authReq, "Login.Title", "Login.Description", errID, errMessage)
+	loginNames, err := l.getLoginNames(r.Context(), authReq.RequestedOrgID)
+	if err != nil {
+		l.renderError(w, r, authReq, err)
+		return
+	}
+
+	data := &struct {
+		userData
+		LoginNames []string
+	}{
+		l.getUserData(r, authReq, "Login.Title", "Login.Description", errID, errMessage),
+		loginNames,
+	}
 
 	l.renderer.RenderTemplate(w, r, l.getTranslator(r.Context(), authReq), l.renderer.Templates[tmplLoginAs], data, nil)
+}
+
+func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, error) {
+	userTypeSearchQuery, err := query.NewUserTypeSearchQuery(int32(domain.UserTypeHuman))
+	queries := &query.UserSearchQueries{
+		SearchRequest: query.SearchRequest{
+			Offset:        0,
+			Limit:         100,
+			Asc:           true,
+			SortingColumn: query.UserUsernameCol,
+		},
+		Queries: []query.SearchQuery{userTypeSearchQuery},
+	}
+
+	if orgId != "" {
+		err = queries.AppendMyResourceOwnerQuery(orgId)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	users, err := l.query.SearchUsers(ctx, queries, false)
+	if err != nil {
+		return nil, err
+	}
+	var loginNames = make([]string, len(users.Users))
+	for i, user := range users.Users {
+		if user.PreferredLoginName != "" {
+			loginNames[i] = user.PreferredLoginName
+		} else {
+			loginNames[i] = user.Username
+		}
+	}
+	return loginNames, nil
 }

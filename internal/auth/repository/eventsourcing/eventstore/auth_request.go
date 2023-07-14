@@ -2,8 +2,6 @@ package eventstore
 
 import (
 	"context"
-	"github.com/zitadel/zitadel/internal/database"
-	"github.com/zitadel/zitadel/internal/query/projection"
 	"strings"
 	"time"
 
@@ -1070,8 +1068,10 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	if err != nil {
 		return nil, err
 	}
-	orgMembers, _ := repo.orgMembersByUserSessions(userSessions)
-	loginAsPossibleMap := userLoginAsPossibleMap(orgMembers)
+	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, userSessions)
+	if err != nil {
+		return nil, err
+	}
 	users := make([]domain.UserSelection, 0)
 	for _, session := range userSessions {
 		loginAsPossible := loginAsPossibleMap[session.UserID]
@@ -1092,32 +1092,19 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	return users, nil
 }
 
-type orgMember struct {
-	UserID string
-	OrgID  string
-	Roles  database.StringArray
-}
-
-func (repo *AuthRequestRepo) orgMembersByUserSessions(userSessions []*user_model.UserSessionView) ([]*orgMember, error) {
+func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
 	userIDs := make([]string, len(userSessions))
 	for i, userSession := range userSessions {
 		userIDs[i] = userSession.UserID
 	}
 
-	orgMembers := make([]*orgMember, 0)
+	orgMembers, err := repo.Query.OrgMembersByUserIDs(authz.WithInstanceID(context.Background(), instanceID), &query.OrgMembersByUserIDsQuery{UserIDs: userIDs}, false)
+	if err != nil {
+		return nil, err
+	}
 
-	err := repo.View.Db.Table(projection.OrgMemberProjectionTable).
-		Where(projection.MemberUserIDCol+" IN (?)", userIDs).
-		Find(&orgMembers).
-		Error
-
-	return orgMembers, err
-}
-
-func userLoginAsPossibleMap(members []*orgMember) map[string]bool {
 	m := make(map[string]bool)
-
-	for _, member := range members {
+	for _, member := range orgMembers.Members {
 		for _, role := range member.Roles {
 			if role == "ORG_OWNER" {
 				m[member.UserID] = true
@@ -1125,8 +1112,7 @@ func userLoginAsPossibleMap(members []*orgMember) map[string]bool {
 			}
 		}
 	}
-
-	return m
+	return m, nil
 }
 
 func (repo *AuthRequestRepo) firstFactorChecked(request *domain.AuthRequest, user *user_model.UserView, userSession *user_model.UserSessionView) domain.NextStep {

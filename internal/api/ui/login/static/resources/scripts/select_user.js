@@ -1,17 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementsByClassName('lgn-account-selection')[0];
-    let title = '';
     container.addEventListener('change', function (event) {
         const t = event.target;
         if (t.classList.contains('lgn-login-as')) {
-            const btn = t.closest('.lgn-account-container').getElementsByClassName('lgn-account')[0];
-            if (t.checked) {
-                title = btn.getAttribute('title');
-                btn.removeAttribute('title');
-                btn.removeAttribute('disabled');
-            } else {
-                btn.setAttribute('title', title);
-                btn.setAttribute('disabled', 'disabled');
+            const btn = t.closest('.lgn-account-container').getElementsByClassName('not-org-user')[0];
+            if (btn) {
+                if (t.checked) {
+                    const title = btn.getAttribute('title');
+                    btn.removeAttribute('title');
+                    if (title) {
+                        btn.setAttribute('_title', title);
+                    }
+                    btn.removeAttribute('disabled');
+                } else {
+                    const title = btn.getAttribute('_title');
+                    btn.removeAttribute('_title');
+                    if (title) {
+                        btn.setAttribute('title', title);
+                    }
+                    btn.setAttribute('disabled', 'disabled');
+                }
             }
         }
     });

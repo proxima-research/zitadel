@@ -29,7 +29,7 @@
         {{ $sessionState := (printf "SelectAccount.SessionState%v" $user.UserSessionState) }}
         {{if or $user.SelectionPossible $user.LoginAsPossible}}
         <div class="lgn-account-container">
-            <button type="submit" name="userID" value="{{$user.UserID}}" class="lgn-account"
+            <button type="submit" name="userID" value="{{$user.UserID}}" class="lgn-account{{if not $user.SelectionPossible}} not-org-user{{end}}"
             {{if not $user.SelectionPossible}}disabled title="{{t "Errors.User.NotAllowedOrg"}}"{{end}}>
                 <div class="left">
                     <div class="lgn-avatar" {{if not $user.AvatarKey}}loginname="{{$user.LoginName}}"{{end}}>
