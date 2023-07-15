@@ -3,7 +3,7 @@ package query
 import (
 	"context"
 	"database/sql"
-	
+
 	sq "github.com/Masterminds/squirrel"
 
 	"github.com/zitadel/zitadel/internal/api/authz"
