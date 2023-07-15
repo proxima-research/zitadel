@@ -45,6 +45,13 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 		l.renderLoginAs(w, r, authReq, err)
 		return
 	}
+
+	err = l.checkUserResourceOwner(r.Context(), authReq.UserID, userOrigID)
+	if err != nil {
+		l.renderLoginAs(w, r, authReq, err)
+		return
+	}
+
 	authReq.UserOrigID = userOrigID
 	err = l.updateAuthRequest(r.Context(), authReq)
 	if err != nil {
@@ -76,6 +83,19 @@ func (l *Login) renderLoginAs(w http.ResponseWriter, r *http.Request, authReq *d
 	}
 
 	l.renderer.RenderTemplate(w, r, l.getTranslator(r.Context(), authReq), l.renderer.Templates[tmplLoginAs], data, nil)
+}
+
+func (l *Login) checkUserResourceOwner(ctx context.Context, userID, userOrigID string) error {
+	if userID != userOrigID {
+		i, _ := l.query.Instance(ctx, false)
+		u, _ := l.query.GetUserByID(ctx, false, userID, false)
+		uo, _ := l.query.GetUserByID(ctx, false, userOrigID, false)
+		if uo.ResourceOwner != i.DefaultOrgID && uo.ResourceOwner != u.ResourceOwner {
+			return errors.ThrowPermissionDenied(nil, "AUTH-Bss7s", "Orig and target users belong to different orgs")
+		}
+		return nil
+	}
+	return nil
 }
 
 func (l *Login) updateAuthRequest(ctx context.Context, request *domain.AuthRequest) error {
