@@ -1047,7 +1047,7 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	if err != nil {
 		return nil, err
 	}
-	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, userSessions)
+	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.RequestedOrgID, userSessions)
 	if err != nil {
 		return nil, err
 	}
@@ -1071,24 +1071,19 @@ func (repo *AuthRequestRepo) usersForUserSelection(request *domain.AuthRequest) 
 	return users, nil
 }
 
-func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
-	userIDs := make([]string, len(userSessions))
-	for i, userSession := range userSessions {
-		userIDs[i] = userSession.UserID
-	}
+func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
+	ctx := authz.WithInstanceID(context.Background(), instanceID)
 
-	orgMembers, err := repo.Query.OrgMembersByUserIDs(authz.WithInstanceID(context.Background(), instanceID), &query.OrgMembersByUserIDsQuery{UserIDs: userIDs}, false)
+	i, err := repo.Query.Instance(ctx, false)
 	if err != nil {
 		return nil, err
 	}
 
 	m := make(map[string]bool)
-	for _, member := range orgMembers.Members {
-		for _, role := range member.Roles {
-			if role == "ORG_OWNER" {
-				m[member.UserID] = true
-				break
-			}
+	for _, userSession := range userSessions {
+		um, _ := repo.Query.GetUserMetadataByKey(ctx, false, userSession.UserID, "LOGIN_AS", false)
+		if um != nil && strings.ToUpper(string(um.Value)) == "ON" && (um.ResourceOwner == requestedOrgID || um.ResourceOwner == i.DefaultOrgID) {
+			m[userSession.UserID] = true
 		}
 	}
 	return m, nil

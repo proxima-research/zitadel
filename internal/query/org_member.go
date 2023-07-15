@@ -109,49 +109,6 @@ func (q *Queries) OrgMembers(ctx context.Context, queries *OrgMembersQuery, with
 	return members, err
 }
 
-type OrgMembersByUserIDsQuery struct {
-	MembersQuery
-	UserIDs []string
-}
-
-func (q *OrgMembersByUserIDsQuery) toQuery(query sq.SelectBuilder) sq.SelectBuilder {
-	return q.MembersQuery.
-		toQuery(query).
-		Where(sq.Eq{OrgMemberUserID.identifier(): q.UserIDs})
-}
-
-func (q *Queries) OrgMembersByUserIDs(ctx context.Context, queries *OrgMembersByUserIDsQuery, withOwnerRemoved bool) (_ *Members, err error) {
-	ctx, span := tracing.NewSpan(ctx)
-	defer func() { span.EndWithError(err) }()
-
-	query, scan := prepareOrgMembersQuery(ctx, q.client)
-	eq := sq.Eq{OrgMemberInstanceID.identifier(): authz.GetInstance(ctx).InstanceID()}
-	if !withOwnerRemoved {
-		addOrgMemberWithoutOwnerRemoved(eq)
-		addLoginNameWithoutOwnerRemoved(eq)
-	}
-	stmt, args, err := queries.toQuery(query).Where(eq).ToSql()
-	if err != nil {
-		return nil, errors.ThrowInvalidArgument(err, "QUERY-JJAVB", "Errors.Query.InvalidRequest")
-	}
-
-	currentSequence, err := q.latestSequence(ctx, orgMemberTable)
-	if err != nil {
-		return nil, err
-	}
-
-	rows, err := q.client.QueryContext(ctx, stmt, args...)
-	if err != nil {
-		return nil, errors.ThrowInternal(err, "QUERY-JSDAS", "Errors.Internal")
-	}
-	members, err := scan(rows)
-	if err != nil {
-		return nil, err
-	}
-	members.LatestSequence = currentSequence
-	return members, err
-}
-
 func prepareOrgMembersQuery(ctx context.Context, db prepareDatabase) (sq.SelectBuilder, func(*sql.Rows) (*Members, error)) {
 	return sq.Select(
 			OrgMemberCreationDate.identifier(),
