@@ -315,7 +315,8 @@
       "DELETEACCOUNT": "Supprimer le compte",
       "DELETEACCOUNT_DESC": "Si vous effectuez cette action, vous serez déconnecté et n'aurez plus accès à votre compte. Cette action n'est pas réversible, veuillez donc continuer avec prudence.",
       "DELETEACCOUNT_BTN": "Supprimer le compte",
-      "DELETEACCOUNT_SUCCESS": "Compte supprimé avec succès !"
+      "DELETEACCOUNT_SUCCESS": "Compte supprimé avec succès !",
+      "NOPERMISSIONTOEDIT": "Il vous manque les autorisations requises pour modifier le profil!"
     },
     "DETAILS": {
       "DATECREATED": "Créé",
