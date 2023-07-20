@@ -315,7 +315,8 @@
       "DELETEACCOUNT": "Account löschen",
       "DELETEACCOUNT_DESC": "Wenn du diese Aktion ausführst, wirst du abgemeldet und danach keinen Zugriff mehr auf dein Konto haben. Diese Aktion kann nicht rückgängig gemacht werden.",
       "DELETEACCOUNT_BTN": "Account löschen",
-      "DELETEACCOUNT_SUCCESS": "Account erfolgreich gelöscht!"
+      "DELETEACCOUNT_SUCCESS": "Account erfolgreich gelöscht!",
+      "NOPERMISSIONTOEDIT": "Ihnen fehlen die erforderlichen Berechtigungen zum Bearbeiten des Profils!"
     },
     "DETAILS": {
       "DATECREATED": "Erstellt",

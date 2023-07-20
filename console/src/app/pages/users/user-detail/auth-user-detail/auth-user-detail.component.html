@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="max-width-container">
+<div class="max-width-container" *ngIf="['user.read'] | hasRole | async; else noPermissionToEdit">
   <cnsl-meta-layout>
     <cnsl-sidenav [(ngModel)]="currentSetting" [settingsList]="settingsList" queryParam="id">
       <ng-container *ngIf="currentSetting === 'general'">
@@ -161,3 +161,11 @@
     </div>
   </cnsl-meta-layout>
 </div>
+<ng-template #noPermissionToEdit>
+  <div class="no-permission-warn-wrapper">
+    <div class="no-permission-warn-wrapper">
+      <cnsl-info-section class="info-section-warn" [fitWidth]="true" [type]="InfoSectionType.ALERT">
+        {{ 'USER.PAGES.NOPERMISSIONTOEDIT' | translate }}</cnsl-info-section>
+    </div>
+  </div>
+</ng-template>
