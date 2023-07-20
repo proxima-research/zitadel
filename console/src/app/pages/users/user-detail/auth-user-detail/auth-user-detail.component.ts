@@ -9,6 +9,7 @@ import { Buffer } from 'buffer';
 import { Subscription, take } from 'rxjs';
 import { ChangeType } from 'src/app/modules/changes/changes.component';
 import { phoneValidator, requiredValidator } from 'src/app/modules/form-field/validators/validators';
+import { InfoSectionType } from 'src/app/modules/info-section/info-section.component';
 import { MetadataDialogComponent } from 'src/app/modules/metadata/metadata-dialog/metadata-dialog.component';
 import { PolicyComponentServiceType } from 'src/app/modules/policies/policy-component-types.enum';
 import { SidenavSetting } from 'src/app/modules/sidenav/sidenav.component';
@@ -25,7 +26,6 @@ import { ToastService } from 'src/app/services/toast.service';
 import { formatPhone } from 'src/app/utils/formatPhone';
 import { supportedLanguages } from 'src/app/utils/language';
 import { EditDialogComponent, EditDialogType } from './edit-dialog/edit-dialog.component';
-import {InfoSectionType} from "src/app/modules/info-section/info-section.component";
 
 @Component({
   selector: 'cnsl-auth-user-detail',
