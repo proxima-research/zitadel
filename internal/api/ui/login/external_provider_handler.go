@@ -1149,7 +1149,7 @@ func mapExternalUserToLoginUser(externalUser *domain.ExternalUser, mustBeDomain 
 	externalIDP := &domain.UserIDPLink{
 		IDPConfigID:    externalUser.IDPConfigID,
 		ExternalUserID: externalUser.ExternalUserID,
-		DisplayName:    externalUser.PreferredUsername,
+		DisplayName:    string(externalUser.Email),
 	}
 	return human, externalIDP, externalUser.Metadatas
 }
