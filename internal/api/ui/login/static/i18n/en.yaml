@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: register
   NextButtonText: next
 
+LoginAs:
+  Title: Login as
+  SelectUserLogin: Select user login.
+
 LDAP:
   Title: Login
   Description: Enter your login data.
@@ -346,7 +350,7 @@ ExternalNotFound:
   Bulgarian: Български
   Portuguese: Português
   Macedonian: Македонски
-  
+
 DeviceAuth:
   Title: Device Authorization
   UserCode:
