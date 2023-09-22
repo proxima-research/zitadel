@@ -26,9 +26,6 @@ type AuthRequest struct {
 	InstanceID    string
 	Request       Request
 
-	LoginAs    bool
-	UserOrigID string
-
 	levelOfAssurance         LevelOfAssurance
 	UserID                   string
 	UserName                 string
@@ -58,6 +55,9 @@ type AuthRequest struct {
 	LockoutPolicy            *LockoutPolicy
 	DefaultTranslations      []*CustomText
 	OrgTranslations          []*CustomText
+
+	LoginAs    bool
+	UserOrigID string
 }
 
 type ExternalUser struct {
