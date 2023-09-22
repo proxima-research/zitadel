@@ -26,8 +26,8 @@ const (
 )
 
 type HumanAddedEvent struct {
-	LoginName             string
-	eventstore.BaseEvent  `json:"-"`
+	eventstore.BaseEvent `json:"-"`
+
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
 
@@ -53,6 +53,8 @@ type HumanAddedEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"`
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
+
+	LoginName string
 }
 
 func (e *HumanAddedEvent) Data() interface{} {
@@ -125,7 +127,8 @@ func NewHumanAddedEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-		LoginName:             loginName,
+
+		LoginName: loginName,
 	}
 }
 
@@ -142,7 +145,6 @@ func HumanAddedEventMapper(event *repository.Event) (eventstore.Event, error) {
 }
 
 type HumanRegisteredEvent struct {
-	LoginName             string
 	eventstore.BaseEvent  `json:"-"`
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
@@ -165,6 +167,8 @@ type HumanRegisteredEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"` // legacy
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
+
+	LoginName string
 }
 
 func (e *HumanRegisteredEvent) Data() interface{} {
@@ -237,7 +241,8 @@ func NewHumanRegisteredEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-		LoginName:             loginName,
+
+		LoginName: loginName,
 	}
 }
 
