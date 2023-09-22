@@ -316,7 +316,8 @@
       "DELETEACCOUNT": "Excluir Conta",
       "DELETEACCOUNT_DESC": "Se você realizar esta ação, será desconectado e não terá mais acesso à sua conta. Essa ação não pode ser desfeita, portanto, prossiga com cautela.",
       "DELETEACCOUNT_BTN": "Excluir Conta",
-      "DELETEACCOUNT_SUCCESS": "Conta excluída com sucesso!"
+      "DELETEACCOUNT_SUCCESS": "Conta excluída com sucesso!",
+      "NOPERMISSIONTOEDIT": "Brakuje Ci wymaganych uprawnień do edycji profilu!"
     },
     "DETAILS": {
       "DATECREATED": "Criado",

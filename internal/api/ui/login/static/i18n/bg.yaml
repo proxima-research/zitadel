@@ -12,6 +12,9 @@ Login:
   MustBeMemberOfOrg: 'Потребителят трябва да е член на {{.OrgName}} организация.'
   RegisterButtonText: регистрирам
   NextButtonText: следващия
+LoginAs:
+  Title: Login as
+  SelectUserLogin: Select user login.
 LDAP:
   Title: Влизам
   Description: Въведете вашите данни за вход.
@@ -20,7 +23,7 @@ LDAP:
   NextButtonText: следващия
 SelectAccount:
   Title: Изберете акаунт
-  Description: Използвайте вашия ZITADEL-акаунт
+  Description: Използвайте вашия акаунт
   TitleLinking: Изберете акаунт за свързване на потребител
   DescriptionLinking: 'Изберете своя акаунт, който да свържете с вашия външен потребител.'
   OtherUser: Друг потребител
