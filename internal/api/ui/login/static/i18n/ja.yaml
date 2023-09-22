@@ -13,7 +13,7 @@ Login:
 
 SelectAccount:
   Title: アカウントの選択
-  Description: ZITADELアカウントを使用します。
+  Description: アカウントを使用します。
   TitleLinking: ユーザーリンクのアカウント選択
   DescriptionLinking: アカウントを選択して、外部ユーザーにリンクします。
   OtherUser: その他のユーザー
