@@ -26,10 +26,8 @@ const (
 )
 
 type HumanAddedEvent struct {
-	eventstore.BaseEvent `json:"-"`
-
-	LoginName string
-
+	LoginName             string
+	eventstore.BaseEvent  `json:"-"`
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
 
@@ -144,10 +142,8 @@ func HumanAddedEventMapper(event *repository.Event) (eventstore.Event, error) {
 }
 
 type HumanRegisteredEvent struct {
-	eventstore.BaseEvent `json:"-"`
-
-	LoginName string
-
+	LoginName             string
+	eventstore.BaseEvent  `json:"-"`
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
 	FirstName             string              `json:"firstName,omitempty"`
