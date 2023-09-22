@@ -26,6 +26,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { formatPhone } from 'src/app/utils/formatPhone';
 import { supportedLanguages } from 'src/app/utils/language';
 import { EditDialogComponent, EditDialogType } from './edit-dialog/edit-dialog.component';
+import { InfoSectionType } from "src/app/modules/info-section/info-section.component";
 
 @Component({
   selector: 'cnsl-auth-user-detail',
@@ -65,6 +66,8 @@ export class AuthUserDetailComponent implements OnDestroy {
   ];
   public currentSetting: string | undefined = this.settingsList[0].id;
   public loginPolicy?: LoginPolicy.AsObject;
+
+  public InfoSectionType: any = InfoSectionType;
 
   constructor(
     public translate: TranslateService,
