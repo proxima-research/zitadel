@@ -20,7 +20,7 @@ func (m *MockRepository) ExpectFilterNoEventsNoError() *MockRepository {
 }
 
 func (m *MockRepository) ExpectFilterEvents(events ...*repository.Event) *MockRepository {
-	m.EXPECT().Filter(gomock.Any(), gomock.Any()).Return(events, nil)
+	m.EXPECT().Filter(gomock.Any(), gomock.Any()).Return(events, nil).AnyTimes()
 	return m
 }
 
