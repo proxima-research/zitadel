@@ -106,12 +106,7 @@ func NewHumanAddedEvent(
 	gender domain.Gender,
 	emailAddress domain.EmailAddress,
 	userLoginMustBeDomain bool,
-	canLoginWithEmail bool,
 ) *HumanAddedEvent {
-	loginName := userName
-	if canLoginWithEmail && emailAddress != "" {
-		loginName = string(emailAddress)
-	}
 	return &HumanAddedEvent{
 		BaseEvent: *eventstore.NewBaseEventForPush(
 			ctx,
@@ -127,8 +122,6 @@ func NewHumanAddedEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-
-		LoginName: loginName,
 	}
 }
 
@@ -220,12 +213,7 @@ func NewHumanRegisteredEvent(
 	gender domain.Gender,
 	emailAddress domain.EmailAddress,
 	userLoginMustBeDomain bool,
-	canLoginWithEmail bool,
 ) *HumanRegisteredEvent {
-	loginName := userName
-	if canLoginWithEmail && emailAddress != "" {
-		loginName = string(emailAddress)
-	}
 	return &HumanRegisteredEvent{
 		BaseEvent: *eventstore.NewBaseEventForPush(
 			ctx,
@@ -241,8 +229,6 @@ func NewHumanRegisteredEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-
-		LoginName: loginName,
 	}
 }
 
