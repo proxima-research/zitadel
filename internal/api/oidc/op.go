@@ -169,6 +169,7 @@ func createOptions(config Config, externalSecure bool, userAgentCookie, instance
 			userAgentCookie,
 			http_utils.CopyHeadersToContext,
 			accessHandler,
+			middleware.ModeHandler(),
 		),
 	}
 	if !externalSecure {

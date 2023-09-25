@@ -20,7 +20,7 @@ LDAP:
 
 SelectAccount:
   Title: 选择账户
-  Description: 使用您的 ZITADEL 帐户
+  Description: 使用您的 帐户
   TitleLinking: 选择用于用户链接的帐户
   DescriptionLinking: 选择您的帐户以与您的外部用户关联。
   OtherUser: 其他用户
