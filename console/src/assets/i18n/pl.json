@@ -315,7 +315,8 @@
       "DELETEACCOUNT": "Usuń Konto",
       "DELETEACCOUNT_DESC": "Jeśli wykonasz tę akcję, zostaniesz wylogowany i już nie będziesz mieć dostępu do swojego konta. Ta akcja nie jest odwracalna, więc proszę kontynuować ostrożnie.",
       "DELETEACCOUNT_BTN": "Usuń Konto",
-      "DELETEACCOUNT_SUCCESS": "Konto zostało pomyślnie usunięte!"
+      "DELETEACCOUNT_SUCCESS": "Konto zostało pomyślnie usunięte!",
+      "NOPERMISSIONTOEDIT": "Brakuje Ci wymaganych uprawnień do edycji profilu!"
     },
     "DETAILS": {
       "DATECREATED": "Utworzone",
