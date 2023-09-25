@@ -1445,18 +1445,22 @@ func TestCommandSide_SetUpOrg(t *testing.T) {
 								"org.iam-domain",
 							)),
 							eventFromEventPusher(
-								user.NewHumanAddedEvent(context.Background(),
-									&user.NewAggregate("userID", "orgID").Aggregate,
-									"username",
-									"firstname",
-									"lastname",
-									"",
-									"firstname lastname",
-									language.English,
-									domain.GenderUnspecified,
-									"email@test.ch",
-									true,
-								),
+								func() *user.HumanAddedEvent {
+									e := user.NewHumanAddedEvent(context.Background(),
+										&user.NewAggregate("userID", "orgID").Aggregate,
+										"username",
+										"firstname",
+										"lastname",
+										"",
+										"firstname lastname",
+										language.English,
+										domain.GenderUnspecified,
+										"email@test.ch",
+										true,
+									)
+									e.LoginName = "email@test.ch"
+									return e
+								}(),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -1484,7 +1488,7 @@ func TestCommandSide_SetUpOrg(t *testing.T) {
 						},
 						uniqueConstraintsFromEventConstraint(org.NewAddOrgNameUniqueConstraint("Org")),
 						uniqueConstraintsFromEventConstraint(org.NewAddOrgDomainUniqueConstraint("org.iam-domain")),
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "orgID", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "orgID", true)),
 						uniqueConstraintsFromEventConstraint(member.NewAddMemberUniqueConstraint("orgID", "userID")),
 					),
 				),

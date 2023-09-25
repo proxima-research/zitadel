@@ -28,8 +28,6 @@ const (
 type HumanAddedEvent struct {
 	eventstore.BaseEvent `json:"-"`
 
-	LoginName string
-
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
 
@@ -55,6 +53,8 @@ type HumanAddedEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"`
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
+
+	LoginName string
 }
 
 func (e *HumanAddedEvent) Data() interface{} {
@@ -106,12 +106,7 @@ func NewHumanAddedEvent(
 	gender domain.Gender,
 	emailAddress domain.EmailAddress,
 	userLoginMustBeDomain bool,
-	canLoginWithEmail bool,
 ) *HumanAddedEvent {
-	loginName := userName
-	if canLoginWithEmail && emailAddress != "" {
-		loginName = string(emailAddress)
-	}
 	return &HumanAddedEvent{
 		BaseEvent: *eventstore.NewBaseEventForPush(
 			ctx,
@@ -127,7 +122,6 @@ func NewHumanAddedEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-		LoginName:             loginName,
 	}
 }
 
@@ -144,10 +138,7 @@ func HumanAddedEventMapper(event *repository.Event) (eventstore.Event, error) {
 }
 
 type HumanRegisteredEvent struct {
-	eventstore.BaseEvent `json:"-"`
-
-	LoginName string
-
+	eventstore.BaseEvent  `json:"-"`
 	UserName              string `json:"userName"`
 	userLoginMustBeDomain bool
 	FirstName             string              `json:"firstName,omitempty"`
@@ -169,6 +160,8 @@ type HumanRegisteredEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"` // legacy
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
+
+	LoginName string
 }
 
 func (e *HumanRegisteredEvent) Data() interface{} {
@@ -220,12 +213,7 @@ func NewHumanRegisteredEvent(
 	gender domain.Gender,
 	emailAddress domain.EmailAddress,
 	userLoginMustBeDomain bool,
-	canLoginWithEmail bool,
 ) *HumanRegisteredEvent {
-	loginName := userName
-	if canLoginWithEmail && emailAddress != "" {
-		loginName = string(emailAddress)
-	}
 	return &HumanRegisteredEvent{
 		BaseEvent: *eventstore.NewBaseEventForPush(
 			ctx,
@@ -241,7 +229,6 @@ func NewHumanRegisteredEvent(
 		Gender:                gender,
 		EmailAddress:          emailAddress,
 		userLoginMustBeDomain: userLoginMustBeDomain,
-		LoginName:             loginName,
 	}
 }
 

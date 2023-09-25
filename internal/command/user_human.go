@@ -184,12 +184,6 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 				return nil, err
 			}
 
-			loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
-			if err != nil {
-				return nil, err
-			}
-			canLoginWithEmail := !loginPolicy.DisableLoginWithEmail && human.Email.Verified
-
 			var createCmd humanCreationCommand
 			if human.Register {
 				createCmd = user.NewHumanRegisteredEvent(
@@ -204,7 +198,6 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 					human.Gender,
 					human.Email.Address,
 					domainPolicy.UserLoginMustBeDomain,
-					canLoginWithEmail,
 				)
 			} else {
 				createCmd = user.NewHumanAddedEvent(
@@ -219,8 +212,22 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 					human.Gender,
 					human.Email.Address,
 					domainPolicy.UserLoginMustBeDomain,
-					canLoginWithEmail,
 				)
+			}
+
+			//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
+			//if err != nil {
+			//	return nil, err
+			//}
+			loginName := human.Username
+			if /*!loginPolicy.DisableLoginWithEmail &&*/ human.Email.Verified && human.Email.Address != "" {
+				loginName = string(human.Email.Address)
+			}
+			switch ev := createCmd.(type) {
+			case *user.HumanRegisteredEvent:
+				ev.LoginName = loginName
+			case *user.HumanAddedEvent:
+				ev.LoginName = loginName
 			}
 
 			if human.Phone.Number != "" {
@@ -607,16 +614,25 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 	//TODO: adlerhurst maybe we could simplify the code below
 	userAgg := UserAggregateFromWriteModel(&addedHuman.WriteModel)
 
-	loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
-	if err != nil {
-		return nil, nil, err
-	}
-	canLoginWithEmail := !loginPolicy.DisableLoginWithEmail && human.IsEmailVerified
-
 	if selfregister {
-		events = append(events, createRegisterHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain, canLoginWithEmail))
+		events = append(events, createRegisterHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
 	} else {
-		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain, canLoginWithEmail))
+		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
+	}
+
+	//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
+	//if err != nil {
+	//	return nil, nil, err
+	//}
+	loginName := human.Username
+	if /*!loginPolicy.DisableLoginWithEmail &&*/ human.IsEmailVerified && human.EmailAddress != "" {
+		loginName = string(human.EmailAddress)
+	}
+	switch ev := events[len(events)-1].(type) {
+	case *user.HumanRegisteredEvent:
+		ev.LoginName = loginName
+	case *user.HumanAddedEvent:
+		ev.LoginName = loginName
 	}
 
 	for _, link := range links {
@@ -680,7 +696,7 @@ func (c *Commands) HumanSkipMFAInit(ctx context.Context, userID, resourceowner s
 }
 
 // TODO: adlerhurst maybe we can simplify createAddHumanEvent and createRegisterHumanEvent
-func createAddHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, human *domain.Human, userLoginMustBeDomain, canLoginWithEmail bool) *user.HumanAddedEvent {
+func createAddHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, human *domain.Human, userLoginMustBeDomain bool) *user.HumanAddedEvent {
 	addEvent := user.NewHumanAddedEvent(
 		ctx,
 		aggregate,
@@ -693,7 +709,6 @@ func createAddHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, h
 		human.Gender,
 		human.EmailAddress,
 		userLoginMustBeDomain,
-		canLoginWithEmail,
 	)
 	if human.Phone != nil {
 		addEvent.AddPhoneData(human.PhoneNumber)
@@ -715,7 +730,7 @@ func createAddHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, h
 	return addEvent
 }
 
-func createRegisterHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, human *domain.Human, userLoginMustBeDomain, canLoginWithEmail bool) *user.HumanRegisteredEvent {
+func createRegisterHumanEvent(ctx context.Context, aggregate *eventstore.Aggregate, human *domain.Human, userLoginMustBeDomain bool) *user.HumanRegisteredEvent {
 	addEvent := user.NewHumanRegisteredEvent(
 		ctx,
 		aggregate,
@@ -728,7 +743,6 @@ func createRegisterHumanEvent(ctx context.Context, aggregate *eventstore.Aggrega
 		human.Gender,
 		human.EmailAddress,
 		userLoginMustBeDomain,
-		canLoginWithEmail,
 	)
 	if human.Phone != nil {
 		addEvent.AddPhoneData(human.PhoneNumber)
