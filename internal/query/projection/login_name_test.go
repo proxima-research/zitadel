@@ -29,7 +29,7 @@ func TestLoginNameProjection_reduces(t *testing.T) {
 					repository.EventType(user.HumanAddedType),
 					user.AggregateType,
 					[]byte(`{
-					"userName": "human-added"
+					"loginName": "human-added"
 				}`),
 				), user.HumanAddedEventMapper),
 			},
@@ -60,7 +60,7 @@ func TestLoginNameProjection_reduces(t *testing.T) {
 					repository.EventType(user.HumanRegisteredType),
 					user.AggregateType,
 					[]byte(`{
-					"userName": "human-registered"
+					"loginName": "human-registered"
 				}`),
 				), user.HumanRegisteredEventMapper),
 			},

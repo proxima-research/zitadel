@@ -215,6 +215,21 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 				)
 			}
 
+			//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
+			//if err != nil {
+			//	return nil, err
+			//}
+			loginName := human.Username
+			if /*!loginPolicy.DisableLoginWithEmail &&*/ human.Email.Verified && human.Email.Address != "" {
+				loginName = string(human.Email.Address)
+			}
+			switch ev := createCmd.(type) {
+			case *user.HumanRegisteredEvent:
+				ev.LoginName = loginName
+			case *user.HumanAddedEvent:
+				ev.LoginName = loginName
+			}
+
 			if human.Phone.Number != "" {
 				createCmd.AddPhoneData(human.Phone.Number)
 			}
@@ -605,6 +620,21 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
 	}
 
+	//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
+	//if err != nil {
+	//	return nil, nil, err
+	//}
+	loginName := human.Username
+	if /*!loginPolicy.DisableLoginWithEmail &&*/ human.IsEmailVerified && human.EmailAddress != "" {
+		loginName = string(human.EmailAddress)
+	}
+	switch ev := events[len(events)-1].(type) {
+	case *user.HumanRegisteredEvent:
+		ev.LoginName = loginName
+	case *user.HumanAddedEvent:
+		ev.LoginName = loginName
+	}
+
 	for _, link := range links {
 		event, err := c.addUserIDPLink(ctx, userAgg, link, false)
 		if err != nil {
@@ -618,6 +648,9 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		if err != nil {
 			return nil, nil, err
 		}
+		//if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
+		//	events = append(events, user.NewHumanEmailVerifiedEvent(ctx, userAgg))
+		//}
 		events = append(events, user.NewHumanInitialCodeAddedEvent(ctx, userAgg, initCode.Code, initCode.Expiry))
 	} else {
 		if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
