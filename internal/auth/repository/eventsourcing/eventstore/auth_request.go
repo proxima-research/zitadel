@@ -316,7 +316,7 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, id, userID, userAge
 	if err != nil {
 		return err
 	}
-	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner {
+	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner && !request.LoginAs {
 		return errors.ThrowPreconditionFailed(nil, "EVENT-fJe2a", "Errors.User.NotAllowedOrg")
 	}
 	username := user.UserName
@@ -991,7 +991,11 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 			return steps, err
 		}
 	}
-	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserID, request.LoginPolicy.IgnoreUnknownUsernames)
+	requestUserId := request.UserID
+	if request.UserOrigID != "" {
+		requestUserId = request.UserOrigID
+	}
+	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, requestUserId, request.LoginPolicy.IgnoreUnknownUsernames)
 	if err != nil {
 		return nil, err
 	}
@@ -1077,6 +1081,9 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 	if ok {
 		steps = append(steps, &domain.LoginSucceededStep{})
 	}
+	if request.LoginAs && request.UserOrigID == "" {
+		steps = append(steps, &domain.LoginAsStep{})
+	}
 	return append(steps, &domain.RedirectToCallbackStep{}), nil
 }
 
@@ -1147,10 +1154,16 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 	if err != nil {
 		return nil, err
 	}
+	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.RequestedOrgID, userSessions)
+	if err != nil {
+		return nil, err
+	}
 	users := make([]domain.UserSelection, 0)
 	for _, session := range userSessions {
-		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner {
+		loginAsPossible := loginAsPossibleMap[session.UserID]
+		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner || loginAsPossible {
 			users = append(users, domain.UserSelection{
+				LoginAsPossible:   loginAsPossible,
 				UserID:            session.UserID,
 				DisplayName:       session.DisplayName,
 				UserName:          session.UserName,
@@ -1163,6 +1176,26 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 		}
 	}
 	return users, nil
+}
+
+func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
+	ctx := authz.WithInstanceID(context.Background(), instanceID)
+
+	m := make(map[string]bool)
+	if repo.Query != nil {
+		i, err := repo.Query.Instance(ctx, false)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, userSession := range userSessions {
+			um, _ := repo.Query.GetUserMetadataByKey(ctx, false, userSession.UserID, "LOGIN_AS", false)
+			if um != nil && strings.ToUpper(string(um.Value)) == "ON" && (um.ResourceOwner == requestedOrgID || um.ResourceOwner == i.DefaultOrgID) {
+				m[userSession.UserID] = true
+			}
+		}
+	}
+	return m, nil
 }
 
 func (repo *AuthRequestRepo) firstFactorChecked(request *domain.AuthRequest, user *user_model.UserView, userSession *user_model.UserSessionView) domain.NextStep {

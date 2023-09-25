@@ -55,6 +55,9 @@ type AuthRequest struct {
 	LockoutPolicy            *LockoutPolicy
 	DefaultTranslations      []*CustomText
 	OrgTranslations          []*CustomText
+
+	LoginAs    bool
+	UserOrigID string
 }
 
 type ExternalUser struct {

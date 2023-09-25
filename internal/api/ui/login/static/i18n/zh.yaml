@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: 注册
   NextButtonText: 继续
 
+LoginAs:
+  Title: 登录身份
+  SelectUserLogin: 选择用户登录。
+
 LDAP:
   Title: 注册
   Description: 输入您的登录数据。
