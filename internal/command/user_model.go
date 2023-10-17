@@ -14,6 +14,7 @@ type UserWriteModel struct {
 	eventstore.WriteModel
 
 	UserName  string
+	LoginName string
 	IDPLinks  []*domain.UserIDPLink
 	UserState domain.UserState
 	UserType  domain.UserType
@@ -33,10 +34,12 @@ func (wm *UserWriteModel) Reduce() error {
 	for _, event := range wm.Events {
 		switch e := event.(type) {
 		case *user.HumanAddedEvent:
+			wm.LoginName = e.LoginName
 			wm.UserName = e.UserName
 			wm.UserState = domain.UserStateActive
 			wm.UserType = domain.UserTypeHuman
 		case *user.HumanRegisteredEvent:
+			wm.LoginName = e.LoginName
 			wm.UserName = e.UserName
 			wm.UserState = domain.UserStateActive
 			wm.UserType = domain.UserTypeHuman
