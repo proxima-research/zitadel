@@ -1124,18 +1124,22 @@ func TestCommandSide_RemoveUser(t *testing.T) {
 					t,
 					expectFilter(
 						eventFromEventPusher(
-							user.NewHumanAddedEvent(context.Background(),
-								&user.NewAggregate("user1", "org1").Aggregate,
-								"username",
-								"firstname",
-								"lastname",
-								"nickname",
-								"displayname",
-								language.German,
-								domain.GenderUnspecified,
-								"email@test.ch",
-								true,
-							),
+							func() *user.HumanAddedEvent {
+								e := user.NewHumanAddedEvent(context.Background(),
+									&user.NewAggregate("user1", "org1").Aggregate,
+									"username",
+									"firstname",
+									"lastname",
+									"nickname",
+									"displayname",
+									language.German,
+									domain.GenderUnspecified,
+									"email@test.ch",
+									true,
+								)
+								e.LoginName = "username"
+								return e
+							}(),
 						),
 					),
 					expectFilter(),
@@ -1182,18 +1186,22 @@ func TestCommandSide_RemoveUser(t *testing.T) {
 					t,
 					expectFilter(
 						eventFromEventPusher(
-							user.NewHumanAddedEvent(context.Background(),
-								&user.NewAggregate("user1", "org1").Aggregate,
-								"username",
-								"firstname",
-								"lastname",
-								"nickname",
-								"displayname",
-								language.German,
-								domain.GenderUnspecified,
-								"email@test.ch",
-								true,
-							),
+							func() *user.HumanAddedEvent {
+								e := user.NewHumanAddedEvent(context.Background(),
+									&user.NewAggregate("user1", "org1").Aggregate,
+									"username",
+									"firstname",
+									"lastname",
+									"nickname",
+									"displayname",
+									language.German,
+									domain.GenderUnspecified,
+									"email@test.ch",
+									true,
+								)
+								e.LoginName = "username"
+								return e
+							}(),
 						),
 						eventFromEventPusher(
 							user.NewUserIDPLinkAddedEvent(context.Background(),
@@ -1249,18 +1257,22 @@ func TestCommandSide_RemoveUser(t *testing.T) {
 					t,
 					expectFilter(
 						eventFromEventPusher(
-							user.NewHumanAddedEvent(context.Background(),
-								&user.NewAggregate("user1", "org1").Aggregate,
-								"username",
-								"firstname",
-								"lastname",
-								"nickname",
-								"displayname",
-								language.German,
-								domain.GenderUnspecified,
-								"email@test.ch",
-								true,
-							),
+							func() *user.HumanAddedEvent {
+								e := user.NewHumanAddedEvent(context.Background(),
+									&user.NewAggregate("user1", "org1").Aggregate,
+									"username",
+									"firstname",
+									"lastname",
+									"nickname",
+									"displayname",
+									language.German,
+									domain.GenderUnspecified,
+									"email@test.ch",
+									true,
+								)
+								e.LoginName = "username"
+								return e
+							}(),
 						),
 					),
 					expectFilter(),
