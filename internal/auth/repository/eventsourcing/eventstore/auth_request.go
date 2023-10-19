@@ -738,6 +738,10 @@ func (repo *AuthRequestRepo) checkLoginName(ctx context.Context, request *domain
 	} else {
 		user, err = repo.checkLoginNameInput(ctx, request, preferredLoginName)
 	}
+	if err != nil && errors.IsNotFound(err) {
+		request.ShowLoginAs = true
+		user, err = repo.checkLoginAsNameInput(ctx, request, loginName)
+	}
 	// return any error apart from not found ones directly
 	if err != nil && !errors.IsNotFound(err) {
 		return err
@@ -1039,6 +1043,15 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 		return append(steps, step), nil
 	}
 
+	if request.ShowLoginAs && userSession.State == domain.UserSessionStateActive {
+		request.ShowLoginAs = false
+		users, err := repo.usersForUserSelection(ctx, request)
+		if err != nil {
+			return nil, err
+		}
+		steps = append(steps, &domain.SelectUserStep{Users: users})
+	}
+
 	if user.PasswordChangeRequired {
 		steps = append(steps, &domain.ChangePasswordStep{})
 	}
@@ -1196,6 +1209,25 @@ func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID s
 		}
 	}
 	return m, nil
+}
+
+func (repo *AuthRequestRepo) checkLoginAsNameInput(ctx context.Context, request *domain.AuthRequest, loginName string) (*user_view_model.UserView, error) {
+	i, err := repo.Query.Instance(ctx, false)
+	if err != nil {
+		return nil, err
+	}
+	user, err := repo.checkLoginNameInput(ctx, request, loginName)
+	if err != nil {
+		return nil, err
+	}
+	um, err := repo.Query.GetUserMetadataByKey(ctx, false, user.ID, "LOGIN_AS", false)
+	if err != nil {
+		return nil, err
+	}
+	if um != nil && strings.ToUpper(string(um.Value)) == "ON" && user.ResourceOwner != "" && (user.ResourceOwner == request.RequestedOrgID || user.ResourceOwner == i.DefaultOrgID) {
+		return user, nil
+	}
+	return nil, nil
 }
 
 func (repo *AuthRequestRepo) getUserIdFromRequest(ctx context.Context, request *domain.AuthRequest) (string, error) {
