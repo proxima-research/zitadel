@@ -56,8 +56,9 @@ type AuthRequest struct {
 	DefaultTranslations      []*CustomText
 	OrgTranslations          []*CustomText
 
-	LoginAs    bool
-	UserOrigID string
+	LoginAs     bool
+	ShowLoginAs bool
+	UserOrigID  string
 }
 
 type ExternalUser struct {
