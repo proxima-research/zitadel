@@ -640,9 +640,6 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		if err != nil {
 			return nil, nil, err
 		}
-		//if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
-		//	events = append(events, user.NewHumanEmailVerifiedEvent(ctx, userAgg))
-		//}
 		events = append(events, user.NewHumanInitialCodeAddedEvent(ctx, userAgg, initCode.Code, initCode.Expiry))
 	} else {
 		if human.Email != nil && human.EmailAddress != "" && human.IsEmailVerified {
