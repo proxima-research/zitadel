@@ -215,12 +215,8 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 				)
 			}
 
-			//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
-			//if err != nil {
-			//	return nil, err
-			//}
 			loginName := human.Username
-			if /*!loginPolicy.DisableLoginWithEmail &&*/ human.Email.Verified && human.Email.Address != "" {
+			if human.Email.Address != "" {
 				loginName = string(human.Email.Address)
 			}
 			switch ev := createCmd.(type) {
@@ -620,12 +616,8 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
 	}
 
-	//loginPolicy, err := c.getOrgLoginPolicy(ctx, orgID)
-	//if err != nil {
-	//	return nil, nil, err
-	//}
 	loginName := human.Username
-	if /*!loginPolicy.DisableLoginWithEmail &&*/ human.IsEmailVerified && human.EmailAddress != "" {
+	if human.EmailAddress != "" {
 		loginName = string(human.EmailAddress)
 	}
 	switch ev := events[len(events)-1].(type) {
