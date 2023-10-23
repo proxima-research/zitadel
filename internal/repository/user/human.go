@@ -53,8 +53,6 @@ type HumanAddedEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"`
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
-
-	LoginName string
 }
 
 func (e *HumanAddedEvent) Data() interface{} {
@@ -62,7 +60,7 @@ func (e *HumanAddedEvent) Data() interface{} {
 }
 
 func (e *HumanAddedEvent) UniqueConstraints() []*eventstore.EventUniqueConstraint {
-	return []*eventstore.EventUniqueConstraint{NewAddUsernameUniqueConstraint(e.LoginName, e.Aggregate().ResourceOwner, e.userLoginMustBeDomain)}
+	return []*eventstore.EventUniqueConstraint{NewAddUsernameUniqueConstraint(string(e.EmailAddress), e.Aggregate().ResourceOwner, e.userLoginMustBeDomain)}
 }
 
 func (e *HumanAddedEvent) AddAddressData(
@@ -160,8 +158,6 @@ type HumanRegisteredEvent struct {
 	Secret         *crypto.CryptoValue `json:"secret,omitempty"` // legacy
 	EncodedHash    string              `json:"encodedHash,omitempty"`
 	ChangeRequired bool                `json:"changeRequired,omitempty"`
-
-	LoginName string
 }
 
 func (e *HumanRegisteredEvent) Data() interface{} {
@@ -169,7 +165,7 @@ func (e *HumanRegisteredEvent) Data() interface{} {
 }
 
 func (e *HumanRegisteredEvent) UniqueConstraints() []*eventstore.EventUniqueConstraint {
-	return []*eventstore.EventUniqueConstraint{NewAddUsernameUniqueConstraint(e.LoginName, e.Aggregate().ResourceOwner, e.userLoginMustBeDomain)}
+	return []*eventstore.EventUniqueConstraint{NewAddUsernameUniqueConstraint(string(e.EmailAddress), e.Aggregate().ResourceOwner, e.userLoginMustBeDomain)}
 }
 
 func (e *HumanRegisteredEvent) AddAddressData(
