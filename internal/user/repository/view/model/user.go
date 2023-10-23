@@ -57,8 +57,6 @@ type UserView struct {
 	InstanceID         string               `json:"instanceID" gorm:"column:instance_id;primary_key"`
 	*MachineView
 	*HumanView
-
-	LoginName string `gorm:"-"`
 }
 
 type UserState int32
@@ -221,7 +219,7 @@ func WebauthnTokenToModel(token *WebAuthNView) *model.WebAuthNView {
 
 func (u *UserView) GenerateLoginName(domain string, appendDomain bool) string {
 	if !appendDomain {
-		return u.LoginName
+		return u.Email
 	}
 	return u.UserName + "@" + domain
 }

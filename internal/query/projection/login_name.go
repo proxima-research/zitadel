@@ -251,16 +251,20 @@ func (p *loginNameProjection) reducers() []handler.AggregateReducer {
 					Reduce: p.reduceUserRemoved,
 				},
 				{
-					Event:  user.UserUserNameChangedType,
-					Reduce: p.reduceUserNameChanged,
+					Event:  user.HumanEmailChangedType,
+					Reduce: p.reduceEmailChanged,
 				},
-				{
-					// changes the username of the user
-					// this event occures in orgs
-					// where policy.must_be_domain=false
-					Event:  user.UserDomainClaimedType,
-					Reduce: p.reduceUserDomainClaimed,
-				},
+				//{
+				//	Event:  user.UserUserNameChangedType,
+				//	Reduce: p.reduceUserNameChanged,
+				//},
+				//{
+				//	// changes the username of the user
+				//	// this event occures in orgs
+				//	// where policy.must_be_domain=false
+				//	Event:  user.UserDomainClaimedType,
+				//	Reduce: p.reduceUserDomainClaimed,
+				//},
 			},
 		},
 		{
@@ -321,9 +325,9 @@ func (p *loginNameProjection) reduceUserCreated(event eventstore.Event) (*handle
 
 	switch e := event.(type) {
 	case *user.HumanAddedEvent:
-		userName = e.LoginName
+		userName = string(e.EmailAddress)
 	case *user.HumanRegisteredEvent:
-		userName = e.LoginName
+		userName = string(e.EmailAddress)
 	case *user.MachineAddedEvent:
 		userName = e.UserName
 	default:
@@ -368,6 +372,25 @@ func (p *loginNameProjection) reduceUserNameChanged(event eventstore.Event) (*ha
 		event,
 		[]handler.Column{
 			handler.NewCol(LoginNameUserUserNameCol, e.UserName),
+		},
+		[]handler.Condition{
+			handler.NewCond(LoginNameUserIDCol, e.Aggregate().ID),
+			handler.NewCond(LoginNameUserInstanceIDCol, e.Aggregate().InstanceID),
+		},
+		crdb.WithTableSuffix(loginNameUserSuffix),
+	), nil
+}
+
+func (p *loginNameProjection) reduceEmailChanged(event eventstore.Event) (*handler.Statement, error) {
+	e, ok := event.(*user.HumanEmailChangedEvent)
+	if !ok {
+		return nil, errors.ThrowInvalidArgumentf(nil, "HANDL-QlwjB", "reduce.wrong.event.type %s", user.HumanEmailChangedType)
+	}
+
+	return crdb.NewUpdateStatement(
+		event,
+		[]handler.Column{
+			handler.NewCol(LoginNameUserUserNameCol, e.EmailAddress),
 		},
 		[]handler.Condition{
 			handler.NewCond(LoginNameUserIDCol, e.Aggregate().ID),
