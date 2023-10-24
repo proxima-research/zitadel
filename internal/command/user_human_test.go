@@ -4252,8 +4252,7 @@ func TestAddHumanCommand(t *testing.T) {
 			c := &Commands{
 				idGenerator: tt.fields.idGenerator,
 			}
-			e := c.AddHumanCommand(tt.args.human, tt.args.orgID, tt.args.hasher, tt.args.codeAlg, tt.args.allowInitMail)
-			AssertValidation(t, context.Background(), e, tt.args.filter, tt.want)
+			AssertValidation(t, context.Background(), c.AddHumanCommand(tt.args.human, tt.args.orgID, tt.args.hasher, tt.args.codeAlg, tt.args.allowInitMail), tt.args.filter, tt.want)
 		})
 	}
 }
