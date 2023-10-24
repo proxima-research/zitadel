@@ -1445,22 +1445,18 @@ func TestCommandSide_SetUpOrg(t *testing.T) {
 								"org.iam-domain",
 							)),
 							eventFromEventPusher(
-								func() *user.HumanAddedEvent {
-									e := user.NewHumanAddedEvent(context.Background(),
-										&user.NewAggregate("userID", "orgID").Aggregate,
-										"username",
-										"firstname",
-										"lastname",
-										"",
-										"firstname lastname",
-										language.English,
-										domain.GenderUnspecified,
-										"email@test.ch",
-										true,
-									)
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								user.NewHumanAddedEvent(context.Background(),
+									&user.NewAggregate("userID", "orgID").Aggregate,
+									"username",
+									"firstname",
+									"lastname",
+									"",
+									"firstname lastname",
+									language.English,
+									domain.GenderUnspecified,
+									"email@test.ch",
+									true,
+								),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
