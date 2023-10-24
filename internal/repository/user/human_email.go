@@ -26,6 +26,8 @@ type HumanEmailChangedEvent struct {
 	eventstore.BaseEvent `json:"-"`
 
 	EmailAddress domain.EmailAddress `json:"email,omitempty"`
+
+	OldEmailAddress domain.EmailAddress
 }
 
 func (e *HumanEmailChangedEvent) Data() interface{} {
@@ -33,7 +35,10 @@ func (e *HumanEmailChangedEvent) Data() interface{} {
 }
 
 func (e *HumanEmailChangedEvent) UniqueConstraints() []*eventstore.EventUniqueConstraint {
-	return nil
+	return []*eventstore.EventUniqueConstraint{
+		NewRemoveUsernameUniqueConstraint(string(e.OldEmailAddress), e.Aggregate().ResourceOwner, false),
+		NewAddUsernameUniqueConstraint(string(e.EmailAddress), e.Aggregate().ResourceOwner, false),
+	}
 }
 
 func NewHumanEmailChangedEvent(ctx context.Context, aggregate *eventstore.Aggregate, emailAddress domain.EmailAddress) *HumanEmailChangedEvent {
