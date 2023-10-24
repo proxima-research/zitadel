@@ -995,8 +995,7 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 	if err != nil {
 		return nil, err
 	}
-	if request.ShowLoginAs {
-		request.ShowLoginAs = false
+	if userId == "" {
 		users, err := repo.usersForUserSelection(ctx, request)
 		if err != nil {
 			return nil, err
@@ -1245,10 +1244,10 @@ func (repo *AuthRequestRepo) getUserIdFromRequest(ctx context.Context, request *
 					if us.State == domain.UserSessionStateActive {
 						request.UserOrigID = us.UserID
 						request.LoginAs = true
+						return us.UserID, nil
 					} else {
-						request.ShowLoginAs = true
+						return "", nil
 					}
-					return us.UserID, nil
 				}
 			}
 		}
