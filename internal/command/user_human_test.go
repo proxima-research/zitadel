@@ -105,11 +105,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 				eventstore: expectEventstore(
 					expectFilter(
 						eventFromEventPusher(
-							func() eventstore.Command {
-								e := newAddHumanEvent("$plain$x$password", true, "")
-								e.LoginName = "username"
-								return e
-							}(),
+							newAddHumanEvent("$plain$x$password", true, ""),
 						),
 					),
 				),
@@ -225,22 +221,18 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := user.NewHumanAddedEvent(context.Background(),
-										&userAgg.Aggregate,
-										"username",
-										"firstname",
-										"lastname",
-										"",
-										"firstname lastname",
-										language.English,
-										domain.GenderUnspecified,
-										"email@test.ch",
-										true,
-									)
-									e.LoginName = "username"
-									return e
-								}(),
+								user.NewHumanAddedEvent(context.Background(),
+									&userAgg.Aggregate,
+									"username",
+									"firstname",
+									"lastname",
+									"",
+									"firstname lastname",
+									language.English,
+									domain.GenderUnspecified,
+									"email@test.ch",
+									true,
+								),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -255,7 +247,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -316,11 +308,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -335,7 +323,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -396,11 +384,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailCodeAddedEventV2(context.Background(),
@@ -417,7 +401,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -479,11 +463,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailCodeAddedEventV2(context.Background(),
@@ -500,7 +480,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -563,11 +543,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", true, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", true, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -636,11 +612,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", true, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", true, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -709,11 +681,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", true, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", true, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -855,7 +823,6 @@ func TestCommandSide_AddHuman(t *testing.T) {
 										"email@test.ch",
 										true,
 									)
-									event.LoginName = "email@test.ch"
 									event.AddPasswordData("$plain$x$password", true)
 									return event
 								}(),
@@ -928,11 +895,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "+41711234567")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(
@@ -1004,11 +967,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("", false, "+41711234567")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(
@@ -1030,7 +989,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -1092,11 +1051,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "+41711234567")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -1171,11 +1126,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(
@@ -1199,7 +1150,7 @@ func TestCommandSide_AddHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -1450,11 +1401,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", true, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", true, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -1469,7 +1416,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -1545,11 +1492,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -1635,11 +1578,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -1746,11 +1685,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -1860,11 +1795,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "+41711234567")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -1889,7 +1820,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 									},
 									time.Hour*1)),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -1971,11 +1902,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("$plain$x$password", false, "+41711234567")
-									e.LoginName = "username"
-									return e
-								}(),
+								newAddHumanEvent("$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -1994,7 +1921,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 									&user.NewAggregate("user1", "org1").Aggregate),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -2134,11 +2061,7 @@ func TestCommandSide_ImportHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newAddHumanEvent("", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newAddHumanEvent("", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewUserIDPLinkAddedEvent(context.Background(),
@@ -2849,11 +2772,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("email@test.ch", "$plain$x$password", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newRegisterHumanEvent("email@test.ch", "$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -2965,11 +2884,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -2984,7 +2899,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", false)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", false)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -3082,11 +2997,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "")
-									e.LoginName = "username"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -3101,7 +3012,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -3199,11 +3110,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -3310,11 +3217,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "+41711234567")
-									e.LoginName = "username"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -3339,7 +3242,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 									},
 									time.Hour*1)),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -3443,11 +3346,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "+41711234567")
-									e.LoginName = "username"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, "+41711234567"),
 							),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
@@ -3466,7 +3365,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 									&user.NewAggregate("user1", "org1").Aggregate),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("username", "org1", true)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email@test.ch", "org1", true)),
 					),
 				),
 				idGenerator:        id_mock.NewIDGeneratorExpectIDs(t, "user1"),
@@ -3628,11 +3527,7 @@ func TestCommandSide_RegisterHuman(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := newRegisterHumanEvent("username", "$plain$x$password", false, "")
-									e.LoginName = "email@test.ch"
-									return e
-								}(),
+								newRegisterHumanEvent("username", "$plain$x$password", false, ""),
 							),
 							eventFromEventPusher(
 								user.NewUserIDPLinkAddedEvent(context.Background(),
@@ -4272,7 +4167,6 @@ func TestAddHumanCommand(t *testing.T) {
 							"support@zitadel.com",
 							true,
 						)
-						event.LoginName = "support@zitadel.com"
 						event.AddPasswordData("$plain$x$password", false)
 						return event
 					}(),
@@ -4345,7 +4239,6 @@ func TestAddHumanCommand(t *testing.T) {
 							"support@zitadel.com",
 							true,
 						)
-						event.LoginName = "support@zitadel.com"
 						event.AddPasswordData("$plain$x$password", false)
 						return event
 					}(),

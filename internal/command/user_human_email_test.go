@@ -183,10 +183,14 @@ func TestCommandSide_ChangeHumanEmail(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								user.NewHumanEmailChangedEvent(context.Background(),
-									&user.NewAggregate("user1", "org1").Aggregate,
-									"email-changed@test.ch",
-								),
+								func() eventstore.Command {
+									e := user.NewHumanEmailChangedEvent(context.Background(),
+										&user.NewAggregate("user1", "org1").Aggregate,
+										"email-changed@test.ch",
+									)
+									e.OldEmailAddress = "email@test.ch"
+									return e
+								}(),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailVerifiedEvent(context.Background(),
@@ -194,6 +198,8 @@ func TestCommandSide_ChangeHumanEmail(t *testing.T) {
 								),
 							),
 						},
+						uniqueConstraintsFromEventConstraint(user.NewRemoveUsernameUniqueConstraint("email@test.ch", "org1", false)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email-changed@test.ch", "org1", false)),
 					),
 				),
 			},
@@ -297,10 +303,14 @@ func TestCommandSide_ChangeHumanEmail(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								user.NewHumanEmailChangedEvent(context.Background(),
-									&user.NewAggregate("user1", "org1").Aggregate,
-									"email-changed@test.ch",
-								),
+								func() eventstore.Command {
+									e := user.NewHumanEmailChangedEvent(context.Background(),
+										&user.NewAggregate("user1", "org1").Aggregate,
+										"email-changed@test.ch",
+									)
+									e.OldEmailAddress = "email@test.ch"
+									return e
+								}(),
 							),
 							eventFromEventPusher(
 								user.NewHumanEmailCodeAddedEvent(context.Background(),
@@ -315,6 +325,8 @@ func TestCommandSide_ChangeHumanEmail(t *testing.T) {
 								),
 							),
 						},
+						uniqueConstraintsFromEventConstraint(user.NewRemoveUsernameUniqueConstraint("email@test.ch", "org1", false)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email-changed@test.ch", "org1", false)),
 					),
 				),
 			},

@@ -266,6 +266,8 @@ func TestCommandSide_ResendInitialMail(t *testing.T) {
 								),
 							),
 						},
+						uniqueConstraintsFromEventConstraint(user.NewRemoveUsernameUniqueConstraint("", "org1", false)),
+						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email2@test.ch", "org1", false)),
 					),
 				),
 			},
