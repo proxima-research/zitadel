@@ -215,16 +215,16 @@ func (c *Commands) AddHumanCommand(human *AddHuman, orgID string, hasher *crypto
 				)
 			}
 
-			//loginName := human.Username
-			//if human.Email.Address != "" {
-			//	loginName = string(human.Email.Address)
-			//}
-			//switch ev := createCmd.(type) {
-			//case *user.HumanRegisteredEvent:
-			//	ev.LoginName = loginName
-			//case *user.HumanAddedEvent:
-			//	ev.LoginName = loginName
-			//}
+			/*loginName := human.Username
+			if human.Email.Address != "" {
+				 loginName = string(human.Email.Address)
+			}
+			switch ev := createCmd.(type) {
+			case *user.HumanRegisteredEvent:
+			  	ev.LoginName = loginName
+			case *user.HumanAddedEvent:
+				ev.LoginName = loginName
+			}*/
 
 			if human.Phone.Number != "" {
 				createCmd.AddPhoneData(human.Phone.Number)
@@ -616,16 +616,16 @@ func (c *Commands) createHuman(ctx context.Context, orgID string, human *domain.
 		events = append(events, createAddHumanEvent(ctx, userAgg, human, domainPolicy.UserLoginMustBeDomain))
 	}
 
-	//loginName := human.Username
-	//if human.EmailAddress != "" {
-	//	loginName = string(human.EmailAddress)
-	//}
-	//switch ev := events[len(events)-1].(type) {
-	//case *user.HumanRegisteredEvent:
-	//	ev.LoginName = loginName
-	//case *user.HumanAddedEvent:
-	//	ev.LoginName = loginName
-	//}
+	/*loginName := human.Username
+	if human.EmailAddress != "" {
+		loginName = string(human.EmailAddress)
+	}
+	switch ev := events[len(events)-1].(type) {
+	case *user.HumanRegisteredEvent:
+		ev.LoginName = loginName
+	case *user.HumanAddedEvent:
+		ev.LoginName = loginName
+	}*/
 
 	for _, link := range links {
 		event, err := c.addUserIDPLink(ctx, userAgg, link, false)

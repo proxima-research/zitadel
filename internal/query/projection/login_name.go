@@ -254,17 +254,17 @@ func (p *loginNameProjection) reducers() []handler.AggregateReducer {
 					Event:  user.HumanEmailChangedType,
 					Reduce: p.reduceEmailChanged,
 				},
-				//{
-				//	Event:  user.UserUserNameChangedType,
-				//	Reduce: p.reduceUserNameChanged,
-				//},
-				//{
-				//	// changes the username of the user
-				//	// this event occures in orgs
-				//	// where policy.must_be_domain=false
-				//	Event:  user.UserDomainClaimedType,
-				//	Reduce: p.reduceUserDomainClaimed,
-				//},
+				/*{
+					Event:  user.UserUserNameChangedType,
+					Reduce: p.reduceUserNameChanged,
+				},
+				{
+					// changes the username of the user
+					// this event occures in orgs
+					// where policy.must_be_domain=false
+					Event:  user.UserDomainClaimedType,
+					Reduce: p.reduceUserDomainClaimed,
+				},*/
 			},
 		},
 		{
