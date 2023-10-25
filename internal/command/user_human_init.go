@@ -32,6 +32,7 @@ func (c *Commands) ResendInitialMail(ctx context.Context, userID string, email d
 	userAgg := UserAggregateFromWriteModel(&existingCode.WriteModel)
 	if email != "" && existingCode.Email != email {
 		changedEvent, _ := existingCode.NewChangedEvent(ctx, userAgg, email)
+		changedEvent.OldEmailAddress = existingCode.Email
 		events = append(events, changedEvent)
 	}
 	initCode, err := domain.NewInitUserCode(initCodeGenerator)
