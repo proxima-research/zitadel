@@ -56,8 +56,9 @@ type AuthRequest struct {
 	DefaultTranslations      []*CustomText
 	OrgTranslations          []*CustomText
 
-	LoginAs    bool
-	UserOrigID string
+	LoginAs            bool
+	UserOrigID         string
+	ShowSelectUserStep ShowSelectUserStep
 }
 
 type ExternalUser struct {
@@ -211,3 +212,11 @@ func (a *AuthRequest) Done() bool {
 	}
 	return false
 }
+
+type ShowSelectUserStep uint8
+
+const (
+	ShowSelectUserStepNone ShowSelectUserStep = iota
+	ShowSelectUserStepToDo
+	ShowSelectUserStepDone
+)
