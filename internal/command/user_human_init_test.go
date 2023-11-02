@@ -250,14 +250,9 @@ func TestCommandSide_ResendInitialMail(t *testing.T) {
 					expectPush(
 						[]*repository.Event{
 							eventFromEventPusher(
-								func() eventstore.Command {
-									e := user.NewHumanEmailChangedEvent(context.Background(),
-										&user.NewAggregate("user1", "org1").Aggregate,
-										"email2@test.ch")
-									e.OldEmailAddress = "email@test.ch"
-									return e
-								}(),
-							),
+								user.NewHumanEmailChangedEvent(context.Background(),
+									&user.NewAggregate("user1", "org1").Aggregate,
+									"email2@test.ch")),
 							eventFromEventPusher(
 								user.NewHumanInitialCodeAddedEvent(context.Background(),
 									&user.NewAggregate("user1", "org1").Aggregate,
@@ -271,8 +266,6 @@ func TestCommandSide_ResendInitialMail(t *testing.T) {
 								),
 							),
 						},
-						uniqueConstraintsFromEventConstraint(user.NewRemoveUsernameUniqueConstraint("email@test.ch", "org1", false)),
-						uniqueConstraintsFromEventConstraint(user.NewAddUsernameUniqueConstraint("email2@test.ch", "org1", false)),
 					),
 				),
 			},
