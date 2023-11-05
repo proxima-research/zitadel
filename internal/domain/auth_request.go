@@ -57,7 +57,7 @@ type AuthRequest struct {
 	OrgTranslations          []*CustomText
 
 	LoginAs            bool
-	UserOrigID         string
+	UserOrigID         *string
 	ShowSelectUserStep ShowSelectUserStep
 }
 
