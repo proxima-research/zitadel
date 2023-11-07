@@ -320,7 +320,8 @@
       "DELETEACCOUNT": "Borrar cuenta",
       "DELETEACCOUNT_DESC": "Si realizas esta acción, se cerrará tu sesión y no podrás volver a tener acceso a tu cuenta. Esta acción no es reversible, por favor procede con cuidado.",
       "DELETEACCOUNT_BTN": "Borrar cuenta",
-      "DELETEACCOUNT_SUCCESS": "¡La cuenta se borró con éxito!"
+      "DELETEACCOUNT_SUCCESS": "¡La cuenta se borró con éxito!",
+      "NOPERMISSIONTOEDIT": "¡Te faltan los permisos necesarios para editar el perfil!"
     },
     "DETAILS": {
       "DATECREATED": "Creada",

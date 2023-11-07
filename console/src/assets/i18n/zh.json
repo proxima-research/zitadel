@@ -319,7 +319,8 @@
       "DELETEACCOUNT": "删除账户",
       "DELETEACCOUNT_DESC": "如果您执行此操作，您将被注销并且无法再访问您的帐户。此操作不可逆，因此请谨慎操作。",
       "DELETEACCOUNT_BTN": "删除账户",
-      "DELETEACCOUNT_SUCCESS": "账号删除成功！"
+      "DELETEACCOUNT_SUCCESS": "账号删除成功！",
+      "NOPERMISSIONTOEDIT": "您缺少编辑个人资料所需的权限！"
     },
     "DETAILS": {
       "DATECREATED": "创建于",
