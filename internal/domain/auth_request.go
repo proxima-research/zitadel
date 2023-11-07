@@ -56,6 +56,10 @@ type AuthRequest struct {
 	DefaultTranslations      []*CustomText
 	OrgTranslations          []*CustomText
 	SAMLRequestID            string
+
+	LoginAs            bool
+	UserOrigID         *string
+	ShowSelectUserStep ShowSelectUserStep
 }
 
 type ExternalUser struct {
@@ -223,3 +227,11 @@ func (a *AuthRequest) PrivateLabelingOrgID(defaultID string) string {
 	}
 	return defaultID
 }
+
+type ShowSelectUserStep uint8
+
+const (
+	ShowSelectUserStepNone ShowSelectUserStep = iota
+	ShowSelectUserStepToDo
+	ShowSelectUserStepDone
+)
