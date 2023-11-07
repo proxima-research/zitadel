@@ -130,6 +130,7 @@ func NewServer(
 		userAgentCookie,
 		http_utils.CopyHeadersToContext,
 		accessHandler.HandleIgnorePathPrefixes(ignoredQuotaLimitEndpoint(config.CustomEndpoints)),
+		middleware.ModeHandler(),
 	))
 
 	return server, nil
