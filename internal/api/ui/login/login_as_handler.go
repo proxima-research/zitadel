@@ -119,7 +119,7 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 	queries := &query.UserSearchQueries{
 		SearchRequest: query.SearchRequest{
 			Offset:        0,
-			Limit:         100,
+			Limit:         1000,
 			Asc:           true,
 			SortingColumn: query.UserUsernameCol,
 		},
