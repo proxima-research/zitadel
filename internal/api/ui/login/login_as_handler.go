@@ -8,6 +8,7 @@ import (
 	"github.com/zitadel/zitadel/internal/errors"
 	"github.com/zitadel/zitadel/internal/query"
 	"net/http"
+	"sort"
 	"strings"
 )
 
@@ -32,16 +33,11 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 	}
 
 	userOrigID := authReq.UserID
+	userOrigLoginName := authReq.LoginName
 
 	userAgentID, _ := http_mw.UserAgentIDFromCtx(r.Context())
 	loginName := strings.Split(data.LoginAsName, " / ")[0]
-	err = l.authRepo.CheckLoginName(r.Context(), authReq.ID, loginName, userAgentID)
-	if err != nil {
-		l.renderLoginAs(w, r, authReq, err)
-		return
-	}
-
-	authReq, err = l.getAuthRequest(r)
+	authReq, err = l.checkLoginNameAndGetAuthRequest(r, authReq.ID, loginName, userAgentID)
 	if err != nil {
 		l.renderLoginAs(w, r, authReq, err)
 		return
@@ -50,6 +46,18 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 	err = l.checkUserResourceOwner(r, authReq.UserID, userOrigID)
 	if err != nil {
 		l.renderLoginAs(w, r, authReq, err)
+		return
+	}
+
+	userWithoutPrivileges, err := l.isUserWithoutPrivileges(r.Context(), authReq.UserID)
+	if err != nil {
+		l.renderLoginAs(w, r, authReq, err)
+		return
+	}
+
+	if !userWithoutPrivileges {
+		authReq, _ = l.checkLoginNameAndGetAuthRequest(r, authReq.ID, userOrigLoginName, userAgentID)
+		l.renderLoginAs(w, r, authReq, errors.ThrowPermissionDenied(nil, "AUTH-Bds7d", "Selected user has privileges"))
 		return
 	}
 
@@ -110,6 +118,14 @@ func (l *Login) updateAuthRequest(r *http.Request, request *domain.AuthRequest) 
 	return err
 }
 
+func (l *Login) checkLoginNameAndGetAuthRequest(r *http.Request, id, loginName, userAgentID string) (*domain.AuthRequest, error) {
+	err := l.authRepo.CheckLoginName(r.Context(), id, loginName, userAgentID)
+	if err != nil {
+		return nil, err
+	}
+	return l.getAuthRequest(r)
+}
+
 func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, error) {
 	userTypeSearchQuery, err := query.NewUserTypeSearchQuery(int32(domain.UserTypeHuman))
 	if err != nil {
@@ -120,7 +136,6 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 		SearchRequest: query.SearchRequest{
 			Offset:        0,
 			Limit:         1000,
-			Asc:           true,
 			SortingColumn: query.UserUsernameCol,
 		},
 		Queries: []query.SearchQuery{userTypeSearchQuery},
@@ -141,8 +156,15 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 	if err != nil {
 		return nil, err
 	}
-	var loginNames = make([]string, len(users.Users))
-	for i, user := range users.Users {
+	var loginNames = make([]string, 0)
+	for _, user := range users.Users {
+		userWithoutPrivileges, err := l.isUserWithoutPrivileges(ctx, user.ID)
+		if err != nil {
+			return nil, err
+		}
+		if !userWithoutPrivileges {
+			continue
+		}
 		loginNameParts := make([]string, 0)
 		if user.PreferredLoginName != "" {
 			loginNameParts = append(loginNameParts, user.PreferredLoginName)
@@ -152,7 +174,45 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 		if !loginPolicy.DisableLoginWithEmail && user.Human.IsEmailVerified {
 			loginNameParts = append(loginNameParts, string(user.Human.Email))
 		}
-		loginNames[i] = strings.Join(loginNameParts, " / ")
+		loginNames = append(loginNames, strings.Join(loginNameParts, " / "))
 	}
+	sort.Strings(loginNames)
 	return loginNames, nil
+}
+
+func (l *Login) getUserRoles(ctx context.Context, userId string) (map[string]struct{}, error) {
+	userQuery, err := query.NewMembershipUserIDQuery(userId)
+	if err != nil {
+		return nil, err
+	}
+	memberships, err := l.query.Memberships(ctx, &query.MembershipSearchQuery{
+		Queries: []query.SearchQuery{userQuery},
+	}, false, false)
+	if err != nil {
+		return nil, err
+	}
+	rolesMap := make(map[string]struct{})
+	for _, membership := range memberships.Memberships {
+		for _, role := range membership.Roles {
+			if _, ok := rolesMap[role]; !ok {
+				rolesMap[role] = struct{}{}
+			}
+		}
+	}
+	return rolesMap, nil
+}
+
+func (l *Login) isUserWithoutPrivileges(ctx context.Context, userId string) (bool, error) {
+	userRoles, err := l.getUserRoles(ctx, userId)
+	if err != nil {
+		return false, err
+	}
+	um, err := l.query.GetUserMetadataByKey(ctx, false, userId, "LOGIN_AS", false)
+	if err != nil && !errors.IsNotFound(err) {
+		return false, err
+	}
+	if um != nil && strings.ToUpper(string(um.Value)) == "ON" || len(userRoles) > 0 {
+		return false, nil
+	}
+	return true, nil
 }
