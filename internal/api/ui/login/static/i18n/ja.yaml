@@ -15,6 +15,13 @@ LoginAs:
   Title: としてログイン
   SelectUserLogin: ユーザーログインを選択します。
 
+LDAP:
+  Title: ログイン
+  Description: ログインデータを入力します。
+  LoginNameLabel: ログイン名
+  PasswordLabel: パスワード
+  NextButtonText: 次
+
 SelectAccount:
   Title: アカウントの選択
   Description: アカウントを使用します。

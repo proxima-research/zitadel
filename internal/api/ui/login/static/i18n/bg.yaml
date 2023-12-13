@@ -14,8 +14,8 @@ Login:
   NextButtonText: следващия
 
 LoginAs:
-  Title: Login as
-  SelectUserLogin: Select user login.
+  Title: Влезте като
+  SelectUserLogin: Изберете потребителско влизане.
 
 LDAP:
   Title: Влизам
