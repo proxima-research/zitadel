@@ -1,1228 +1,1227 @@
 Errors:
-  Internal: Возникла внутренняя ошибка
-  NoChangesFound: Без изменений
-  OriginNotAllowed: Это «Происхождение» не разрешено
-  IDMissing: идентификатор отсутствует
-  ResourceOwnerMissing: Отсутствует организация-владелец ресурса.
-  RemoveFailed: Не удалось удалить
+  Internal: Виникла внутрішня помилка
+  NoChangesFound: Без змін
+  OriginNotAllowed: Це «Походження» не дозволено
+  IDMissing: ідентифікатор відсутній
+  ResourceOwnerMissing: Відсутня організація-власник ресурсу.
+  RemoveFailed: Не вдалося вилучити
   ProjectionName:
-    Invalid: Неверное имя проекции
+    Invalid: 'Неправильне ім&#39;я проекції'
   Assets:
-    EmptyKey: Ключ актива пуст
+    EmptyKey: Ключ ресурсу порожній
     Store:
-      NotInitialized: Хранилище активов не инициализировано
-      NotConfigured: Хранилище активов не настроено
+      NotInitialized: Сховище активів не ініціалізоване
+      NotConfigured: Сховище активів не налаштоване
     Bucket:
-      Internal: Внутренняя ошибка при создании сегмента
-      AlreadyExists: Сегмент уже существует
-      CreateFailed: Сегмент не создан
-      ListFailed: Ведра не читаются
-      RemoveFailed: Сегмент не удален
-      SetPublicFailed: Не удалось сделать сегмент общедоступным.
+      Internal: Внутрішня помилка під час створення сегмента
+      AlreadyExists: Сегмент уже існує
+      CreateFailed: Сегмент не створено
+      ListFailed: Список не читається
+      RemoveFailed: Сегмент не видалено
+      SetPublicFailed: Не вдалось зробити сегмент загальнодоступним.
     Object:
-      PutFailed: Объект не создан
-      GetFailed: Объект не может быть прочитан
-      NotFound: Объект не найден
-      PresignedTokenFailed: Не удалось создать подписанный токен
-      ListFailed: Список объектов не может быть прочитан
-      RemoveFailed: Объект не удалось удалить
+      PutFailed: 'Об&#39;єкт не створено'
+      GetFailed: 'Об&#39;єкт не може бути прочитаний'
+      NotFound: 'Об&#39;єкт не знайдено'
+      PresignedTokenFailed: Не вдалося створити підписаний токен
+      ListFailed: 'Список об&#39;єктів не може бути прочитаний'
+      RemoveFailed: 'Об&#39;єкт не вдалося видалити'
   Limit:
-    ExceedsDefault: Лимит превышает лимит по умолчанию
+    ExceedsDefault: Ліміт перевищує ліміт за замовчуванням
   Language:
-    NotParsed: Не удалось разобрать язык
+    NotParsed: Не вдалося розібрати мову
   OIDCSettings:
-    NotFound: Конфигурация OIDC не найдена
-    AlreadyExists: Конфигурация OIDC уже существует
+    NotFound: Конфігурацію OIDC не знайдено
+    AlreadyExists: Конфігурація OIDC вже існує
   SecretGenerator:
-    AlreadyExists: Секретный генератор уже существует
-    TypeMissing: Тип секретного генератора отсутствует.
-    NotFound: Секретный генератор не найден
+    AlreadyExists: Секретний генератор вже існує
+    TypeMissing: Тип секретного генератора відсутній.
+    NotFound: Секретний генератор не знайдено
   SMSConfig:
-    NotFound: Конфигурация SMS не найдена
-    AlreadyActive: Конфигурация SMS уже активна
-    AlreadyDeactivated: Конфигурация SMS уже деактивирована
+    NotFound: Конфігурацію SMS не знайдено
+    AlreadyActive: Конфігурація SMS вже активна
+    AlreadyDeactivated: Конфігурацію SMS вже деактивовано
   SMTPConfig:
-    NotFound: Конфигурация SMTP не найдена
-    AlreadyExists: Конфигурация SMTP уже существует
-    SenderAdressNotCustomDomain: Адрес отправителя должен быть настроен как личный домен на экземпляре.
+    NotFound: Конфігурацію SMTP не знайдено
+    AlreadyExists: Конфігурація SMTP вже існує
+    SenderAdressNotCustomDomain: Адреса відправника має бути налаштована як особистий домен на екземплярі.
   Notification:
-    NoDomain: Домен для сообщения не найден
+    NoDomain: Домен для повідомлення не знайдено
   User:
-    NotFound: Пользователь не найден
-    AlreadyExists: Пользователь уже существует
-    NotFoundOnOrg: Пользователь не найден в выбранной организации
-    NotAllowedOrg: Пользователь не является членом требуемой организации
-    UserIDMissing: Идентификатор пользователя отсутствует
-    UserIDWrong: Пользователь запроса не равен аутентифицированному пользователю
-    DomainPolicyNil: Политика организации пуста
-    EmailAsUsernameNotAllowed: Электронная почта не разрешена в качестве имени пользователя.
-    Invalid: Данные пользователя недействительны
-    DomainNotAllowedAsUsername: Домен уже зарезервирован и не может быть использован.
-    AlreadyInactive: Пользователь уже неактивен
-    NotInactive: Пользователь не неактивен
-    CantDeactivateInitial: Пользователя с начальным состоянием можно только удалить, но не деактивировать.
-    ShouldBeActiveOrInitial: Пользователь не активен или не является начальным
-    AlreadyInitialised: Пользователь уже инициализирован
-    NotInitialised: Пользователь еще не инициализирован
-    NotLocked: Пользователь не заблокирован
-    NoChanges: Никаких изменений не найдено
-    InitCodeNotFound: Код инициализации не найден
-    UsernameNotChanged: Имя пользователя не изменено
-    InvalidURLTemplate: Шаблон URL-адреса недействителен.
+    NotFound: Користувач не знайдений
+    AlreadyExists: Користувач вже існує
+    NotFoundOnOrg: Користувач не знайдений у вибраній організації
+    NotAllowedOrg: Користувач не є членом необхідної організації
+    UserIDMissing: Ідентифікатор користувача відсутній
+    UserIDWrong: Користувач запиту не дорівнює автентифікованому користувачеві
+    DomainPolicyNil: Політика організації порожня
+    EmailAsUsernameNotAllowed: 'Електронна пошта не дозволена як ім&#39;я користувача.'
+    Invalid: Дані користувача недійсні
+    DomainNotAllowedAsUsername: Домен вже зарезервований та не може бути використаний.
+    AlreadyInactive: Користувач уже неактивний
+    NotInactive: Користувач неактивний
+    CantDeactivateInitial: Користувача з початковим станом можна видалити, але не деактивувати.
+    ShouldBeActiveOrInitial: Користувач не активний або не є початковим
+    AlreadyInitialised: Користувача вже ініціалізовано
+    NotInitialised: Користувач ще не ініціалізований
+    NotLocked: Користувач не заблоковано
+    NoChanges: Жодних змін не знайдено
+    InitCodeNotFound: Код ініціалізації не знайдено
+    UsernameNotChanged: 'Ім&#39;я користувача не змінено'
+    InvalidURLTemplate: Недійсна URL-адреса шаблону.
     Profile:
-      NotFound: Профиль не найден
-      NotChanged: Профиль не изменен
-      Empty: Профиль пуст
-      FirstNameEmpty: Имя в профиле пусто
-      LastNameEmpty: Фамилия в профиле пуста
-      IDMissing: Идентификатор профиля отсутствует
+      NotFound: Профіль не знайдено
+      NotChanged: Профіль не змінено
+      Empty: Профіль порожній
+      FirstNameEmpty: 'Ім&#39;я у профілі порожнє'
+      LastNameEmpty: Прізвище у профілі порожнє
+      IDMissing: Ідентифікатор профілю відсутній
     Email:
-      NotFound: Электронная почта не найдена
-      Invalid: Электронная почта недействительна
-      AlreadyVerified: Электронная почта уже подтверждена
-      NotChanged: Электронная почта не изменена
-      Empty: Электронная почта пуста
-      IDMissing: Идентификатор электронной почты отсутствует
+      NotFound: Електронну пошту не знайдено
+      Invalid: Електронна пошта недійсна
+      AlreadyVerified: Електронна пошта вже підтверджена
+      NotChanged: Електронна пошта не змінена
+      Empty: Електронна пошта порожня
+      IDMissing: Ідентифікатор електронної пошти відсутній
     Phone:
-      NotFound: Телефон не найден
-      Invalid: Телефон недействителен
-      AlreadyVerified: Телефон уже подтвержден
-      Empty: Телефон пуст
-      NotChanged: Телефон не менялся
+      NotFound: Телефон не знайдено
+      Invalid: Телефон недійсний
+      AlreadyVerified: Телефон уже підтверджено
+      Empty: Телефон порожній
+      NotChanged: Телефон не змінювався
     Address:
-      NotFound: Адрес не найден
-      NotChanged: Адрес не изменен
+      NotFound: Адреса не знайдена
+      NotChanged: Адреса не змінена
     Machine:
       Key:
-        NotFound: Машинный ключ не найден
-        AlreadyExisting: Машинный ключ уже существует
+        NotFound: Машинний ключ не знайдено
+        AlreadyExisting: Машинний ключ вже існує
       Secret:
-        NotExisting: Секрета не существует
-        Invalid: Секрет недействителен
-        CouldNotGenerate: Секрет не может быть создан
+        NotExisting: Секрету не існує
+        Invalid: Секрет недійсний
+        CouldNotGenerate: Секрет не може бути створений
     PAT:
-      NotFound: Токен личного доступа не найден
-    NotHuman: Пользователь должен быть персональным
-    NotMachine: Пользователь должен быть техническим
-    WrongType: Не разрешено для этого типа пользователя
-    NotAllowedToLink: Пользователю не разрешено связываться с внешним поставщиком входа в систему.
+      NotFound: Токен особистого доступу не знайдено
+    NotHuman: Користувач має бути персональним
+    NotMachine: Користувач має бути технічним
+    WrongType: Не дозволено для цього типу користувача
+    NotAllowedToLink: Користувачеві не дозволяється зв&#39;язуватися із зовнішнім постачальником входу в систему.
     Username:
-      AlreadyExists: Данное имя пользователя уже занято
-      Reserved: Имя пользователя уже используется
-      Empty: Имя пользователя пусто
+      AlreadyExists: 'Дане ім&#39;я користувача вже зайняте'
+      Reserved: 'Ім&#39;я користувача вже використовується'
+      Empty: 'Ім&#39;я користувача порожнє'
     Code:
-      Empty: Код пуст
-      NotFound: Код не найден
-      Expired: Срок действия кода истек
-      GeneratorAlgNotSupported: Неподдерживаемый алгоритм генератора
+      Empty: Код порожній
+      NotFound: Код не знайдено
+      Expired: Термін дії коду минув
+      GeneratorAlgNotSupported: Непідтримуваний алгоритм генератора
     Password:
-      NotFound: Пароль не найден
-      Empty: Пароль пуст
-      Invalid: Неправильный пароль
-      NotSet: Пользователь не установил пароль
-      NotChanged: Пароль не изменен
-      NotSupported: Кодировка хэша пароля не поддерживается.
+      NotFound: Пароль не знайдено
+      Empty: Пароль порожній
+      Invalid: Неправильний пароль
+      NotSet: Користувач не встановив пароль
+      NotChanged: Пароль не змінено
+      NotSupported: Кодування хешу пароля не підтримується.
     PasswordComplexityPolicy:
-      NotFound: Политика паролей не найдена
-      MinLength: Пароль слишком короткий
-      MinLengthNotAllowed: Указанная минимальная длина не допускается.
-      HasLower: Пароль должен содержать строчные буквы
-      HasUpper: Пароль должен содержать заглавные буквы
-      HasNumber: Пароль должен содержать цифру
-      HasSymbol: Пароль должен содержать символ
+      NotFound: Політика паролів не знайдена
+      MinLength: Пароль надто короткий
+      MinLengthNotAllowed: Вказана мінімальна довжина не допускається.
+      HasLower: Пароль повинен містити малі літери
+      HasUpper: Пароль повинен містити великі літери
+      HasNumber: Пароль повинен містити цифру
+      HasSymbol: Пароль має містити символ
     ExternalIDP:
-      Invalid: Внешний идентификационный номер недействителен.
-      IDPConfigNotExisting: Поставщик МВУ недействителен для этой организации.
-      NotAllowed: Внешний IDP не разрешен в этой организации.
-      MinimumExternalIDPNeeded: Необходимо добавить хотя бы одного ВПЛ.
-      AlreadyExists: Внешнее ВПЛ уже занято
-      NotFound: Внешний IDP не найден
-      LoginFailed: Не удалось войти во внешний IDP
+      Invalid: Зовнішній ідентифікаційний номер недійсний.
+      IDPConfigNotExisting: Постачальник МВУ є недійсним для цієї організації.
+      NotAllowed: Зовнішній IDP не дозволено у цій організації.
+      MinimumExternalIDPNeeded: Необхідно додати хоча б одного ВПО.
+      AlreadyExists: Зовнішнє ВПО вже зайняте
+      NotFound: Зовнішнього IDP не знайдено
+      LoginFailed: Неможливо увійти до зовнішнього IDP
     MFA:
       OTP:
-        AlreadyReady: Многофакторный OTP (OneTimePassword) уже настроен.
-        NotExisting: Многофакторный OTP (OneTimePassword) не существует.
-        NotReady: Многофакторный OTP (OneTimePassword) не готов.
-        InvalidCode: Неверный код
+        AlreadyReady: Багатофакторний OTP (OneTimePassword) вже налаштований.
+        NotExisting: Багатофакторний OTP (OneTimePassword) не існує.
+        NotReady: Багатофакторний OTP (OneTimePassword) не готовий.
+        InvalidCode: Невірний код
       U2F:
-        NotExisting: U2F не существует
+        NotExisting: U2F не існує
       Passwordless:
-        NotExisting: Без пароля не существует
+        NotExisting: Без пароля не існує
     WebAuthN:
-      NotFound: Токен WebAuthN не найден.
-      BeginRegisterFailed: Ошибка начала регистрации WebAuthN
-      MarshalError: Ошибка в данных маршала
-      ErrorOnParseCredential: Ошибка при анализе учетных данных
-      CreateCredentialFailed: Ошибка при создании учетных данных
-      BeginLoginFailed: WebAuthN начать вход в систему не удалось
-      ValidateLoginFailed: Ошибка при проверке учетных данных для входа
-      CloneWarning: Учетные данные могут быть клонированы
+      NotFound: Токен WebAuthN не знайдено.
+      BeginRegisterFailed: Помилка початку реєстрації WebAuthN
+      MarshalError: Помилка даних маршала
+      ErrorOnParseCredential: Помилка під час аналізу облікових даних
+      CreateCredentialFailed: Помилка під час створення облікових даних
+      BeginLoginFailed: WebAuthN розпочати вхід до системи не вдалося
+      ValidateLoginFailed: Помилка під час перевірки облікових даних для входу
+      CloneWarning: Облікові дані можуть бути клоновані
     RefreshToken:
-      Invalid: Токен обновления недействителен.
-      NotFound: Токен обновления не найден
+      Invalid: Токен оновлення недійсний.
+      NotFound: Токен оновлення не знайдено
   Instance:
-    NotFound: Экземпляр не найден
-    AlreadyExists: Экземпляр уже существует
-    NotChanged: Экземпляр не изменен
+    NotFound: Примірник не знайдено
+    AlreadyExists: Екземпляр вже існує
+    NotChanged: Примірник не змінено
   Org:
-    AlreadyExists: Название организации уже занято
-    Invalid: Организация недействительна
-    AlreadyDeactivated: Организация уже деактивирована
-    AlreadyActive: Организация уже активна
-    Empty: Организация пуста
-    NotFound: Организация не найдена
-    NotChanged: Организация не изменена
-    DefaultOrgNotDeletable: Организацию по умолчанию нельзя удалять
-    ZitadelOrgNotDeletable: Нельзя удалять организацию с проектом ZITADEL.
-    InvalidDomain: Неверный домен
-    DomainMissing: Домен отсутствует
-    DomainNotOnOrg: Домен не существует в организации
-    DomainNotVerified: Домен не подтвержден
-    DomainAlreadyVerified: Домен уже подтвержден
-    DomainVerificationTypeInvalid: Недопустимый тип подтверждения домена.
-    DomainVerificationMissing: Проверка домена еще не началась
-    DomainVerificationFailed: Проверка домена не удалась
-    PrimaryDomainNotDeletable: Основной домен нельзя удалять
-    DomainNotFound: Домен не найден
-    MemberIDMissing: Идентификатор участника отсутствует
-    MemberNotFound: Член организации не найден
-    InvalidMember: Член организации недействителен
-    UserIDMissing: Идентификатор пользователя отсутствует
-    PolicyAlreadyExists: Политика уже существует
-    PolicyNotExisting: Политика не существует
-    IdpInvalid: Конфигурация IDP недействительна.
-    IdpNotExisting: Конфигурация IDP не существует
-    OIDCConfigInvalid: Конфигурация OIDC IDP недействительна.
-    IdpIsNotOIDC: Конфигурация IDP не относится к типу oidc.
+    AlreadyExists: Назва організації вже зайнята
+    Invalid: Організація недійсна
+    AlreadyDeactivated: Організацію вже деактивовано
+    AlreadyActive: Організація вже активна
+    Empty: Організація спустошена
+    NotFound: Організації не знайдено
+    NotChanged: Організація не змінена
+    DefaultOrgNotDeletable: Організацію за замовчуванням не можна видаляти
+    ZitadelOrgNotDeletable: Не можна видаляти організацію із проектом ZITADEL.
+    InvalidDomain: Невірний домен
+    DomainMissing: Домен відсутній
+    DomainNotOnOrg: Домен не існує в організації
+    DomainNotVerified: Домен не підтверджений
+    DomainAlreadyVerified: Домен уже підтверджений
+    DomainVerificationTypeInvalid: Неприпустимий тип підтвердження домену.
+    DomainVerificationMissing: Перевірка домену ще не розпочалася
+    DomainVerificationFailed: Перевірка домену не вдалася
+    PrimaryDomainNotDeletable: Основний домен не можна видаляти
+    DomainNotFound: Домен не знайдено
+    MemberIDMissing: Ідентифікатор учасника відсутній
+    MemberNotFound: Член організації не знайдено
+    InvalidMember: Член організації недійсний
+    UserIDMissing: Ідентифікатор користувача відсутній
+    PolicyAlreadyExists: Політика вже існує
+    PolicyNotExisting: Політика не існує
+    IdpInvalid: Конфігурація IDP недійсна.
+    IdpNotExisting: Конфігурації IDP немає
+    OIDCConfigInvalid: Конфігурація OIDC IDP недійсна.
+    IdpIsNotOIDC: Конфігурація IDP не стосується типу oidc.
     Domain:
-      AlreadyExists: Домен уже существует
-      InvalidCharacter: Только буквенно-цифровые символы, . и - разрешены для домена
+      AlreadyExists: Домен вже існує
+      InvalidCharacter: Лише буквено-цифрові символи, . та - дозволені для домену
     IDP:
-      InvalidSearchQuery: Неверный поисковый запрос
-      ClientIDMissing: ClientID отсутствует
-      TeamIDMissing: TeamID отсутствует
-      KeyIDMissing: KeyID отсутствует
-      PrivateKeyMissing: Закрытый ключ отсутствует
+      InvalidSearchQuery: Невірний пошуковий запит
+      ClientIDMissing: ClientID відсутня
+      TeamIDMissing: TeamID відсутня
+      KeyIDMissing: KeyID відсутня
+      PrivateKeyMissing: Закритий ключ відсутній
     LoginPolicy:
-      NotFound: Политика входа не найдена
-      Invalid: Политика входа недействительна.
-      RedirectURIInvalid: URI перенаправления по умолчанию недействителен.
-      NotExisting: Политика входа не существует
-      AlreadyExists: Политика входа уже существует
-      IdpProviderAlreadyExisting: Поставщик удостоверений уже существует
-      IdpProviderNotExisting: Поставщик удостоверений не существует
-      RegistrationNotAllowed: Регистрация не разрешена
-      UsernamePasswordNotAllowed: Вход с именем пользователя/паролем невозможен.
+      NotFound: Політика входу не знайдена
+      Invalid: Політика входу недійсна.
+      RedirectURIInvalid: Перевірка URI за замовчуванням недійсна.
+      NotExisting: Політика входу не існує
+      AlreadyExists: Політика входу вже існує
+      IdpProviderAlreadyExisting: Постачальник посвідчень вже існує
+      IdpProviderNotExisting: Постачальник посвідчень не існує
+      RegistrationNotAllowed: Реєстрація заборонена
+      UsernamePasswordNotAllowed: Вхід з іменем користувача/паролем неможливий.
       MFA:
-        AlreadyExists: Мультифактор уже существует
-        NotExisting: Многофакторный не существует
-        Unspecified: Многофакторный недействителен
+        AlreadyExists: Мультифактор вже існує
+        NotExisting: Багатофакторний не існує
+        Unspecified: Багатофакторний недійсний
     MailTemplate:
-      NotFound: Шаблон письма по умолчанию не найден
-      NotChanged: Шаблон почты по умолчанию не был изменен.
-      AlreadyExists: Шаблон письма по умолчанию уже существует.
-      Invalid: Шаблон письма по умолчанию недействителен.
+      NotFound: Шаблон листа за замовчуванням не знайдено
+      NotChanged: Не було змінено шаблон пошти за замовчанням.
+      AlreadyExists: Шаблон листа за замовчанням вже існує.
+      Invalid: Шаблон листа за замовчанням недійсний.
     CustomMessageText:
-      NotFound: Текст сообщения по умолчанию не найден
-      NotChanged: Текст сообщения по умолчанию не был изменен
-      AlreadyExists: Текст сообщения по умолчанию уже существует
-      Invalid: Текст сообщения по умолчанию недействителен.
+      NotFound: Текст повідомлення за замовчуванням не знайдено
+      NotChanged: Текст повідомлення за замовчуванням не змінено
+      AlreadyExists: Текст повідомлення за замовчанням вже існує
+      Invalid: Текст повідомлення за замовчанням недійсний.
     PasswordComplexityPolicy:
-      NotFound: Политика сложности паролей не найдена
-      Empty: Политика сложности паролей пуста.
-      NotExisting: Политика сложности паролей не существует.
-      AlreadyExists: Политика сложности паролей уже существует.
+      NotFound: Політика складності паролів не знайдено
+      Empty: Політика складності паролів пуста.
+      NotExisting: Політика складності паролів немає.
+      AlreadyExists: Політика складності паролів існує.
     PasswordLockoutPolicy:
-      NotFound: Политика блокировки паролей не найдена
-      Empty: Политика блокировки паролей пуста
-      NotExisting: Политика блокировки паролей не существует
-      AlreadyExists: Политика блокировки паролей уже существует
+      NotFound: Політика блокування паролів не знайдена
+      Empty: Політика блокування паролів порожня
+      NotExisting: Політика блокування паролів не існує
+      AlreadyExists: Політика блокування паролів вже існує
     PasswordAgePolicy:
-      NotFound: Политика срока действия пароля не найдена
-      Empty: Политика срока действия пароля пуста.
-      NotExisting: Политика возраста пароля не существует
-      AlreadyExists: Политика срока действия пароля уже существует.
+      NotFound: Політика терміну дії пароля не знайдено
+      Empty: Політика терміну дії пароля пуста.
+      NotExisting: Політика віку пароля не існує
+      AlreadyExists: Політика терміну дії пароля вже існує.
     OrgIAMPolicy:
-      Empty: IAM-политика организации пуста.
-      NotExisting: IAM-политика организации не существует.
-      AlreadyExists: IAM-политика организации уже существует.
+      Empty: IAM-політика організації порожня.
+      NotExisting: IAM-політика організації немає.
+      AlreadyExists: IAM-політика організації вже існує.
     NotificationPolicy:
-      NotFound: Политика уведомлений не найдена
-      NotChanged: Политика уведомлений не изменена
-      AlreadyExists: Политика уведомлений уже существует
+      NotFound: Політика повідомлень не знайдена
+      NotChanged: Політика повідомлень не змінена
+      AlreadyExists: Політика повідомлень вже існує
     LabelPolicy:
-      NotFound: Политика частных торговых марок не найдена
-      NotChanged: Политика использования частных торговых марок не изменилась.
+      NotFound: Політика приватних торгових марок не знайдено
+      NotChanged: Політика використання приватних марок не змінилася.
   Project:
-    ProjectIDMissing: Идентификатор проекта отсутствует
-    AlreadyExists: Проект уже существует в организации
-    OrgNotExisting: Организация не существует
-    UserNotExisting: Пользователь не существует
-    CouldNotGenerateClientSecret: Не удалось создать секрет клиента
-    Invalid: Проект недействителен
-    NotActive: Проект не активен
-    NotInactive: Проект не деактивирован
-    NotFound: Проект не найден
-    UserIDMissing: Идентификатор пользователя отсутствует
+    ProjectIDMissing: Ідентифікатора проекту немає
+    AlreadyExists: Проект вже існує в організації
+    OrgNotExisting: Організації немає
+    UserNotExisting: Користувач не існує
+    CouldNotGenerateClientSecret: Не вдалося створити секрет клієнта
+    Invalid: Проект недійсний
+    NotActive: Проект не активний
+    NotInactive: Проект не деактивовано
+    NotFound: Проект не знайдено
+    UserIDMissing: Ідентифікатор користувача відсутній
     Member:
-      NotFound: Участник проекта не найден
-      Invalid: Участник проекта недействителен
-      AlreadyExists: Участник проекта уже существует
-      NotExisting: Участник проекта не существует
-    MinimumOneRoleNeeded: Необходимо добавить хотя бы одну роль.
+      NotFound: Учасника проекту не знайдено
+      Invalid: Учасник проекту недійсний
+      AlreadyExists: Учасник проекту вже існує
+      NotExisting: Учасник проекту не існує
+    MinimumOneRoleNeeded: Потрібно додати хоча б одну роль.
     Role:
-      AlreadyExists: Роль уже существует
-      Invalid: Роль недействительна
-      NotExisting: Роль не существует
-    IDMissing: идентификатор отсутствует
+      AlreadyExists: Роль вже існує
+      Invalid: Роль недійсна
+      NotExisting: Роль не існує
+    IDMissing: ідентифікатор відсутній
     App:
-      AlreadyExists: Приложение уже существует
-      NotFound: Приложение не найдено
-      Invalid: Заявка недействительна
-      NotExisting: Приложение не существует
-      NotActive: Приложение не активно
-      NotInactive: Приложение не неактивно
-      OIDCConfigInvalid: Конфигурация OIDC недействительна.
-      APIConfigInvalid: Конфигурация API недействительна
-      SAMLConfigInvalid: Конфигурация SAML недействительна.
-      IsNotOIDC: Приложение не типа OIDC
-      IsNotAPI: Приложение не относится к типу API
-      IsNotSAML: Приложение не относится к типу SAML
-      SAMLMetadataMissing: Метаданные SAML отсутствуют.
-      SAMLMetadataFormat: Ошибка формата метаданных SAML
-      SAMLEntityIDAlreadyExisting: SAML EntityID уже существует
-      OIDCAuthMethodNoSecret: Выбранный метод аутентификации OIDC не требует секрета.
-      APIAuthMethodNoSecret: Выбранный метод аутентификации API не требует секрета.
-      AuthMethodNoPrivateKeyJWT: Выбранный метод аутентификации не требует ключа.
-      ClientSecretInvalid: Секрет клиента недействителен.
+      AlreadyExists: Програма вже існує
+      NotFound: Додаток не знайдено
+      Invalid: Заявка недійсна
+      NotExisting: Додаток не існує
+      NotActive: Програма не активна
+      NotInactive: Програма не неактивна
+      OIDCConfigInvalid: Конфігурація OIDC недійсна.
+      APIConfigInvalid: Конфігурація API недійсна
+      SAMLConfigInvalid: Конфігурація SAML є недійсною.
+      IsNotOIDC: Програма не типу OIDC
+      IsNotAPI: Додаток не відноситься до типу API
+      IsNotSAML: Додаток не відноситься до типу SAML
+      SAMLMetadataMissing: Метадані SAML відсутні.
+      SAMLMetadataFormat: Помилка формату метаданих SAML
+      SAMLEntityIDAlreadyExisting: SAML EntityID вже існує
+      OIDCAuthMethodNoSecret: Вибраний метод аутентифікації OIDC не вимагає секрету.
+      APIAuthMethodNoSecret: Вибраний метод автентифікації API не вимагає секрету.
+      AuthMethodNoPrivateKeyJWT: Вибраний метод автентифікації не вимагає ключа.
+      ClientSecretInvalid: Секрет клієнта недійсний.
       Key:
-        AlreadyExisting: Ключ приложения уже существует
-        NotFound: Ключ приложения не найден
-    RequiredFieldsMissing: Некоторые обязательные поля отсутствуют
+        AlreadyExisting: Ключ додатку вже існує
+        NotFound: Ключ додатку не знайдено
+    RequiredFieldsMissing: 'Деякі обов&#39;язкові поля відсутні'
     Grant:
-      AlreadyExists: Грант на проект уже существует
-      NotFound: Грант не найден
-      Invalid: Грант проекта недействителен.
-      NotExisting: Гранта на проект не существует
-      HasNotExistingRole: В проекте не существует одной роли
-      NotActive: Грант проекта не активен
-      NotInactive: Грант проекта не неактивен
+      AlreadyExists: Грант на проект уже існує
+      NotFound: Грант не знайдено
+      Invalid: Проект гранту недійсний.
+      NotExisting: Гранта на проект не існує
+      HasNotExistingRole: У проекті немає однієї ролі
+      NotActive: Грантовий проект неактивний
+      NotInactive: Грантовий проект не є бездіяльним
   IAM:
-    NotFound: Экземпляр не найден
+    NotFound: Екземпляр не знайдено
     Member:
-      RolesNotChanged: Роли не изменились
-    MemberInvalid: Участник недействителен
-    MemberAlreadyExisting: Участник уже существует
-    MemberNotExisting: Участник не существует
-    IDMissing: Я пропал
-    IAMProjectIDMissing: Идентификатор проекта IAM отсутствует
-    IamProjectAlreadySet: Идентификатор проекта IAM уже установлен.
-    IdpInvalid: Конфигурация IDP недействительна.
-    IdpNotExisting: Конфигурация IDP не существует
-    OIDCConfigInvalid: Конфигурация OIDC IDP недействительна.
-    IdpIsNotOIDC: Конфигурация IDP не относится к типу oidc.
-    LoginPolicyInvalid: Политика входа недействительна.
-    LoginPolicyNotExisting: Политика входа не существует
-    IdpProviderInvalid: Поставщик удостоверений недействителен.
+      RolesNotChanged: Ролі не змінилися
+    MemberInvalid: Учасник недійсний
+    MemberAlreadyExisting: Учасник вже існує
+    MemberNotExisting: Учасник не існує
+    IDMissing: Я зник
+    IAMProjectIDMissing: Ідентифікатор проекту IAM відсутній
+    IamProjectAlreadySet: Ідентифікатор IAM вже встановлено.
+    IdpInvalid: Конфігурація IDP недійсна.
+    IdpNotExisting: Конфігурації IDP немає
+    OIDCConfigInvalid: Конфігурація OIDC IDP недійсна.
+    IdpIsNotOIDC: Конфігурація IDP не стосується типу oidc.
+    LoginPolicyInvalid: Політика входу недійсна.
+    LoginPolicyNotExisting: Політика входу не існує
+    IdpProviderInvalid: Постачальник посвідчень недійсний.
     LoginPolicy:
-      NotFound: Политика входа по умолчанию не найдена
-      NotChanged: Политика входа по умолчанию не была изменена
-      NotExisting: Политика входа по умолчанию не существует
-      AlreadyExists: Политика входа по умолчанию уже существует
-      RedirectURIInvalid: URI перенаправления по умолчанию недействителен.
+      NotFound: Політика входу за замовчуванням не знайдено
+      NotChanged: Політика стандартного входу не була змінена
+      NotExisting: Політика входу за замовчуванням не існує
+      AlreadyExists: Політика стандартного входу вже існує
+      RedirectURIInvalid: Перевірка URI за замовчуванням недійсна.
       MFA:
-        AlreadyExists: Мультифактор уже существует
-        NotExisting: Многофакторный не существует
-        Unspecified: Многофакторный недействителен
+        AlreadyExists: Мультифактор вже існує
+        NotExisting: Багатофакторний не існує
+        Unspecified: Багатофакторний недійсний
       IDP:
-        AlreadyExists: Поставщик удостоверений уже существует
-        NotExisting: Поставщик удостоверений не существует
-        Invalid: Поставщик удостоверений недействителен.
+        AlreadyExists: Постачальник посвідчень вже існує
+        NotExisting: Постачальник посвідчень не існує
+        Invalid: Постачальник посвідчень недійсний.
       IDPConfig:
-        AlreadyExists: Конфигурация поставщика удостоверений уже существует.
-        NotInactive: Конфигурация поставщика удостоверений не неактивна
-        NotActive: Конфигурация поставщика удостоверений не активна
+        AlreadyExists: Конфігурація постачальника посвідчень вже існує.
+        NotInactive: Конфігурація постачальника посвідчень не активна
+        NotActive: Конфігурація постачальника посвідчень не активна
     LabelPolicy:
-      NotFound: Политика частных торговых марок по умолчанию не найдена
-      NotChanged: Политика частных торговых марок по умолчанию не была изменена.
+      NotFound: Політика приватних торгових марок за замовчуванням не знайдено
+      NotChanged: Політика приватних торгових марок за умовчанням була змінена.
     MailTemplate:
-      NotFound: Шаблон письма по умолчанию не найден
-      NotChanged: Шаблон почты по умолчанию не был изменен.
-      AlreadyExists: Шаблон письма по умолчанию уже существует.
-      Invalid: Шаблон письма по умолчанию недействителен.
+      NotFound: Шаблон листа за замовчуванням не знайдено
+      NotChanged: Не було змінено шаблон пошти за замовчанням.
+      AlreadyExists: Шаблон листа за замовчанням вже існує.
+      Invalid: Шаблон листа за замовчанням недійсний.
     CustomMessageText:
-      NotFound: Текст сообщения по умолчанию не найден
-      NotChanged: Текст сообщения по умолчанию не был изменен
-      AlreadyExists: Текст сообщения по умолчанию уже существует
-      Invalid: Текст сообщения по умолчанию недействителен.
+      NotFound: Текст повідомлення за замовчуванням не знайдено
+      NotChanged: Текст повідомлення за замовчуванням не змінено
+      AlreadyExists: Текст повідомлення за замовчанням вже існує
+      Invalid: Текст повідомлення за замовчанням недійсний.
     PasswordComplexityPolicy:
-      NotFound: Политика сложности паролей по умолчанию не найдена
-      NotExisting: Политика сложности паролей по умолчанию не существует
-      AlreadyExists: Политика сложности паролей по умолчанию уже существует
-      Empty: Политика сложности паролей по умолчанию пуста
-      NotChanged: Политика сложности паролей по умолчанию не была изменена.
+      NotFound: Політика складності паролів за замовчуванням не знайдено
+      NotExisting: Політика складності паролів за замовчанням не існує
+      AlreadyExists: Політика складності паролів за замовчанням вже існує
+      Empty: Політика складності паролів за замовчанням порожня
+      NotChanged: Політика складності паролів за замовчанням не була змінена.
     PasswordAgePolicy:
-      NotFound: Политика срока действия пароля по умолчанию не найдена
-      NotExisting: Политика срока действия пароля по умолчанию не существует
-      AlreadyExists: Политика срока действия пароля по умолчанию уже существует
-      Empty: Политика срока действия пароля по умолчанию пуста
-      NotChanged: Политика срока действия пароля по умолчанию не была изменена
+      NotFound: Політика терміну дії пароля за замовчуванням не знайдено
+      NotExisting: Політика терміну дії пароля за замовчанням не існує
+      AlreadyExists: Політика терміну дії пароля за замовчанням вже існує
+      Empty: Політика терміну дії пароля за замовчанням порожня
+      NotChanged: Політика терміну дії пароля за замовчанням не була змінена
     PasswordLockoutPolicy:
-      NotFound: Политика блокировки пароля по умолчанию не найдена
-      NotExisting: Политика блокировки пароля по умолчанию не существует
-      AlreadyExists: Политика блокировки пароля по умолчанию уже существует
-      Empty: Политика блокировки пароля по умолчанию пуста
-      NotChanged: Политика блокировки пароля по умолчанию не была изменена
+      NotFound: Політика блокування пароля за замовчуванням не знайдено
+      NotExisting: Політика блокування пароля за замовчанням не існує
+      AlreadyExists: Політика блокування пароля за замовчанням вже існує
+      Empty: Політика блокування пароля за замовчанням порожня
+      NotChanged: Політика блокування пароля за замовчанням не була змінена
     DomainPolicy:
-      NotFound: Политика IAM организации не найдена
-      Empty: IAM-политика организации пуста.
-      NotExisting: IAM-политика организации не существует.
-      AlreadyExists: IAM-политика организации уже существует.
-      NotChanged: IAM-политика организации не изменилась.
+      NotFound: Політика IAM організації не знайдено
+      Empty: IAM-політика організації порожня.
+      NotExisting: IAM-політика організації немає.
+      AlreadyExists: IAM-політика організації вже існує.
+      NotChanged: IAM-політика організації не змінилася.
     NotificationPolicy:
-      NotFound: Политика уведомлений по умолчанию не найдена
-      NotChanged: Политика уведомления по умолчанию не изменена
-      AlreadyExists: Политика уведомлений по умолчанию уже существует
+      NotFound: Політика повідомлень за замовчуванням не знайдено
+      NotChanged: Політика стандартного повідомлення не змінена
+      AlreadyExists: Політика стандартних повідомлень вже існує
   Policy:
-    AlreadyExists: Политика уже существует
+    AlreadyExists: Політика вже існує
     Label:
       Invalid:
-        PrimaryColor: Основной цвет не является допустимым шестнадцатеричным значением цвета.
-        BackgroundColor: Цвет фона не является допустимым шестнадцатеричным значением цвета.
-        WarnColor: Цвет предупреждения не является допустимым шестнадцатеричным значением цвета.
-        FontColor: Цвет шрифта не является допустимым шестнадцатеричным значением цвета.
-        PrimaryColorDark: Основной цвет (темный режим) не является допустимым шестнадцатеричным значением цвета.
-        BackgroundColorDark: Цвет фона (темный режим) не является допустимым шестнадцатеричным значением цвета.
-        WarnColorDark: Цвет предупреждения (темный режим) не является допустимым шестнадцатеричным значением цвета.
-        FontColorDark: Цвет шрифта (темный режим) не является допустимым шестнадцатеричным значением цвета.
+        PrimaryColor: Основний колір не є допустимим шістнадцятковим значенням кольору.
+        BackgroundColor: Колір фону не є допустимим шістнадцятковим значенням кольору.
+        WarnColor: Колір попередження не є допустимим шістнадцятковим значенням кольору.
+        FontColor: Колір шрифту не є допустимим значенням шістнадцяткового кольору.
+        PrimaryColorDark: Основний колір (темний режим) не є допустимим значенням шістнадцяткового кольору.
+        BackgroundColorDark: Колір фону (темний режим) не є допустимим значенням шістнадцяткового кольору.
+        WarnColorDark: Колір попередження (темний режим) не є допустимим шістнадцятковим значенням кольору.
+        FontColorDark: Колір шрифту (темний режим) не є допустимим шістнадцятковим значенням кольору.
   UserGrant:
-    AlreadyExists: Разрешение пользователя уже существует
-    NotFound: Разрешение пользователя не найдено
-    Invalid: Недопустимый пользовательский грант
-    NotChanged: Пользовательский грант не был изменен
-    IDMissing: Идентификатор отсутствует
-    NotActive: Разрешение пользователя не активно.
-    NotInactive: Разрешение пользователя не деактивировано
-    NoPermissionForProject: Пользователь не имеет разрешений на этот проект
-    RoleKeyNotFound: Роль не найдена
+    AlreadyExists: Дозвіл користувача вже існує
+    NotFound: Дозвіл користувача не знайдено
+    Invalid: Неприпустимий грант користувача
+    NotChanged: Грант користувача не було змінено
+    IDMissing: Ідентифікатор відсутній
+    NotActive: Дозвіл користувача не активний.
+    NotInactive: Дозвіл користувача не деактивовано
+    NoPermissionForProject: Користувач не має дозволів на цей проект
+    RoleKeyNotFound: Роль не знайдена
   Member:
-    AlreadyExists: Участник уже существует
+    AlreadyExists: Учасник вже існує
   IDPConfig:
-    AlreadyExists: Конфигурация IDP с таким именем уже существует
-    NotExisting: Конфигурация поставщика удостоверений не существует
+    AlreadyExists: Конфігурація IDP з такою назвою вже існує
+    NotExisting: Конфігурації постачальника посвідчень немає
   Changes:
-    NotFound: История не найдена
-    AuditRetention: История находится за пределами хранилища журнала аудита
+    NotFound: Історія не знайдена
+    AuditRetention: Історія знаходиться за межами сховища журналу аудиту
   Token:
-    NotFound: Токен не найден
+    NotFound: Токена не знайдено
   UserSession:
-    NotFound: UserSession не найден
+    NotFound: UserSession не знайдено
   Key:
-    ExpireBeforeNow: Срок годности в прошлом
+    ExpireBeforeNow: Термін придатності минулого
   Login:
     LoginPolicy:
       MFA:
-        ForceAndNotConfigured: Многофакторная настройка выполняется в соответствии с требованиями, но возможные поставщики не настраиваются. Обратитесь к системному администратору.
+        ForceAndNotConfigured: Багатофакторне налаштування виконується відповідно до вимог, але  можливі постачальники не налаштовуються. Зверніться до системного адміністратора.
   Step:
     Started:
-      AlreadyExists: Шаг начат уже существует
+      AlreadyExists: Крок розпочато вже існує
     Done:
-      AlreadyExists: Шаг сделан уже существует
+      AlreadyExists: Крок зроблено вже існує
   CustomText:
-    AlreadyExists: Пользовательский текст уже существует
-    Invalid: Пользовательский текст недействителен
-    NotFound: Пользовательский текст не найден
+    AlreadyExists: Текст користувача вже існує
+    Invalid: Текст користувача недійсний
+    NotFound: Користувальницький текст не знайдено
   TranslationFile:
-    ReadError: Ошибка при чтении файла перевода
-    MergeError: Файл перевода не может быть объединен с пользовательским переводом
-    NotFound: Файл перевода не существует
+    ReadError: Помилка під час читання файлу перекладу
+    MergeError: 'Файл перекладу не може бути об&#39;єднаний з перекладом користувача'
+    NotFound: Файл перекладу не існує
   Metadata:
-    NotFound: Метаданные не найдены
-    NoData: Список метаданных пуст
-    Invalid: Недопустимые метаданные
-    KeyNotExisting: Один или несколько ключей не существуют
+    NotFound: Метадані не знайдені
+    NoData: Список метаданих порожній
+    Invalid: Неприпустимі метадані
+    KeyNotExisting: Один або кілька ключів не існує
   Action:
-    Invalid: Действие недопустимо
-    NotFound: Действие не найдено
-    NotActive: Действие не активно
-    NotInactive: Действие не является бездействующим
-    MaxAllowed: Дополнительные активные действия запрещены
+    Invalid: Дія заборонена
+    NotFound: Дія не знайдена
+    NotActive: Дія не активна
+    NotInactive: Дія не є бездіяльною
+    MaxAllowed: Додаткові активні дії заборонені
   Flow:
-    FlowTypeMissing: FlowType отсутствует
-    Empty: Поток уже пуст
-    WrongTriggerType: Недопустимый тип триггера
-    NoChanges: Без изменений
-    ActionIDsNotExist: Идентификаторы действий не существуют
+    FlowTypeMissing: FlowType відсутня
+    Empty: Потік уже порожній
+    WrongTriggerType: Неприпустимий тип тригера
+    NoChanges: Без змін
+    ActionIDsNotExist: Ідентифікатори дій не існують
   Query:
-    CloseRows: Не удалось завершить инструкцию SQL
-    SQLStatement: Не удалось создать инструкцию SQL
-    InvalidRequest: Запрос недействителен
+    CloseRows: Не вдалося завершити інструкцію SQL
+    SQLStatement: Не вдалося створити інструкцію SQL
+    InvalidRequest: Запит недійсний
   Quota:
-    AlreadyExists: Квота для этой единицы уже существует
-    NotFound: Квота не найдена для этого объекта
+    AlreadyExists: Квота для цієї одиниці вже існує
+    NotFound: 'Квоти не знайдено для цього об&#39;єкту'
     Invalid:
-      CallURL: URL-адрес вызова квоты недействителен
-      Percent: Процент квоты меньше 1
-      Unimplemented: Квоты для этой единицы не применяются
-      Amount: Размер квоты меньше 1
-      ResetInterval: Интервал сброса квоты меньше минуты
-      Noop: Неограниченная квота без уведомлений не действует
+      CallURL: URL-адреса виклику квоти недійсна
+      Percent: Відсоток квоти менше 1
+      Unimplemented: Квоти для цієї одиниці не застосовуються
+      Amount: Розмір квоти менше 1
+      ResetInterval: Інтервал скидання квоти менше хвилини
+      Noop: Необмежена квота без повідомлень не діє
     Access:
-      Exhausted: Квота на запросы с проверкой подлинности исчерпана
+      Exhausted: Квота на запити з автентичністю вичерпана
     Execution:
-      Exhausted: Квота на выполнение секунд исчерпана
+      Exhausted: Квота на виконання секунд вичерпана
   LogStore:
     Access:
-      StorageFailed: Не удалось сохранить журнал доступа к базе данных
-      ScanFailed: Сбой использования запросов для запросов, прошедших проверку подлинности
+      StorageFailed: Не вдалося зберегти журнал доступу до бази даних
+      ScanFailed: Збій використання запитів для запитів, що пройшли автентифікацію
     Execution:
-      StorageFailed: Не удалось сохранить журнал выполнения действий в базе данных
-      ScanFailed: Сбой запроса использования для секунд выполнения действия
+      StorageFailed: Не вдалося зберегти журнал виконання дій у базі даних
+      ScanFailed: Збій запиту використання для секунд виконання дії
   Session:
-    NotExisting: Сеанс не существует
-    Terminated: Сеанс уже завершен
+    NotExisting: Сеанс не існує
+    Terminated: Сеанс уже завершено
     Token:
-      Invalid: Маркер сеанса недействителен
+      Invalid: Маркер сеансу недійсний
     WebAuthN:
-      NoChallenge: Сеанс без вызова WebAuthN
+      NoChallenge: Сеанс без виклику WebAuthN
   Intent:
-    IDPMissing: В запросе отсутствует идентификатор IDP
-    SuccessURLMissing: В запросе отсутствует URL-адрес успешного выполнения
-    FailureURLMissing: В запросе отсутствует URL-адрес ошибки
-    StateMissing: В запросе отсутствует параметр State
-    NotStarted: Намерение не начато или уже прекращено
-    NotSucceeded: Намерение не увенчалось успехом
-    TokenCreationFailed: Не удалось создать токен
-    InvalidToken: Маркер намерения недействителен
-    OtherUser: Намерение, предназначенное для другого пользователя
+    IDPMissing: Ідентифікатор IDP відсутній
+    SuccessURLMissing: У запиті відсутня URL-адреса успішного виконання
+    FailureURLMissing: У запиті відсутня URL-адреса помилки
+    StateMissing: У запиті відсутній параметр State
+    NotStarted: Намір не розпочато або вже припинено
+    NotSucceeded: Намір не увінчався успіхом
+    TokenCreationFailed: Не вдалося створити токен
+    InvalidToken: Маркер наміру недійсний
+    OtherUser: Намір призначений для іншого користувача
   AuthRequest:
-    AlreadyExists: Запрос на аутентификацию уже существует
-    NotExisting: Запрос на аутентификацию не существует
-    WrongLoginClient: Запрос на аутентификацию, созданный другим клиентом входа
+    AlreadyExists: Запит на автентифікацію вже існує
+    NotExisting: Запит на автентифікацію не існує
+    WrongLoginClient: Запит на аутентифікацію, створений іншим клієнтом входу
   OIDCSession:
-    RefreshTokenInvalid: Маркер обновления недействителен
+    RefreshTokenInvalid: Маркер оновлення недійсний
     Token:
-      Invalid: Токен недействителен
-      Expired: Срок действия токена истек
-    InvalidClient: Токен не был выпущен для этого клиента
+      Invalid: Токен недійсний
+      Expired: Термін дії токена минув
+    InvalidClient: Токен не був випущений для цього клієнта
 AggregateTypes:
-  action: Действие
-  instance: Пример
-  key_pair: Пара ключей
-  org: Организация
-  project: Проект
-  user: Пользователь
-  usergrant: Разрешение пользователя
+  action: Дія
+  instance: Приклад
+  key_pair: Пара ключів
+  org: Організація
+  project: Демонструвати
+  user: Користувач
+  usergrant: Дозвіл користувача
   quota: Квота
 EventTypes:
   user:
-    added: Добавлено пользователем
-    selfregistered: Пользователь зарегистрировался сам
+    added: Додано користувачем
+    selfregistered: Користувач зареєструвався сам
     initialization:
       code:
-        added: Сгенерирован код инициализации
-        sent: Отправлен код инициализации
+        added: Згенеровано код ініціалізації
+        sent: Надіслано код ініціалізації
       check:
-        succeeded: Проверка инициализации прошла успешно
-        failed: Проверка инициализации не удалась
+        succeeded: Перевірка ініціалізації пройшла успішно
+        failed: Перевірка ініціалізації не вдалася
     token:
-      added: Маркер доступа создан
-      removed: Удален маркер доступа
+      added: Маркер доступу створено
+      removed: Видалений маркер доступу
     username:
-      reserved: Имя пользователя зарезервировано
-      released: Имя пользователя выпущено
-      changed: Имя пользователя изменено
+      reserved: 'Ім&#39;я користувача зарезервовано'
+      released: 'Ім&#39;я користувача випущено'
+      changed: 'Ім&#39;я користувача змінено'
     email:
-      reserved: Адрес электронной почты зарезервирован
-      released: Адрес электронной почты освобожден
-      changed: Адрес электронной почты изменен
-      verified: Адрес электронной почты подтвержден
+      reserved: Адреса електронної пошти зарезервована
+      released: Адреса електронної пошти звільнена
+      changed: Адреса електронної пошти змінено
+      verified: Адреса електронної пошти підтверджена
       verification:
-        failed: Не удалось подтвердить адрес электронной почты
+        failed: Неможливо підтвердити адресу електронної пошти
       code:
-        added: Сгенерирован код подтверждения адреса электронной почты
-        sent: Отправлен код подтверждения адреса электронной почты
+        added: Згенеровано код підтвердження адреси електронної пошти
+        sent: Надіслано код підтвердження адреси електронної пошти
     machine:
-      added: Добавлен технический пользователь
-      changed: Изменен технический пользователь
+      added: Доданий технічний користувач
+      changed: Змінено технічного користувача
       key:
-        added: Ключ добавлен
-        removed: Ключ удален
+        added: Ключ доданий
+        removed: Ключ видалено
       secret:
-        set: Секретный набор
-        removed: Секрет удален
+        set: Секретний набір
+        removed: Секрет видалено
         check:
-          succeeded: Секретная проверка прошла успешно
-          failed: Секретная проверка не удалась
+          succeeded: Секретна перевірка пройшла успішно
+          failed: Секретна перевірка не вдалася
     human:
-      added: Человек добавлен
-      selfregistered: Человек зарегистрировал себя
+      added: Людина додана
+      selfregistered: Людина зареєструвала себе
       avatar:
-        added: Добавлен аватар
-        removed: Аватар удален
+        added: Доданий аватар
+        removed: Аватар видалено
       initialization:
         code:
-          added: Сгенерирован код инициализации
-          sent: Отправлен код инициализации
+          added: Згенеровано код ініціалізації
+          sent: Надіслано код ініціалізації
         check:
-          succeeded: Проверка инициализации прошла успешно
-          failed: Проверка инициализации не удалась
+          succeeded: Перевірка ініціалізації пройшла успішно
+          failed: Перевірка ініціалізації не вдалася
       username:
-        reserved: Имя пользователя зарезервировано
-        released: Имя пользователя выпущено
+        reserved: 'Ім&#39;я користувача зарезервовано'
+        released: 'Ім&#39;я користувача випущено'
       email:
-        changed: Адрес электронной почты изменен
-        verified: Адрес электронной почты подтвержден
+        changed: Адреса електронної пошти змінено
+        verified: Адреса електронної пошти підтверджена
         verification:
-          failed: Не удалось подтвердить адрес электронной почты
+          failed: Неможливо підтвердити адресу електронної пошти
         code:
-          added: Сгенерирован код подтверждения адреса электронной почты
-          sent: Отправлен код подтверждения адреса электронной почты
+          added: Згенеровано код підтвердження адреси електронної пошти
+          sent: Надіслано код підтвердження адреси електронної пошти
       password:
-        changed: Пароль изменен
+        changed: Пароль змінений
         code:
-          added: Сгенерирован код пароля
-          sent: Код пароля отправлен
+          added: Згенеровано код пароля
+          sent: Код пароля надіслано
         check:
-          succeeded: Проверка пароля прошла успешно
-          failed: Проверка пароля не удалась
+          succeeded: Перевірка пароля пройшла успішно
+          failed: Перевірка пароля не вдалася
         change:
-          sent: Отправлена смена пароля
+          sent: Відправлено зміну пароля
         hash:
-          updated: Обновлен хэш пароля
+          updated: Оновлено хеш пароля
       externallogin:
         check:
-          succeeded: Внешний вход выполнен успешно
+          succeeded: Зовнішній вхід виконано успішно
       externalidp:
-        added: Добавлен внешний поставщик удостоверений
-        removed: Удален внешний поставщик удостоверений
+        added: Додано зовнішнього постачальника посвідчень
+        removed: Видалено зовнішнього постачальника посвідчень
         cascade:
-          removed: Удален внешний каскад IDP
+          removed: Видалено зовнішній каскад IDP
         id:
-          migrated: Внешний идентификатор пользователя IDP был перенесен
+          migrated: Зовнішній ідентифікатор користувача IDP було перенесено
       phone:
-        changed: Номер телефона изменен
-        verified: Номер телефона подтвержден
+        changed: Номер телефону змінено
+        verified: Номер телефону підтверджено
         verification:
-          failed: Не удалось подтвердить номер телефона
+          failed: Не вдалося підтвердити номер телефону
         code:
-          added: Сгенерирован код номера телефона
-          sent: Отправленный код номера телефона
-        removed: Номер телефона удален
+          added: Згенеровано код номера телефону
+          sent: Надісланий код номера телефону
+        removed: Номер телефону видалено
       profile:
-        changed: Профиль пользователя изменен
+        changed: Профіль користувача змінено
       address:
-        changed: Адрес пользователя изменен
+        changed: Адреса користувача змінено
       mfa:
         otp:
-          added: Добавлен многофакторный одноразовый пароль
-          verified: Многофакторная проверка OTP
-          removed: Удален многофакторный одноразовый пароль
+          added: Додано багатофакторний одноразовий пароль
+          verified: Багатофакторна перевірка OTP
+          removed: Видалено багатофакторний одноразовий пароль
           check:
-            succeeded: Многофакторная проверка OTP прошла успешно
-            failed: Многофакторная проверка одноразового пароля не удалась
+            succeeded: Багатофакторна перевірка OTP пройшла успішно
+            failed: Багатофакторна перевірка одноразового пароля не вдалася
           sms:
-            added: Добавлен многофакторный OTP SMS
-            removed: Удалены многофакторные OTP SMS
+            added: Додано багатофакторний OTP SMS
+            removed: Видалено багатофакторні OTP SMS
             code:
-              added: Добавлен многофакторный OTP SMS-код
-              sent: Многофакторный OTP SMS-код отправлен
+              added: Додано багатофакторний OTP SMS-код
+              sent: Багатофакторний OTP SMS-код надіслано
             check:
-              succeeded: Многофакторная проверка OTP SMS прошла успешно
-              failed: Сбой многофакторной проверки OTP SMS
+              succeeded: Багатофакторна перевірка OTP SMS пройшла успішно
+              failed: Збій багатофакторної перевірки OTP SMS
           email:
-            added: Добавлена многофакторная электронная почта OTP
-            removed: Удалена многофакторная электронная почта OTP
+            added: Додано багатофакторну електронну пошту OTP
+            removed: Видалено багатофакторну електронну пошту OTP
             code:
-              added: Добавлен многофакторный код электронной почты OTP
-              sent: Многофакторный код OTP отправлен по электронной почте
+              added: Додано багатофакторний код електронної пошти OTP
+              sent: Багатофакторний код OTP надіслано електронною поштою
             check:
-              succeeded: Многофакторная проверка электронной почты OTP прошла успешно
-              failed: Не удалось выполнить многофакторную проверку электронной почты OTP
+              succeeded: Багатофакторна перевірка електронної пошти OTP пройшла успішно
+              failed: Не вдалося виконати багатофакторну перевірку електронної пошти OTP
         u2f:
           token:
-            added: Добавлен многофакторный U2F-токен
-            verified: Многофакторный U2F-токен проверен
-            removed: Удален многофакторный токен U2F
+            added: Додано багатофакторний U2F-токен
+            verified: Багатофакторний U2F-токен перевірено
+            removed: Видалено багатофакторний токен U2F
             begin:
-              login: Запущена многофакторная U2F-проверка
+              login: Запущено багатофакторну U2F-перевірку
             check:
-              succeeded: Многофакторная проверка U2F прошла успешно
-              failed: Сбой многофакторной проверки U2F
+              succeeded: Багатофакторна перевірка U2F пройшла успішно
+              failed: Збій багатофакторної перевірки U2F
             signcount:
-              changed: Изменена контрольная сумма токена Multifactor U2F
+              changed: Змінено контрольну суму токена Multifactor U2F
         init:
-          skipped: Пропущена многофакторная инициализация
+          skipped: Пропущено багатофакторну ініціалізацію
       passwordless:
         token:
-          added: Добавлен токен для входа без пароля
-          verified: Токен для беспарольного входа проверен
-          removed: Удален токен для входа без пароля
+          added: Доданий токен для входу без пароля
+          verified: Токен для безпарольного входу перевірено
+          removed: Видалений токен для входу без пароля
           begin:
-            login: Запущена проверка входа без пароля
+            login: Запущено перевірку входу без пароля
           check:
-            succeeded: Проверка входа без пароля прошла успешно
-            failed: Ошибка проверки входа без пароля
+            succeeded: Перевірка входу без пароля пройшла успішно
+            failed: Помилка перевірки входу без пароля
           signcount:
-            changed: Изменена контрольная сумма беспарольного токена входа
+            changed: Змінено контрольну суму безпарольного токена входу
         initialization:
           code:
-            added: Добавлен код инициализации без пароля
-            sent: Отправлен код инициализации без пароля
-            requested: Запрошен код инициализации без пароля
+            added: Доданий код ініціалізації без пароля
+            sent: Надіслано код ініціалізації без пароля
+            requested: Запитано код ініціалізації без пароля
             check:
-              succeeded: Код инициализации без пароля успешно проверен
-              failed: Ошибка проверки кода инициализации без пароля
+              succeeded: Код ініціалізації без пароля успішно перевірено
+              failed: Помилка перевірки коду ініціалізації без пароля
       signed:
-        out: Пользователь вышел из системы
+        out: Користувач вийшов із системи
       refresh:
         token:
-          added: Маркер обновления создан
-          renewed: Обновление маркера
-          removed: Маркер обновления удален
-    locked: Пользователь заблокирован
-    unlocked: Пользователь разблокирован
-    deactivated: Пользователь деактивирован
-    reactivated: Пользователь повторно активирован
-    removed: Пользователь удален
+          added: Маркер оновлення створено
+          renewed: Оновлення маркера
+          removed: Маркер оновлення видалено
+    locked: Користувач заблоковано
+    unlocked: Користувач розблоковано
+    deactivated: Користувач деактивовано
+    reactivated: Користувач повторно активовано
+    removed: Користувача видалено
     password:
-      changed: Пароль изменен
+      changed: Пароль змінений
       code:
-        added: Сгенерирован код пароля
-        sent: Код пароля отправлен
+        added: Згенеровано код пароля
+        sent: Код пароля надіслано
       check:
-        succeeded: Проверка пароля прошла успешно
-        failed: Проверка пароля не удалась
+        succeeded: Перевірка пароля пройшла успішно
+        failed: Перевірка пароля не вдалася
     phone:
-      changed: Номер телефона изменен
-      verified: Номер телефона подтвержден
+      changed: Номер телефону змінено
+      verified: Номер телефону підтверджено
       verification:
-        failed: Не удалось подтвердить номер телефона
+        failed: Не вдалося підтвердити номер телефону
       code:
-        added: Сгенерирован код номера телефона
-        sent: Отправленный код номера телефона
-      removed: Номер телефона удален
+        added: Згенеровано код номера телефону
+        sent: Надісланий код номера телефону
+      removed: Номер телефону видалено
     profile:
-      changed: Профиль пользователя изменен
+      changed: Профіль користувача змінено
     address:
-      changed: Адрес пользователя изменен
+      changed: Адреса користувача змінено
     mfa:
       otp:
-        added: Добавлен многофакторный одноразовый пароль
-        verified: Многофакторная проверка OTP
-        removed: Удален многофакторный одноразовый пароль
+        added: Додано багатофакторний одноразовий пароль
+        verified: Багатофакторна перевірка OTP
+        removed: Видалено багатофакторний одноразовий пароль
         check:
-          succeeded: Многофакторная проверка OTP прошла успешно
-          failed: Многофакторная проверка одноразового пароля не удалась
+          succeeded: Багатофакторна перевірка OTP пройшла успішно
+          failed: Багатофакторна перевірка одноразового пароля не вдалася
         init:
-          skipped: Пропущена многофакторная инициализация одноразового пароля
+          skipped: Пропущено багатофакторну ініціалізацію одноразового пароля
       init:
-        skipped: Пропущена многофакторная инициализация
+        skipped: Пропущено багатофакторну ініціалізацію
     signed:
-      out: Пользователь вышел из системы
+      out: Користувач вийшов із системи
     grant:
-      added: Добавлена авторизация
-      changed: Авторизация изменена
-      removed: Удалена авторизация
-      deactivated: Авторизация отключена
-      reactivated: Авторизация активирована повторно
-      reserved: Авторизация зарезервирована
-      released: Авторизация выпущена
+      added: Додано авторизацію
+      changed: Авторизація змінено
+      removed: Видалено авторизацію
+      deactivated: Авторизація відключено
+      reactivated: Авторизація активована повторно
+      reserved: Авторизація збережена
+      released: Авторизація випущена
       cascade:
-        removed: Удалена авторизация
-        changed: Авторизация изменена
+        removed: Видалено авторизацію
+        changed: Авторизація змінено
     metadata:
-      set: Набор метаданных пользователя
-      removed: Удалены метаданные пользователя
-      removed.all: Все метаданные пользователя удалены
+      set: Набір метаданих користувача
+      removed: Видалено метадані користувача
+      removed.all: Усі метадані користувача видалені
     domain:
-      claimed: Домен заявлен
-      claimed.sent: Отправлено уведомление о подтверждении домена
+      claimed: Домен заявлено
+      claimed.sent: Надіслано повідомлення про підтвердження домену
     pat:
-      added: Добавлен персональный маркер доступа
-      removed: Удален личный маркер доступа
+      added: Доданий персональний маркер доступу
+      removed: Видалено особистий маркер доступу
   org:
-    added: Добавлена организация
-    changed: Организация изменена
-    deactivated: Организация деактивирована
-    reactivated: Организация восстановлена
-    removed: Организация удалена
+    added: Додана організація
+    changed: Організація змінена
+    deactivated: Організацію деактивовано
+    reactivated: Організацію відновлено
+    removed: Організацію видалено
     domain:
-      added: Домен добавлен
+      added: Домен доданий
       verification:
-        added: Добавлена проверка домена
-        failed: Не удалось подтвердить домен
-      verified: Домен подтвержден
-      removed: Домен удален
+        added: Додано перевірку домену
+        failed: Не вдалося підтвердити домен
+      verified: Домен підтверджений
+      removed: Домен видалено
       primary:
-        set: Основной набор доменов
-      reserved: Домен зарезервирован
-      released: Домен освобожден
+        set: Основний набір доменів
+      reserved: Домен зарезервований
+      released: Домен звільнено
     name:
-      reserved: Название организации зарезервировано
-      released: Опубликовано название организации
+      reserved: Назва організації зарезервована
+      released: Опубліковано назву організації
     member:
-      added: Добавлен участник организации
-      changed: Изменен участник организации
-      removed: Удален участник организации
+      added: Додано учасника організації
+      changed: Змінені організації-учасники
+      removed: Вилучений учасник організації
       cascade:
-        removed: Удален каскад участников организации
+        removed: Вилучено каскад учасників організації
     iam:
       policy:
-        added: Добавлена системная политика
-        changed: Изменена системная политика
-        removed: Удалена системная политика
+        added: Додана системна політика
+        changed: Змінено системну політику
+        removed: Видалено системну політику
     idp:
       config:
-        added: Добавлена конфигурация IDP
-        changed: Изменена конфигурация IDP
-        removed: Удалена конфигурация IDP
-        deactivated: Конфигурация IDP отключена
-        reactivated: Повторная активация конфигурации IDP
+        added: Додано конфігурацію IDP
+        changed: Змінена конфігурація IDP
+        removed: Видалено конфігурацію IDP
+        deactivated: Конфігурація IDP вимкнена
+        reactivated: Повторна активація конфігурації IDP
       oidc:
         config:
-          added: Добавлена конфигурация OIDC IDP
-          changed: Изменена конфигурация OIDC IDP
+          added: Додано конфігурацію OIDC IDP
+          changed: Змінено конфігурацію OIDC IDP
       saml:
         config:
-          added: Добавлена конфигурация SAML IDP
-          changed: Изменена конфигурация SAML IDP
+          added: Додано конфігурацію SAML IDP
+          changed: Змінено конфігурацію SAML IDP
       jwt:
         config:
-          added: Добавлена конфигурация JWT IDP
-          changed: Изменена конфигурация IDP JWT
+          added: Додано конфігурацію JWT IDP
+          changed: Змінено конфігурацію IDP JWT
     customtext:
-      set: Пользовательский набор текста
-      removed: Пользовательский текст удален
+      set: Набір тексту
+      removed: Користувальницький текст видалено
       template:
-        removed: Удален пользовательский текстовый шаблон
+        removed: Видалено користувальницький текстовий шаблон
     policy:
       login:
-        added: Добавлена политика входа в систему
-        changed: Изменена политика входа в систему
-        removed: Политика входа в систему удалена
+        added: Додана політика входу до системи
+        changed: Змінено політику входу до системи
+        removed: Політика входу в систему видалена
         idpprovider:
-          added: Поставщик удостоверений добавлен в политику входа
-          removed: Поставщик удостоверений удален из политики входа
+          added: Постачальник посвідчень доданий до політики входу
+          removed: Постачальник посвідчень видалено з політики входу
           cascade:
-            removed: Каскад поставщиков удостоверений удален из политики входа
+            removed: Каскад постачальників посвідчень видалено із політики входу
         secondfactor:
-          added: Второй фактор, добавленный в политику входа
-          removed: Второй фактор удален из политики входа
+          added: Другий фактор, доданий до політики входу
+          removed: Другий фактор видалено із політики входу
         multifactor:
-          added: Многофакторный добавлен в политику входа
-          removed: Многофакторность удалена из политики входа
+          added: Багатофакторний доданий до політики входу
+          removed: Багатофакторність видалена із політики входу
       password:
         complexity:
-          added: Добавлена политика сложности паролей
-          changed: Изменена политика сложности паролей
-          removed: Удалена политика сложности паролей
+          added: Додана політика складності паролів
+          changed: Змінено політику складності паролів
+          removed: Видалено політику складності паролів
         age:
-          added: Добавлена политика срока действия пароля
-          changed: Изменена политика срока действия пароля
-          removed: Удалена политика срока действия пароля
+          added: Додана політика терміну дії пароля
+          changed: Змінено політику терміну дії пароля
+          removed: Видалено політику терміну дії пароля
         lockout:
-          added: Добавлена политика блокировки паролем
-          changed: Изменена политика блокировки паролем
-          removed: Удалена политика блокировки паролем
+          added: Додана політика блокування паролем
+          changed: Змінено політику блокування паролем
+          removed: Видалено політику блокування паролем
       label:
-        added: Добавлена политика меток
-        changed: Изменена политика меток
-        activated: Политика меток активирована
-        removed: Политика меток удалена
+        added: Додана політика міток
+        changed: Змінено політику міток
+        activated: Політика міток активована
+        removed: Політика тегів видалена
         logo:
-          added: Логотип добавлен в политику меток
-          removed: Логотип удален из политики меток
+          added: Логотип доданий до політики міток
+          removed: Логотип видалено з політики міток
           dark:
-            added: Логотип (темный режим) добавлен в политику меток
-            removed: Логотип (темный режим) удален из политики меток
+            added: Логотип (темний режим) додано до політики міток
+            removed: Логотип (темний режим) видалено з політики міток
         icon:
-          added: Значок добавлен в политику меток
-          removed: Значок удален из политики меток
+          added: Піктограма додана до політики міток
+          removed: Значок видалено з політики міток
           dark:
-            added: Значок (темный режим) добавлен в политику меток
-            removed: Значок (темный режим) удален из политики меток
+            added: Значок (темний режим) додано до політики міток
+            removed: Тема (темний режим) значок видалено з політики позначок
         font:
-          added: Шрифт, добавленный в политику меток
-          removed: Шрифт удален из политики меток
+          added: Шрифт, доданий до політики міток
+          removed: Шрифт видалено з політики міток
         assets:
-          removed: Ресурсы, удаленные из политики меток
+          removed: Ресурси, видалені з політики міток
       privacy:
-        added: Добавлена политика конфиденциальности и TOS
-        changed: Политика конфиденциальности и Условия использования изменены
-        removed: Политика конфиденциальности и Условия использования удалены
+        added: Додана політика конфіденційності та TOS
+        changed: Політика конфіденційності та Умови використання змінено
+        removed: Політика конфіденційності та Умови використання видалені
       domain:
-        added: Добавлена политика домена
-        changed: Изменена политика домена
-        removed: Политика домена удалена
+        added: Додана політика домену
+        changed: Змінено політику домену
+        removed: Політика домену видалено
       lockout:
-        added: Добавлена политика блокировки
-        changed: Изменена политика блокировки
-        removed: Политика блокировки удалена
+        added: Додана політика блокування
+        changed: Змінено політику блокування
+        removed: Політика блокування видалена
       notification:
-        added: Добавлена политика уведомлений
-        changed: Изменена политика уведомлений
-        removed: Политика уведомлений удалена
+        added: Додана політика повідомлень
+        changed: Змінено політику повідомлень
+        removed: Політика повідомлень видалена
     flow:
       trigger_actions:
-        set: Набор действий
+        set: Набір дій
         cascade:
-          removed: Удален каскад действий
-        removed: Удаленные действия
-      cleared: Поток очищен
+          removed: Вилучено каскад дій
+        removed: Віддалені дії
+      cleared: Потік очищений
     mail:
       template:
-        added: Добавлен шаблон E-Mail
-        changed: Изменен шаблон E-Mail
-        removed: Удален шаблон электронной почты
+        added: Доданий шаблон E-Mail
+        changed: Шаблон електронної пошти від My Name
+        removed: Видалено шаблон електронної пошти
       text:
-        added: Добавлен текст E-Mail
-        changed: Изменен текст сообщения электронной почты
-        removed: Текст электронной почты удален
+        added: Доданий текст E-Mail
+        changed: Змінено текст повідомлення електронної пошти
+        removed: Текст електронної пошти видалено
     metadata:
-      removed: Метаданные удалены
-      removed.all: Все метаданные удалены
-      set: Набор метаданных
+      removed: Метадані видалено
+      removed.all: Усі метадані видалені
+      set: Набір метаданих
   project:
-    added: Проект добавлен
-    changed: Проект изменен
-    deactivated: Проект деактивирован
-    reactivated: Проект возобновлен
-    removed: Проект удален
+    added: Проект доданий
+    changed: До проекту внесено зміни
+    deactivated: Проект деактивовано
+    reactivated: Проект відновлено
+    removed: Проект вилучено
     member:
-      added: Добавлен участник проекта
-      changed: Изменен участник проекта
-      removed: Удален участник проекта
+      added: Доданий учасник проекту
+      changed: Змінився учасник проекту
+      removed: Вилучений учасник проекту
       cascade:
-        removed: Удален каскад участников проекта
+        removed: Вилучено каскад учасників проекту
     role:
-      added: Добавлена роль проекта
-      changed: Изменена роль проекта
-      removed: Удалена роль проекта
+      added: Додана роль проекту
+      changed: Змінено роль проекту
+      removed: Вилучено роль проекту
     grant:
-      added: Добавлен доступ к управлению
-      changed: Изменен доступ к управлению
-      removed: Удален доступ к управлению
-      deactivated: Доступ к управлению отключен
-      reactivated: Доступ к управлению снова активирован
+      added: Доданий доступ до управління
+      changed: Змінено доступ до управління
+      removed: Видалено доступ до управління
+      deactivated: Доступ до управління вимкнено
+      reactivated: Доступ до управління знову активовано
       cascade:
-        changed: Изменен доступ к управлению
+        changed: Змінено доступ до управління
       member:
-        added: Добавлен участник с доступом к управлению
-        changed: Изменен участник с доступом к управлению
-        removed: Удален участник с доступом к управлению
+        added: Додано учасника з доступом до управління
+        changed: Змінено учасника з доступом до управління
+        removed: Видалено учасника з доступом до управління
         cascade:
-          removed: Удален каскад доступа к управлению
+          removed: Видалено каскад доступу до управління
     application:
-      added: Приложение добавлено
-      changed: Приложение изменено
-      removed: Приложение удалено
-      deactivated: Приложение деактивировано
-      reactivated: Приложение повторно активировано
+      added: Додаток додано
+      changed: До заявки внесено зміни
+      removed: Додаток видалено
+      deactivated: Додаток вимкнено
+      reactivated: Додаток повторно активовано
       oidc:
         secret:
           check:
-            succeeded: Проверка секрета клиента OIDC прошла успешно
-            failed: Сбой проверки секрета клиента OIDC
+            succeeded: Перевірка секрету клієнта OIDC пройшла успішно
+            failed: Збій перевірки секрету клієнта OIDC
         key:
-          added: Добавлен ключ приложения
-          removed: Удален ключ приложения
+          added: Доданий ключ додатку
+          removed: Видалено ключ додатку
       config:
         saml:
-          added: Добавлена конфигурация SAML
-          changed: Изменена конфигурация SAML
+          added: Додано конфігурацію SAML
+          changed: Змінено конфігурацію SAML
         oidc:
-          added: Добавлена конфигурация OIDC
-          changed: Изменена конфигурация OIDC
+          added: Додано конфігурацію OIDC
+          changed: Змінено конфігурацію OIDC
           secret:
-            changed: Секрет OIDC изменен
+            changed: Секретний OIDC виправлено
         api:
-          added: Добавлена конфигурация API
-          changed: Изменена конфигурация API
+          added: Додано конфігурацію API
+          changed: Змінено конфігурацію API
           secret:
-            changed: Секрет API изменен
+            changed: Секретний API змінено
   policy:
     password:
       complexity:
-        added: Добавлена политика сложности паролей
-        changed: Изменена политика сложности паролей
+        added: Додана політика складності паролів
+        changed: Змінено політику складності паролів
       age:
-        added: Добавлена политика срока действия пароля
-        changed: Изменена политика срока действия пароля
+        added: Додана політика терміну дії пароля
+        changed: Змінено політику терміну дії пароля
       lockout:
-        added: Добавлена политика блокировки паролем
-        changed: Изменена политика блокировки паролем
+        added: Додана політика блокування паролем
+        changed: Змінено політику блокування паролем
   iam:
     setup:
-      started: Начата настройка ZITADEL
-      done: Настройка ZITADEL завершена
+      started: Розпочато налаштування ZITADEL
+      done: Налаштування ZITADEL завершено
     global:
       org:
-        set: Глобальный организационный набор
+        set: Глобальний організаційний набір
     project:
       iam:
-        set: Проектный комплект ZITADEL
+        set: Проектний комплект ZITADEL
     member:
-      added: Добавлен член ZITADEL
-      changed: Сменился участник ZITADEL
-      removed: Удален член ZITADEL
+      added: Доданий член ZITADEL
+      changed: Змінився учасник ZITADEL
+      removed: Вилучений член ZITADEL
       cascade:
-        removed: Удален каскад элементов ZITADEL
+        removed: Видалено каскад елементів ZITADEL
     idp:
       config:
-        added: Добавлена конфигурация IDP
-        changed: Изменена конфигурация IDP
-        removed: Удалена конфигурация IDP
-        deactivated: Конфигурация IDP отключена
-        reactivated: Повторная активация конфигурации IDP
+        added: Додано конфігурацію IDP
+        changed: Змінена конфігурація IDP
+        removed: Видалено конфігурацію IDP
+        deactivated: Конфігурація IDP вимкнена
+        reactivated: Повторна активація конфігурації IDP
       oidc:
         config:
-          added: Добавлена конфигурация OIDC IDP
-          changed: Изменена конфигурация OIDC IDP
+          added: Додано конфігурацію OIDC IDP
+          changed: Змінено конфігурацію OIDC IDP
       saml:
         config:
-          added: Добавлена конфигурация SAML IDP
-          changed: Изменена конфигурация SAML IDP
+          added: Додано конфігурацію SAML IDP
+          changed: Змінено конфігурацію SAML IDP
       jwt:
         config:
-          added: Добавлена конфигурация JWT для поставщика удостоверений
-          changed: Удалена конфигурация JWT из поставщика удостоверений
+          added: Додано конфігурацію JWT для постачальника посвідчень
+          changed: Видалено конфігурацію JWT з постачальника посвідчень
     customtext:
-      set: Текст был задан
-      removed: Текст был удален
+      set: Текст було встановлено
+      removed: Текст було видалено
     policy:
       login:
-        added: Добавлена политика входа по умолчанию
-        changed: Изменена политика входа по умолчанию
+        added: Додано політику входу за замовчуванням
+        changed: Змінено політику входу за замовчуванням
         idpprovider:
-          added: Поставщик удостоверений добавлен в политику входа по умолчанию
-          removed: Поставщик удостоверений удален из политики входа по умолчанию
+          added: Постачальник посвідчень доданий до політики входу за умовчанням
+          removed: Постачальник посвідчень видалено з політики входу за замовчанням
       label:
-        added: Добавлена политика меток
-        changed: Изменена политика меток
-        activated: Политика меток активирована
+        added: Додана політика міток
+        changed: Змінено політику міток
+        activated: Політика тегів активована
         logo:
-          added: Логотип добавлен в политику меток
-          removed: Логотип удален из политики меток
+          added: Логотип доданий до політики міток
+          removed: Логотип видалено з політики міток
           dark:
-            added: Логотип (темный режим) добавлен в политику меток
-            removed: Логотип (темный режим) удален из политики меток
+            added: Логотип (темний режим) додано до політики міток
+            removed: Логотип (темний режим) видалено з політики міток
         icon:
-          added: Значок добавлен в политику меток
-          removed: Значок удален из политики меток
+          added: Піктограма додано до політики міток
+          removed: Значок видалено з політики міток
           dark:
-            added: Значок (темный режим) добавлен в политику меток
-            removed: Значок (темный режим) удален из политики меток
+            added: Значок (темний режим) додано до політики міток
+            removed: Тема (темний режим) значок видалено з політики позначок
         font:
-          added: Шрифт, добавленный в политику меток
-          removed: Шрифт удален из политики меток
+          added: Шрифт, доданий до політики міток
+          removed: Шрифт видалено з політики міток
         assets:
-          removed: Ресурсы, удаленные из политики меток
+          removed: Ресурси, видалені з політики міток
     default:
       language:
-        set: Набор языков по умолчанию
+        set: Набір мов за замовчуванням
     oidc:
       settings:
-        added: Добавлена конфигурация OIDC
-        changed: Изменена конфигурация OIDC
-        removed: Удалена конфигурация OIDC
+        added: Додано конфігурацію OIDC
+        changed: Змінено конфігурацію OIDC
+        removed: Видалено конфігурацію OIDC
     secret:
       generator:
-        added: Добавлен генератор секретов
-        changed: Изменен генератор секретов
-        removed: Удален генератор секретов
+        added: Додано генератор секретів
+        changed: Змінено генератор секретів
+        removed: Вилучений генератор секретів
     smtp:
       config:
-        added: Добавлена конфигурация SMTP
-        changed: Изменена конфигурация SMTP
+        added: Додано конфігурацію SMTP
+        changed: Змінено конфігурацію SMTP
         password:
-          changed: Изменен секрет конфигурации SMTP
+          changed: Змінено секрет конфігурації SMTP
     sms:
       config:
         twilio:
-          added: Добавлен SMS-провайдер Twilio
-          changed: Смена SMS-провайдера Twilio
+          added: Доданий SMS-провайдер Twilio
+          changed: Зміна SMS-провайдера Twilio
           token:
-            changed: Изменен маркер поставщика Twilio SMS
-          removed: Удален поставщик SMS Twilio
-          activated: Активирован поставщик Twilio SMS
-          deactivated: Поставщик SMS Twilio отключен
+            changed: Змінено маркер постачальника Twilio SMS
+          removed: Видалений постачальник SMS Twilio
+          activated: Активовано постачальника Twilio SMS
+          deactivated: Постачальник SMS Twilio вимкнено
   key_pair:
-    added: Добавлена пара ключей
+    added: Додана пара ключів
     certificate:
-      added: Сертификат добавлен
+      added: Сертифікат додано
   action:
-    added: Добавлено действие
-    changed: Действие изменено
-    deactivated: Действие деактивировано
-    reactivated: Действие активировано повторно
-    removed: Действие удалено
+    added: Додано дію
+    changed: Дія змінена
+    deactivated: Дія вимкнена
+    reactivated: Дія активована повторно
+    removed: Дія видалена
   instance:
-    added: Добавлен экземпляр
-    changed: Экземпляр изменен
+    added: Доданий екземпляр
+    changed: Екземпляр змінено
     customtext:
-      removed: Пользовательский текст удален
-      set: Пользовательский набор текста
+      removed: Користувальницький текст видалено
+      set: Набір тексту
       template:
-        removed: Удален шаблон пользовательского текста
+        removed: Видалено шаблон тексту користувача
     default:
       language:
-        set: Набор языков по умолчанию
+        set: Набір мов за замовчуванням
       org:
-        set: Набор организации по умолчанию
+        set: Набір за замовчуванням організації
     domain:
-      added: Домен добавлен
+      added: Домен доданий
       primary:
-        set: Основной набор доменов
-      removed: Домен удален
+        set: Основний набір доменів
+      removed: Домен видалено
     iam:
       console:
-        set: Набор приложений ZITADEL Console
+        set: Набір додатків ZITADEL Console
       project:
-        set: Проектный комплект ZITADEL
+        set: Проектний комплект ZITADEL
     mail:
       template:
-        added: Добавлен шаблон E-Mail
-        changed: Изменен шаблон E-Mail
+        added: Доданий шаблон E-Mail
+        changed: Шаблон електронної пошти
       text:
-        added: Добавлен текст E-Mail
-        changed: Изменен текст сообщения электронной почты
+        added: Доданий текст E-Mail
+        changed: Змінено текст повідомлення електронної пошти
     member:
-      added: Добавлен элемент экземпляра
-      changed: Изменен элемент экземпляра
-      removed: Удален элемент экземпляра
+      added: Доданий елемент екземпляра
+      changed: Змінено елемент екземпляра
+      removed: Видалено елемент екземпляра
       cascade:
-        removed: Удален каскад элементов экземпляра
+        removed: Видалено каскад елементів екземпляра
     notification:
       provider:
         debug:
-          fileadded: Добавлен поставщик уведомлений об отладке файлов
-          filechanged: Изменен поставщик уведомлений об отладке файлов
-          fileremoved: Удален поставщик уведомлений об отладке файлов
-          logadded: Добавлен поставщик уведомлений об отладке журнала
-          logchanged: Изменен поставщик уведомлений об отладке журнала
-          logremoved: Удален поставщик уведомлений об отладке журнала
+          fileadded: Доданий постачальник повідомлень про налагодження файлів
+          filechanged: Змінено постачальника повідомлень про налагодження файлів
+          fileremoved: Видалено постачальника повідомлень про налагодження файлів
+          logadded: Доданий постачальник повідомлень про налагодження журналу
+          logchanged: Змінено постачальника повідомлень про налагодження журналу
+          logremoved: Видалено постачальника повідомлень про налагодження журналу
     oidc:
       settings:
-        added: Добавлены настройки OIDC
-        changed: Изменены настройки OIDC
+        added: Додано налаштування OIDC
+        changed: Змінено налаштування OIDC
     policy:
       domain:
-        added: Добавлена политика домена
-        changed: Изменена политика домена
+        added: Додана політика домену
+        changed: Змінено політику домену
       label:
-        activated: Политика меток активирована
-        added: Добавлена политика меток
+        activated: Політика тегів активована
+        added: Додана політика міток
         assets:
-          removed: Удалена политика "Ресурс из меток"
-        changed: Изменена политика меток
+          removed: Видалено політику "Ресурс із міток"
+        changed: Змінено політику міток
         font:
-          added: Шрифт, добавленный в политику меток
-          removed: Шрифт удален из политики меток
+          added: Шрифт, доданий до політики міток
+          removed: Шрифт видалено з політики міток
         icon:
-          added: Значок добавлен в политику меток
-          removed: Значок удален из политики меток
+          added: Піктограма додано до політики міток
+          removed: Значок видалено з політики міток
           dark:
-            added: Значок добавлен в политику dark label
-            removed: Значок удален из политики темной метки
+            added: Значок додано до політики dark label
+            removed: Значок видалено з політики темної позначки
         logo:
-          added: Логотип добавлен в правила маркировки
-          removed: Логотип удален из правил маркировки
+          added: Логотип додано до правил маркування
+          removed: Логотип видалено з правил маркування
           dark:
-            added: Логотип добавлен в политику в отношении темных меток
-            removed: Логотип удален из политики темной этикетки
+            added: Логотип доданий до політики щодо темних міток
+            removed: Логотип видалено з політики темної етикетки
       lockout:
-        added: Добавлена политика блокировки
-        changed: Изменена политика блокировки
+        added: Додана політика блокування
+        changed: Змінено політику блокування
       login:
-        added: Добавлена политика входа в систему
-        changed: Изменена политика входа в систему
+        added: Додана політика входу до системи
+        changed: Змінено політику входу до системи
         idpprovider:
-          added: Поставщик удостоверений добавлен в политику входа
+          added: Постачальник посвідчень доданий до політики входу
           cascade:
-            removed: Каскад поставщиков удостоверений удален из политики входа
-          removed: Поставщик удостоверений удален из политики входа
+            removed: Каскад постачальників посвідчень видалено із політики входу
+          removed: Постачальник посвідчень видалено з політики входу
         multifactor:
-          added: Многофакторный добавлен в политику входа
-          removed: Многофакторность удалена из политики входа в систему
+          added: Багатофакторний доданий до політики входу
+          removed: Багатофакторність видалена з політики входу до системи
         secondfactor:
-          added: Второй фактор, добавленный в политику входа
-          removed: Второй фактор удален из политики входа в систему
+          added: Другий фактор, доданий до політики входу
+          removed: Другий чинник видалено із політики входу до системи
       password:
         age:
-          added: Добавлена политика срока действия пароля
-          changed: Изменена политика срока действия пароля
+          added: Додана політика терміну дії пароля
+          changed: Змінено політику терміну дії пароля
         complexity:
-          added: Добавлена политика сложности паролей
-          changed: Удалена политика сложности паролей
+          added: Додана політика складності паролів
+          changed: Видалено політику складності паролів
       privacy:
-        added: Добавлена политика конфиденциальности
-        changed: Политика конфиденциальности изменена
+        added: Додана політика конфіденційності
+        changed: Політика конфіденційності змінена
       security:
-        set: Набор политик безопасности
-
-    removed: Экземпляр удален
+        set: Набір політик безпеки
+    removed: Примірник видалено
     secret:
       generator:
-        added: Добавлен генератор секретов
-        changed: Изменен генератор секретов
-        removed: Удален генератор секретов
+        added: Додано генератор секретів
+        changed: Змінено генератор секретів
+        removed: Вилучений генератор секретів
     sms:
       configtwilio:
-        activated: Конфигурация Twilio SMS активирована
-        added: Добавлена конфигурация Twilio SMS
-        changed: Изменена конфигурация Twilio SMS
-        deactivated: Конфигурация Twilio SMS отключена
-        removed: Удалена конфигурация Twilio SMS
+        activated: Конфігурація Twilio SMS активована
+        added: Додано конфігурацію Twilio SMS
+        changed: Змінено конфігурацію Twilio SMS
+        deactivated: Конфігурація Twilio SMS вимкнена
+        removed: Видалено конфігурацію Twilio SMS
         token:
-          changed: Изменена конфигурация токена Twilio SMS
+          changed: Змінено конфігурацію токена Twilio SMS
     smtp:
       config:
-        added: Добавлена конфигурация SMTP
-        changed: Изменена конфигурация SMTP
+        added: Додано конфігурацію SMTP
+        changed: Змінено конфігурацію SMTP
         password:
-          changed: Изменен пароль конфигурации SMTP
-        removed: Удалена конфигурация SMTP
+          changed: Змінено пароль конфігурації SMTP
+        removed: Видалено конфігурацію SMTP
 Application:
   OIDC:
-    UnsupportedVersion: Ваша версия OIDC не поддерживается
+    UnsupportedVersion: Ваша версія OIDC не підтримується
     V1:
-      NotCompliant: Конфигурация не соответствует требованиям стандарта OIDC 1.0 и отличается от него.
-      NoRedirectUris: Должен быть зарегистрирован хотя бы один URI перенаправления.
-      NotAllCombinationsAreAllowed: Конфигурация соответствует требованиям, но не все возможные комбинации разрешены.
+      NotCompliant: Конфігурація не відповідає вимогам стандарту OIDC 1.0 та відрізняється від нього.
+      NoRedirectUris: Повинен бути зареєстрований хоча б один URI перенаправлення.
+      NotAllCombinationsAreAllowed: Конфігурація відповідає вимогам, але не всі можливі комбінації дозволені.
       Code:
         RedirectUris:
-          HttpOnlyForWeb: Код типа гранта разрешен только URI перенаправления http для веб-сайта типа приложения.
-          CustomOnlyForNative: Код типа гранта разрешает пользовательские URI перенаправления только для нативного типа приложения (например, appname:// )
+          HttpOnlyForWeb: Код типу гранту дозволено лише URI перенаправлення http для веб-сайту типу додатку.
+          CustomOnlyForNative: Код типу гранту дозволяє користувацькі URI перенаправлення тільки для нативного типу додатку (наприклад, appname:// )
       Implicit:
         RedirectUris:
-          CustomNotAllowed: Тип grant implicit не разрешает пользовательские uri перенаправления
-          HttpNotAllowed: Тип grant implicit не разрешает uri перенаправления http
-          HttpLocalhostOnlyForNative: URI перенаправления Http://localhost разрешен только для собственных приложений.
+          CustomNotAllowed: Тип grant implicit не дозволяє користувальницькі перенаправлення uri
+          HttpNotAllowed: Тип grant implicit не дозволяє uri перенаправлення http
+          HttpLocalhostOnlyForNative: URI перенаправлення Http://localhost дозволено лише для власних додатків.
       Native:
         AuthMethodType:
-          NotNone: Нативные приложения должны иметь authmethodtype none.
+          NotNone: Нативні додатки повинні мати authmethodtype none.
         RedirectUris:
-          MustBeHttpLocalhost: URI перенаправления должны начинаться с вашего собственного протокола, http://127.0.0.1, http://[::1] или http://localhost.
+          MustBeHttpLocalhost: URI перенаправлення повинні починатися з вашого власного протоколу, http://127.0.0.1, http://[::1] або http://localhost.
       UserAgent:
         AuthMethodType:
-          NotNone: Приложение агента пользователя должно иметь authmethodtype none.
+          NotNone: Додаток агента користувача повинен мати authmethodtype none.
       GrantType:
         Refresh:
-          NoAuthCode: Маркер обновления разрешен только в сочетании с кодом авторизации.
+          NoAuthCode: Маркер оновлення дозволено лише у поєднанні з кодом авторизації.
 Action:
   Flow:
     Type:
-      Unspecified: Неопределенное
-      ExternalAuthentication: Внешняя аутентификация
-      CustomiseToken: Токен дополнения
-      InternalAuthentication: Внутренняя аутентификация
-      CustomizeSAMLResponse: Дополнение SAMLResponse
+      Unspecified: Невизначене
+      ExternalAuthentication: Зовнішня автентифікація
+      CustomiseToken: Токен доповнення
+      InternalAuthentication: Внутрішня автентифікація
+      CustomizeSAMLResponse: Додаток SAMLResponse
   TriggerType:
-    Unspecified: Неопределенное
-    PostAuthentication: Постаутентификация
-    PreCreation: Предварительное создание
-    PostCreation: Создание поста
-    PreUserinfoCreation: Предварительное создание информации о пользователе
-    PreAccessTokenCreation: Создание маркера предварительного доступа
-    PreSAMLResponseCreation: Предварительное создание SAMLResponse
+    Unspecified: Невизначене
+    PostAuthentication: Пост-автентифікація
+    PreCreation: Попереднє створення
+    PostCreation: Створення посту
+    PreUserinfoCreation: Попереднє створення інформації про користувача
+    PreAccessTokenCreation: Створення маркера попереднього доступу
+    PreSAMLResponseCreation: Попереднє створення SAMLResponse

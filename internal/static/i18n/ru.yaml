@@ -16,7 +16,7 @@ Errors:
       Internal: Внутренняя ошибка при создании сегмента
       AlreadyExists: Сегмент уже существует
       CreateFailed: Сегмент не создан
-      ListFailed: Ведра не читаются
+      ListFailed: Список не читается
       RemoveFailed: Сегмент не удален
       SetPublicFailed: Не удалось сделать сегмент общедоступным.
     Object:
