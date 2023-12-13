@@ -250,6 +250,9 @@ RegistrationUser:
   Bulgarian: Български
   Portuguese: Português
   Macedonian: Македонски
+  Czech: Čeština
+  Russian: Русский
+  Ukrainian: Українська
   GenderLabel: 性别
   Female: 女性
   Male: 男性
@@ -286,6 +289,9 @@ ExternalRegistrationUserOverview:
   Bulgarian: Български
   Portuguese: Português
   Macedonian: Македонски
+  Czech: Čeština
+  Russian: Русский
+  Ukrainian: Українська
   TosAndPrivacyLabel: 条款和条款
   TosConfirm: 我接受
   TosLinkText: 服务条款
@@ -350,7 +356,9 @@ ExternalNotFound:
   Bulgarian: Български
   Portuguese: Português
   Macedonian: Македонски
-
+  Czech: Čeština
+  Russian: Русский
+  Ukrainian: Українська
 DeviceAuth:
   Title: 设备授权
   UserCode:
