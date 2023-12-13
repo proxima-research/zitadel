@@ -162,6 +162,7 @@ func (t *Translator) localizerFromCtx(ctx context.Context) *i18n.Localizer {
 }
 
 func (t *Translator) localizer(langs ...string) *i18n.Localizer {
+	langs = append(langs, "en")
 	return i18n.NewLocalizer(t.bundle, langs...)
 }
 
