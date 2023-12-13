@@ -46,7 +46,8 @@ ZITADEL is available in the following languages
 - Portuguese (pt)
 - Macedonian (mk)
 - Czech (cs)
-- Russina (ru)
+- Russian (ru)
+- Ukrainian (uk)
 
 A language is displayed based on your agent's language header. The default language is English.
 
