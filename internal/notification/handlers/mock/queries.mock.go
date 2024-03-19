@@ -6,6 +6,7 @@ package mock
 
 import (
 	context "context"
+	"errors"
 	gomock "github.com/golang/mock/gomock"
 	domain "github.com/zitadel/zitadel/internal/domain"
 	query "github.com/zitadel/zitadel/internal/query"
@@ -223,4 +224,8 @@ func (m *MockQueries) SessionByID(arg0 context.Context, arg1 bool, arg2, arg3 st
 func (mr *MockQueriesMockRecorder) SessionByID(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SessionByID", reflect.TypeOf((*MockQueries)(nil).SessionByID), arg0, arg1, arg2, arg3)
+}
+
+func (m *MockQueries) OrgByID(context.Context, bool, string) (*query.Org, error) {
+	return nil, errors.New("Not implemented")
 }
