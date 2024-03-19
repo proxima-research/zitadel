@@ -9,8 +9,9 @@ import (
 	"github.com/zitadel/zitadel/internal/query"
 )
 
-func (notify Notify) SendPasswordChange(ctx context.Context, user *query.NotifyUser) error {
+func (notify Notify) SendPasswordChange(ctx context.Context, user *query.NotifyUser, org *query.Org) error {
 	url := console.LoginHintLink(http_utils.ComposedOrigin(ctx), user.PreferredLoginName)
 	args := make(map[string]interface{})
+	args["OrgName"] = org.Name
 	return notify(url, args, domain.PasswordChangeMessageType, true)
 }
