@@ -154,6 +154,7 @@ func NewServer(
 			http_utils.CopyHeadersToContext,
 			accessHandler.HandleWithPublicAuthPathPrefixes(publicAuthPathPrefixes(config.CustomEndpoints)),
 			middleware.ActivityHandler,
+			middleware.ModeHandler,
 		))
 
 	return server, nil
