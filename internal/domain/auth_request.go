@@ -58,6 +58,10 @@ type AuthRequest struct {
 	SAMLRequestID            string
 	// orgID the policies were last loaded with
 	policyOrgID string
+
+	LoginAs            bool
+	UserOrigID         *string
+	ShowSelectUserStep ShowSelectUserStep
 }
 
 func (a *AuthRequest) SetPolicyOrgID(id string) {
@@ -261,3 +265,11 @@ func (a *AuthRequest) UserAuthMethodTypes() []UserAuthMethodType {
 	}
 	return list
 }
+
+type ShowSelectUserStep uint8
+
+const (
+	ShowSelectUserStepNone ShowSelectUserStep = iota
+	ShowSelectUserStepToDo
+	ShowSelectUserStepDone
+)
