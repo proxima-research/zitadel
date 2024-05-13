@@ -219,6 +219,12 @@ EmailVerificationDone:
   CancelButtonText: Відміна
   LoginButtonText: логін
 
+LinkingUserPrompt:
+  Title: Знайдено існуючого користувача
+  Description: "Ви хочете пов’язати свій існуючий обліковий запис:"
+  LinkButtonText: Зв’язок
+  OtherButtonText: Інші варіанти
+
 RegisterOption:
   Title: Варіанти реєстрації
   Description: Виберіть, як ви хочете зареєструватися

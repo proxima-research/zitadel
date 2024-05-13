@@ -6,7 +6,7 @@ Errors:
   ResourceOwnerMissing: Відсутня організація-власник ресурсу.
   RemoveFailed: Не вдалося вилучити
   ProjectionName:
-    Invalid: 'Неправильне ім&#39;я проекції'
+    Invalid: 'Неправильне ім''я проекції'
   Assets:
     EmptyKey: Ключ ресурсу порожній
     Store:
@@ -20,16 +20,28 @@ Errors:
       RemoveFailed: Сегмент не видалено
       SetPublicFailed: Не вдалось зробити сегмент загальнодоступним.
     Object:
-      PutFailed: 'Об&#39;єкт не створено'
-      GetFailed: 'Об&#39;єкт не може бути прочитаний'
-      NotFound: 'Об&#39;єкт не знайдено'
+      PutFailed: 'Об''єкт не створено'
+      GetFailed: 'Об''єкт не може бути прочитаний'
+      NotFound: 'Об''єкт не знайдено'
       PresignedTokenFailed: Не вдалося створити підписаний токен
-      ListFailed: 'Список об&#39;єктів не може бути прочитаний'
-      RemoveFailed: 'Об&#39;єкт не вдалося видалити'
+      ListFailed: 'Список об''єктів не може бути прочитаний'
+      RemoveFailed: 'Об''єкт не вдалося видалити'
   Limit:
     ExceedsDefault: Ліміт перевищує ліміт за замовчуванням
+  Limits:
+    NotFound: Ліміти не знайдені
+    NoneSpecified: Не вказані ліміти
+    Instance:
+      Blocked: Екземпляр заблоковано
+  Restrictions:
+    NoneSpecified: Не вказані обмеження
+    DefaultLanguageMustBeAllowed: Мова за замовчуванням має буди дозволена
   Language:
     NotParsed: Не вдалося розібрати мову
+    NotSupported: Мова не підтримується
+    NotAllowed: Мова не дозволена
+    Undefined: Мова не вказана
+    Duplicate: Мови мають дублі
   OIDCSettings:
     NotFound: Конфігурацію OIDC не знайдено
     AlreadyExists: Конфігурація OIDC вже існує
@@ -44,6 +56,7 @@ Errors:
   SMTPConfig:
     NotFound: Конфігурацію SMTP не знайдено
     AlreadyExists: Конфігурація SMTP вже існує
+    AlreadyDeactivated: Конфігурація SMTP вже деактивована
     SenderAdressNotCustomDomain: Адреса відправника має бути налаштована як особистий домен на екземплярі.
   Notification:
     NoDomain: Домен для повідомлення не знайдено
@@ -55,7 +68,7 @@ Errors:
     UserIDMissing: Ідентифікатор користувача відсутній
     UserIDWrong: Користувач запиту не дорівнює автентифікованому користувачеві
     DomainPolicyNil: Політика організації порожня
-    EmailAsUsernameNotAllowed: 'Електронна пошта не дозволена як ім&#39;я користувача.'
+    EmailAsUsernameNotAllowed: 'Електронна пошта не дозволена як ім''я користувача.'
     Invalid: Дані користувача недійсні
     DomainNotAllowedAsUsername: Домен вже зарезервований та не може бути використаний.
     AlreadyInactive: Користувач уже неактивний
@@ -67,13 +80,13 @@ Errors:
     NotLocked: Користувач не заблоковано
     NoChanges: Жодних змін не знайдено
     InitCodeNotFound: Код ініціалізації не знайдено
-    UsernameNotChanged: 'Ім&#39;я користувача не змінено'
+    UsernameNotChanged: 'Ім''я користувача не змінено'
     InvalidURLTemplate: Недійсна URL-адреса шаблону.
     Profile:
       NotFound: Профіль не знайдено
       NotChanged: Профіль не змінено
       Empty: Профіль порожній
-      FirstNameEmpty: 'Ім&#39;я у профілі порожнє'
+      FirstNameEmpty: 'Ім''я у профілі порожнє'
       LastNameEmpty: Прізвище у профілі порожнє
       IDMissing: Ідентифікатор профілю відсутній
     Email:
@@ -96,6 +109,7 @@ Errors:
       Key:
         NotFound: Машинний ключ не знайдено
         AlreadyExisting: Машинний ключ вже існує
+        Invalid: Відкритий ключ не є допустимим відкритим ключем RSA у форматі PKIX з кодуванням PEM
       Secret:
         NotExisting: Секрету не існує
         Invalid: Секрет недійсний
@@ -105,16 +119,17 @@ Errors:
     NotHuman: Користувач має бути персональним
     NotMachine: Користувач має бути технічним
     WrongType: Не дозволено для цього типу користувача
-    NotAllowedToLink: Користувачеві не дозволяється зв&#39;язуватися із зовнішнім постачальником входу в систему.
+    NotAllowedToLink: Користувачеві не дозволяється зв'язуватися із зовнішнім постачальником входу в систему.
     Username:
-      AlreadyExists: 'Дане ім&#39;я користувача вже зайняте'
-      Reserved: 'Ім&#39;я користувача вже використовується'
-      Empty: 'Ім&#39;я користувача порожнє'
+      AlreadyExists: 'Дане ім''я користувача вже зайняте'
+      Reserved: 'Ім''я користувача вже використовується'
+      Empty: 'Ім''я користувача порожнє'
     Code:
       Empty: Код порожній
       NotFound: Код не знайдено
       Expired: Термін дії коду минув
       GeneratorAlgNotSupported: Непідтримуваний алгоритм генератора
+      Invalid: Код недійсний
     Password:
       NotFound: Пароль не знайдено
       Empty: Пароль порожній
@@ -295,10 +310,11 @@ Errors:
       APIAuthMethodNoSecret: Вибраний метод автентифікації API не вимагає секрету.
       AuthMethodNoPrivateKeyJWT: Вибраний метод автентифікації не вимагає ключа.
       ClientSecretInvalid: Секрет клієнта недійсний.
+      ClientSecretNotSet: Секрет клієнта не встановлено
       Key:
         AlreadyExisting: Ключ додатку вже існує
         NotFound: Ключ додатку не знайдено
-    RequiredFieldsMissing: 'Деякі обов&#39;язкові поля відсутні'
+    RequiredFieldsMissing: 'Деякі обов''язкові поля відсутні'
     Grant:
       AlreadyExists: Грант на проект уже існує
       NotFound: Грант не знайдено
@@ -418,6 +434,7 @@ Errors:
   UserSession:
     NotFound: UserSession не знайдено
   Key:
+    NotFound: Ключ не знайдено
     ExpireBeforeNow: Термін придатності минулого
   Login:
     LoginPolicy:
@@ -434,7 +451,7 @@ Errors:
     NotFound: Користувальницький текст не знайдено
   TranslationFile:
     ReadError: Помилка під час читання файлу перекладу
-    MergeError: 'Файл перекладу не може бути об&#39;єднаний з перекладом користувача'
+    MergeError: 'Файл перекладу не може бути об''єднаний з перекладом користувача'
     NotFound: Файл перекладу не існує
   Metadata:
     NotFound: Метадані не знайдені
@@ -457,9 +474,10 @@ Errors:
     CloseRows: Не вдалося завершити інструкцію SQL
     SQLStatement: Не вдалося створити інструкцію SQL
     InvalidRequest: Запит недійсний
+    TooManyNestingLevels: занадто багато рівнів вкладеності запитів (максимум 20)
   Quota:
     AlreadyExists: Квота для цієї одиниці вже існує
-    NotFound: 'Квоти не знайдено для цього об&#39;єкту'
+    NotFound: 'Квоти не знайдено для цього об''єкту'
     Invalid:
       CallURL: URL-адреса виклику квоти недійсна
       Percent: Відсоток квоти менше 1
@@ -505,6 +523,43 @@ Errors:
       Invalid: Токен недійсний
       Expired: Термін дії токена минув
     InvalidClient: Токен не був випущений для цього клієнта
+  Feature:
+    NotExisting: Функція не існує
+    TypeNotSupported: Тип об'єкта не підтримується
+    InvalidValue: Неприпустиме значення цієї функції
+  Target:
+    Invalid: Ціль недійсна
+    NoTimeout: Ціль не має тайм-ауту
+    InvalidURL: Ціль має неправильну URL-адресу
+    NotFound: Ціль не знайдена
+  Execution:
+    ConditionInvalid: Неприпустима умова виконання
+    Invalid: Виконання недійсне
+    NotFound: Виконання не знайдено
+    IncludeNotFound: Виконання не знайдено
+    NoTargets: Цілі не визначені
+  UserSchema:
+    NotEnabled: Функція «Схема користувача» не включена
+    Type:
+      Missing: Тип схеми користувача відсутній
+      AlreadyExists: Тип схеми користувача вже існує
+    Authenticator:
+      Invalid: Невірний тип автентифікатора
+    NotActive: Схема користувача не активна
+    NotInactive: Схема користувача не неактивна
+    NotExists: Схема користувача не існує
+  TokenExchange:
+    FeatureDisabled: Функцію обміну токенами відключено для вашого екземпляра. https://zitadel.com/docs/apis/resources/feature_service_v2/feature-service-set-instance-features
+    Token:
+      Missing: Токен відсутній
+      Invalid: Токен недійсний
+      TypeMissing: Тип токена відсутній
+      TypeNotAllowed: Тип токена неприпустимий
+      TypeNotSupported: Тип токена не підтримується
+      NotForAPI: Персональні токени не дозволені для API
+    Impersonation:
+      PolicyDisabled: Персональні токени відключені у безпековій політиці інстансу
+
 AggregateTypes:
   action: Дія
   instance: Приклад
@@ -514,7 +569,28 @@ AggregateTypes:
   user: Користувач
   usergrant: Дозвіл користувача
   quota: Квота
+  feature: Особливість
+  target: Ціль
+  execution: Виконання
+  user_schema: Користувацька схема
+  auth_request: Запит на аутентифікацію
+  device_auth: Аутентифікація пристрою
+  idpintent: Наміри IDP
+  limits: Обмеження
+  milestone: Віха
+  oidc_session: Сеанс OIDC
+  restrictions: Обмеження
+  system: Система
+  session: Сеанс
+
 EventTypes:
+  execution:
+    set: Набір виконання
+    removed: Виконання видалено
+  target:
+    added: Ціль створена
+    changed: Ціль змінена
+    removed: Ціль видалена
   user:
     added: Додано користувачем
     selfregistered: Користувач зареєструвався сам
@@ -528,10 +604,11 @@ EventTypes:
     token:
       added: Маркер доступу створено
       removed: Видалений маркер доступу
+    impersonated: Користувач уособлює себе
     username:
-      reserved: 'Ім&#39;я користувача зарезервовано'
-      released: 'Ім&#39;я користувача випущено'
-      changed: 'Ім&#39;я користувача змінено'
+      reserved: 'Ім''я користувача зарезервовано'
+      released: 'Ім''я користувача випущено'
+      changed: 'Ім''я користувача змінено'
     email:
       reserved: Адреса електронної пошти зарезервована
       released: Адреса електронної пошти звільнена
@@ -550,7 +627,8 @@ EventTypes:
         removed: Ключ видалено
       secret:
         set: Секретний набір
-        removed: Секрет видалено
+        updated: Секретний хеш оновлено
+        removed: Секретний хеш видалено
         check:
           succeeded: Секретна перевірка пройшла успішно
           failed: Секретна перевірка не вдалася
@@ -568,8 +646,8 @@ EventTypes:
           succeeded: Перевірка ініціалізації пройшла успішно
           failed: Перевірка ініціалізації не вдалася
       username:
-        reserved: 'Ім&#39;я користувача зарезервовано'
-        released: 'Ім&#39;я користувача випущено'
+        reserved: 'Ім''я користувача зарезервовано'
+        released: 'Ім''я користувача випущено'
       email:
         changed: Адреса електронної пошти змінено
         verified: Адреса електронної пошти підтверджена
@@ -927,6 +1005,14 @@ EventTypes:
         key:
           added: Доданий ключ додатку
           removed: Видалено ключ додатку
+      api:
+        secret:
+          check:
+            succeeded: Перевірка секретності API пройшла успішно
+            failed: Перевірка секретності API пройшла невдало
+        key:
+          added: Додано ключ додатка
+          removed: Ключ додатка удалён
       config:
         saml:
           added: Додано конфігурацію SAML
@@ -935,12 +1021,14 @@ EventTypes:
           added: Додано конфігурацію OIDC
           changed: Змінено конфігурацію OIDC
           secret:
-            changed: Секретний OIDC виправлено
+            changed: Секретний хеш OIDC виправлено
+            updated: Секретний хеш OIDC оновлено
         api:
           added: Додано конфігурацію API
           changed: Змінено конфігурацію API
           secret:
             changed: Секретний API змінено
+            updated: Секретний хеш API оновлено
   policy:
     password:
       complexity:
@@ -1035,6 +1123,9 @@ EventTypes:
       config:
         added: Додано конфігурацію SMTP
         changed: Змінено конфігурацію SMTP
+        activated: Конфігурацію SMTP активовано
+        deactivated: Конфігурацію SMTP деактивовано
+        removed: Конфігурацію SMTP видалено
         password:
           changed: Змінено секрет конфігурації SMTP
     sms:
@@ -1179,9 +1270,18 @@ EventTypes:
       config:
         added: Додано конфігурацію SMTP
         changed: Змінено конфігурацію SMTP
+        activated: Конфігурацію SMTP активовано
+        deactivated: Конфігурацію SMTP деактивовано
         password:
           changed: Змінено пароль конфігурації SMTP
         removed: Видалено конфігурацію SMTP
+  user_schema:
+    created: Схему користувача створено
+    updated: Схему користувача оновлено
+    deactivated: Схема користувача деактивована
+    reactivated: Схема користувача повторно активована
+    deleted: Схема користувача видалена
+
 Application:
   OIDC:
     UnsupportedVersion: Ваша версія OIDC не підтримується
