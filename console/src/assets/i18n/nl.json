@@ -637,7 +637,8 @@
       "DELETEACCOUNT": "Account verwijderen",
       "DELETEACCOUNT_DESC": "Als u deze actie uitvoert, wordt u uitgelogd en heeft u geen toegang meer tot uw account. Deze actie is niet omkeerbaar, dus ga voorzichtig verder.",
       "DELETEACCOUNT_BTN": "Account verwijderen",
-      "DELETEACCOUNT_SUCCESS": "Account succesvol verwijderd!"
+      "DELETEACCOUNT_SUCCESS": "Account succesvol verwijderd!",
+      "NOPERMISSIONTOEDIT": "U mist de vereiste rechten om uw account te bewerken!"
     },
     "DETAILS": {
       "DATECREATED": "Gemaakt",
