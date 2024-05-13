@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Registrovat
   NextButtonText: Další
 
+LoginAs:
+  Title: Přihlásit se jako
+  SelectUserLogin: Vyberte přihlášení uživatele.
+
 LDAP:
   Title: Přihlášení
   Description: Zadejte své přihlašovací údaje.
