@@ -1227,9 +1227,38 @@ func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID s
 		}
 
 		for _, userSession := range userSessions {
-			um, _ := repo.Query.GetUserMetadataByKey(ctx, false, userSession.UserID, "LOGIN_AS", false)
-			if um != nil && strings.ToUpper(string(um.Value)) == "ON" && (um.ResourceOwner == requestedOrgID || um.ResourceOwner == i.DefaultOrgID) {
-				m[userSession.UserID] = true
+			queries := &query.UserMetadataSearchQueries{}
+			metadata, _ := repo.Query.SearchUserMetadata(ctx, true, userSession.UserID, queries, false)
+			var loginAs, loginAsOrgs *query.UserMetadata
+			if metadata != nil {
+				for _, um := range metadata.Metadata {
+					if um != nil {
+						switch um.Key {
+						case "LOGIN_AS":
+							loginAs = um
+						case "LOGIN_AS_ORGS":
+							loginAsOrgs = um
+						}
+					}
+				}
+			}
+
+			if loginAs != nil && strings.ToUpper(string(loginAs.Value)) == "ON" && (loginAs.ResourceOwner == requestedOrgID || loginAs.ResourceOwner == i.DefaultOrgID) {
+				loginAsPossible := true
+				if loginAsOrgs != nil {
+					loginAsPossible = false
+					loginAsOrgsValue := strings.TrimSpace(string(loginAsOrgs.Value))
+					if loginAsOrgsValue != "" && requestedOrgID != "" {
+						orgIds := strings.Split(loginAsOrgsValue, ",")
+						for _, orgId := range orgIds {
+							if strings.TrimSpace(orgId) == requestedOrgID {
+								loginAsPossible = true
+								break
+							}
+						}
+					}
+				}
+				m[userSession.UserID] = loginAsPossible
 			}
 		}
 	}

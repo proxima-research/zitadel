@@ -103,6 +103,26 @@ func (l *Login) checkUserResourceOwner(r *http.Request, userID, userOrigID strin
 		if uo.ResourceOwner != i.DefaultOrgID && uo.ResourceOwner != u.ResourceOwner {
 			return zerrors.ThrowPermissionDenied(nil, "AUTH-Bss7s", "Orig and target users belong to different orgs")
 		}
+
+		if uo.ResourceOwner == i.DefaultOrgID {
+			um, _ := l.query.GetUserMetadataByKey(r.Context(), false, uo.ID, "LOGIN_AS_ORGS", false)
+			if um != nil {
+				umValue := strings.TrimSpace(string(um.Value))
+				loginAsPossible := false
+				if umValue != "" {
+					orgIds := strings.Split(umValue, ",")
+					for _, orgId := range orgIds {
+						if strings.TrimSpace(orgId) == u.ResourceOwner {
+							loginAsPossible = true
+							break
+						}
+					}
+				}
+				if !loginAsPossible {
+					return zerrors.ThrowPermissionDenied(nil, "AUTH-Bjj7s", "Target org is not set in login as orgs list")
+				}
+			}
+		}
 		return nil
 	}
 	return nil
