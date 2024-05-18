@@ -153,13 +153,22 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 		return nil, err
 	}
 
+	notUsersWithLoginAsSearchQuery, err := query.NewNotUsersWithLoginAsSearchQuery()
+	if err != nil {
+		return nil, err
+	}
+
 	queries := &query.UserSearchQueries{
 		SearchRequest: query.SearchRequest{
 			Offset:        0,
 			Limit:         1000,
 			SortingColumn: query.UserUsernameCol,
 		},
-		Queries: []query.SearchQuery{userTypeSearchQuery},
+		Queries: []query.SearchQuery{
+			userTypeSearchQuery,
+			notUsersWithLoginAsSearchQuery,
+			query.NewNotMembersSearchQuery(),
+		},
 	}
 
 	if orgId != "" {
@@ -179,13 +188,6 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 	}
 	var loginNames = make([]string, 0)
 	for _, user := range users.Users {
-		userWithoutPrivileges, err := l.isUserWithoutPrivileges(ctx, user.ID)
-		if err != nil {
-			return nil, err
-		}
-		if !userWithoutPrivileges {
-			continue
-		}
 		loginNameParts := make([]string, 0)
 		if user.PreferredLoginName != "" {
 			loginNameParts = append(loginNameParts, user.PreferredLoginName)
