@@ -635,7 +635,8 @@
       "DELETEACCOUNT": "Elimina account personale",
       "DELETEACCOUNT_DESC": "Se esegui questa azione, sarai disconnesso e non avrai più accesso al tuo account. Questa azione non può essere invertita.",
       "DELETEACCOUNT_BTN": "Elimina",
-      "DELETEACCOUNT_SUCCESS": "Account eliminato con successo!"
+      "DELETEACCOUNT_SUCCESS": "Account eliminato con successo!",
+      "NOPERMISSIONTOEDIT": "Ti mancano le autorizzazioni necessarie per modificare il profilo!"
     },
     "DETAILS": {
       "DATECREATED": "Creato",
