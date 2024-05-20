@@ -1,4 +1,5 @@
 @import "account_selection";
+@import "account_selection_ext";
 
 @mixin lgn-account-selection-theme() {
   @include lgn-account-selection-color();
