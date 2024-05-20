@@ -637,7 +637,8 @@
       "DELETEACCOUNT": "アカウントを削除",
       "DELETEACCOUNT_DESC": "このアクションを実行すると、ログアウトされ、アカウントにアクセスできなくなります。このアクションは元に戻せないので、注意して実行してください。",
       "DELETEACCOUNT_BTN": "アカウントを削除",
-      "DELETEACCOUNT_SUCCESS": "アカウントが正常に削除されました！"
+      "DELETEACCOUNT_SUCCESS": "アカウントが正常に削除されました！",
+      "NOPERMISSIONTOEDIT": "プロフィールを編集するために必要な権限がありません。"
     },
     "DETAILS": {
       "DATECREATED": "作成",
