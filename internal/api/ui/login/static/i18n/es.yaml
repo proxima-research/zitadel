@@ -253,6 +253,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Género
   Female: Mujer
   Male: Hombre
@@ -292,6 +293,7 @@ ExternalRegistrationUserOverview:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Términos y condiciones
   TosConfirm: Acepto los
   TosLinkText: TDS
@@ -365,6 +367,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   
 Footer:
   PoweredBy: Powered By

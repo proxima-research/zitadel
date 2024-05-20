@@ -253,6 +253,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Geslacht
   Female: Vrouw
   Male: Man
@@ -291,7 +292,8 @@ ExternalRegistrationUserOverview:
   Macedonian: Македонски
   Czech: Čeština
   Russian: Русский
-  Nederlands: Nederlands
+  Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Algemene voorwaarden
   TosConfirm: Ik accepteer de
   TosLinkText: AV
@@ -365,6 +367,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
 DeviceAuth:
   Title: Apparaat Autorisatie
   UserCode:

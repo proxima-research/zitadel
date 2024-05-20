@@ -1378,7 +1378,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1604,7 +1605,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Weryfikacja adresu e-mail zakończona",
@@ -2528,7 +2530,8 @@
     "mk": "Македонски",
     "cs": "Čeština",
     "ru": "Русский",
-    "nl": "Nederlands"
+    "nl": "Nederlands",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Dodaj managera",
