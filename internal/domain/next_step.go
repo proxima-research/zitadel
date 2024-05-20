@@ -38,10 +38,21 @@ func (s *LoginStep) Type() NextStepType {
 	return NextStepLogin
 }
 
-type LoginAsStep struct{}
+type LoginAsStep struct {
+	Users []UserLoginAs
+}
 
 func (s *LoginAsStep) Type() NextStepType {
 	return NextStepLoginAs
+}
+
+type UserLoginAs struct {
+	UserID        string
+	LoginName     string
+	Username      string
+	Email         string
+	AvatarKey     string
+	ResourceOwner string
 }
 
 type RegistrationStep struct{}
