@@ -8,21 +8,26 @@ import (
 	"github.com/zitadel/zitadel/internal/query"
 	"github.com/zitadel/zitadel/internal/zerrors"
 	"net/http"
-	"sort"
 	"strings"
 )
 
 const (
 	tmplLoginAs = "loginas"
+	pageSize    = 10
 )
 
-type loginAsData struct {
+type loginAsCheck struct {
 	LoginAsName string `schema:"loginAsName"`
 }
 
+type loginAs struct {
+	Search string `schema:"search"`
+	Page   int    `schema:"page"`
+}
+
 func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
-	data := new(loginAsData)
-	authReq, err := l.getAuthRequestAndParseData(r, data)
+	d := new(loginAsCheck)
+	authReq, err := l.getAuthRequestAndParseData(r, d)
 	if err != nil {
 		l.renderLoginAs(w, r, authReq, err)
 		return
@@ -36,8 +41,7 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 	userOrigLoginName := authReq.LoginName
 
 	userAgentID, _ := http_mw.UserAgentIDFromCtx(r.Context())
-	loginName := strings.Split(data.LoginAsName, " / ")[0]
-	authReq, err = l.checkLoginNameAndGetAuthRequest(r, authReq.ID, loginName, userAgentID)
+	authReq, err = l.checkLoginNameAndGetAuthRequest(r, authReq.ID, d.LoginAsName, userAgentID)
 	if err != nil {
 		l.renderLoginAs(w, r, authReq, err)
 		return
@@ -45,6 +49,7 @@ func (l *Login) handleLoginAsCheck(w http.ResponseWriter, r *http.Request) {
 
 	err = l.checkUserResourceOwner(r, authReq.UserID, userOrigID)
 	if err != nil {
+		authReq, _ = l.checkLoginNameAndGetAuthRequest(r, authReq.ID, userOrigLoginName, userAgentID)
 		l.renderLoginAs(w, r, authReq, err)
 		return
 	}
@@ -77,19 +82,40 @@ func (l *Login) renderLoginAs(w http.ResponseWriter, r *http.Request, authReq *d
 		errID, errMessage = l.getErrorMessage(r, err)
 	}
 
-	loginNames, err := l.getLoginNames(r.Context(), authReq.RequestedOrgID)
+	d := new(loginAs)
+	err = l.getParseData(r, d)
+	if err != nil {
+		l.renderError(w, r, authReq, err)
+		return
+	}
+
+	users, hasNextPage, err := l.usersForLoginAs(r.Context(), authReq.RequestedOrgID, d.Search, d.Page)
 	if err != nil {
 		l.renderError(w, r, authReq, err)
 		return
 	}
 
 	translator := l.getTranslator(r.Context(), authReq)
+	nextPage := 0
+	if hasNextPage {
+		nextPage = d.Page + 1
+	}
 	data := &struct {
 		userData
-		LoginNames []string
+		UserId   string
+		Search   string
+		PrevPage int
+		Page     int
+		NextPage int
+		Users    []domain.UserLoginAs
 	}{
 		l.getUserData(r, authReq, translator, "Login.Title", "Login.Description", errID, errMessage),
-		loginNames,
+		authReq.UserID,
+		d.Search,
+		d.Page - 1,
+		d.Page,
+		nextPage,
+		users,
 	}
 
 	l.renderer.RenderTemplate(w, r, l.getTranslator(r.Context(), authReq), l.renderer.Templates[tmplLoginAs], data, nil)
@@ -147,21 +173,21 @@ func (l *Login) checkLoginNameAndGetAuthRequest(r *http.Request, id, loginName, 
 	return l.getAuthRequest(r)
 }
 
-func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, error) {
+func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string, page int) ([]domain.UserLoginAs, bool, error) {
 	userTypeSearchQuery, err := query.NewUserTypeSearchQuery(int32(domain.UserTypeHuman))
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 
 	notUsersWithLoginAsSearchQuery, err := query.NewNotUsersWithLoginAsSearchQuery()
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 
 	queries := &query.UserSearchQueries{
 		SearchRequest: query.SearchRequest{
-			Offset:        0,
-			Limit:         1000,
+			Offset:        uint64(page * pageSize),
+			Limit:         pageSize,
 			SortingColumn: query.UserUsernameCol,
 		},
 		Queries: []query.SearchQuery{
@@ -171,36 +197,59 @@ func (l *Login) getLoginNames(ctx context.Context, orgId string) ([]string, erro
 		},
 	}
 
+	if search != "" {
+		userDisplayNameSearchQuery, err := query.NewUserUsernameSearchQuery(search, query.TextContainsIgnoreCase)
+		if err != nil {
+			return nil, false, err
+		}
+		userEmailSearchQuery, err := query.NewUserEmailSearchQuery(search, query.TextContainsIgnoreCase)
+		if err != nil {
+			return nil, false, err
+		}
+		userDisplayNameOrEmailSearchQuery, err := query.NewUserOrSearchQuery([]query.SearchQuery{
+			userDisplayNameSearchQuery,
+			userEmailSearchQuery,
+		})
+		if err != nil {
+			return nil, false, err
+		}
+		queries.Queries = append(queries.Queries, userDisplayNameOrEmailSearchQuery)
+	}
+
 	if orgId != "" {
 		err = queries.AppendMyResourceOwnerQuery(orgId)
 		if err != nil {
-			return nil, err
+			return nil, false, err
 		}
 	}
 
-	loginPolicy, err := l.query.LoginPolicyByID(ctx, false, orgId, false)
-	if err != nil {
-		return nil, err
-	}
 	users, err := l.query.SearchUsers(ctx, queries)
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
-	var loginNames = make([]string, 0)
+	var usersLoginAs = make([]domain.UserLoginAs, 0)
 	for _, user := range users.Users {
-		loginNameParts := make([]string, 0)
+		loginName := user.Username
 		if user.PreferredLoginName != "" {
-			loginNameParts = append(loginNameParts, user.PreferredLoginName)
-		} else {
-			loginNameParts = append(loginNameParts, user.Username)
+			loginName = user.PreferredLoginName
 		}
-		if !loginPolicy.DisableLoginWithEmail && user.Human.IsEmailVerified {
-			loginNameParts = append(loginNameParts, string(user.Human.Email))
-		}
-		loginNames = append(loginNames, strings.Join(loginNameParts, " / "))
+
+		usersLoginAs = append(usersLoginAs, domain.UserLoginAs{
+			UserID:        user.ID,
+			LoginName:     loginName,
+			Username:      user.Username,
+			Email:         string(user.Human.Email),
+			AvatarKey:     user.Human.AvatarKey,
+			ResourceOwner: user.ResourceOwner,
+		})
 	}
-	sort.Strings(loginNames)
-	return loginNames, nil
+
+	queries.SearchRequest.Offset += pageSize
+	nextUsers, err := l.query.SearchUsers(ctx, queries)
+	if err != nil {
+		return nil, false, err
+	}
+	return usersLoginAs, len(nextUsers.Users) > 0, nil
 }
 
 func (l *Login) getUserRoles(ctx context.Context, userId string) (map[string]struct{}, error) {
