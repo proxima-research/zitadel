@@ -189,6 +189,7 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 			Offset:        uint64(page * pageSize),
 			Limit:         pageSize,
 			SortingColumn: query.UserUsernameCol,
+			Asc:           true,
 		},
 		Queries: []query.SearchQuery{
 			userTypeSearchQuery,
