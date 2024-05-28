@@ -218,9 +218,25 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 	}
 
 	if orgId != "" {
-		err = queries.AppendMyResourceOwnerQuery(orgId)
+		grantedOrgIds, err := l.query.GetOrgGrantedOrgIds(ctx, orgId)
+		if err != nil && !zerrors.IsNotFound(err) {
+			return nil, false, err
+		}
+		userResourceOwnerSearchQuery, err := query.NewUserResourceOwnerSearchQuery(orgId, query.TextEquals)
 		if err != nil {
 			return nil, false, err
+		}
+		if len(grantedOrgIds) == 0 {
+			queries.Queries = append(queries.Queries, userResourceOwnerSearchQuery)
+		} else {
+			userResourceOwnerOrGrantedOrgsSearchQuery, err := query.NewUserOrSearchQuery([]query.SearchQuery{
+				userResourceOwnerSearchQuery,
+				query.NewUserResourceOwnersSearchQuery(grantedOrgIds),
+			})
+			if err != nil {
+				return nil, false, err
+			}
+			queries.Queries = append(queries.Queries, userResourceOwnerOrGrantedOrgsSearchQuery)
 		}
 	}
 

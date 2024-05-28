@@ -1,7 +1,9 @@
 package query
 
 import (
+	"context"
 	sq "github.com/Masterminds/squirrel"
+	"strings"
 )
 
 type ExprQuery struct {
@@ -29,6 +31,28 @@ func NewNotUsersWithLoginAsSearchQuery() (SearchQuery, error) {
 
 func NewNotMembersSearchQuery() SearchQuery {
 	return &ExprQuery{Column: UserIDCol, Condition: "NOT IN (" + membersQuery() + ")"}
+}
+
+func NewUserResourceOwnersSearchQuery(ids []string) SearchQuery {
+	return &ExprQuery{Column: UserResourceOwnerCol, Condition: "IN ('" + strings.Join(ids, "','") + "')"}
+}
+
+func (q *Queries) GetOrgGrantedOrgIds(ctx context.Context, orgId string) ([]string, error) {
+	om, err := q.GetOrgMetadataByKey(ctx, false, orgId, "GRANTED_ORGS", false)
+	if err != nil {
+		return nil, err
+	}
+	var grantedOrgIds []string
+	if om != nil {
+		if omValue := strings.TrimSpace(string(om.Value)); omValue != "" {
+			for _, grantedOrgId := range strings.Split(omValue, ",") {
+				if strings.TrimSpace(orgId) != "" {
+					grantedOrgIds = append(grantedOrgIds, grantedOrgId)
+				}
+			}
+		}
+	}
+	return grantedOrgIds, nil
 }
 
 func usersWithLoginAsQuery() sq.SelectBuilder {
