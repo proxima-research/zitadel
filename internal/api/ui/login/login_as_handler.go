@@ -184,6 +184,16 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 		return nil, false, err
 	}
 
+	userStateSearchQuery, err := query.NewUserStateSearchQuery(int32(domain.UserStateInactive))
+	if err != nil {
+		return nil, false, err
+	}
+
+	userNotStateSearchQuery, err := query.NewUserNotSearchQuery(userStateSearchQuery)
+	if err != nil {
+		return nil, false, err
+	}
+
 	queries := &query.UserSearchQueries{
 		SearchRequest: query.SearchRequest{
 			Offset:        uint64(page * pageSize),
@@ -195,6 +205,7 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 			userTypeSearchQuery,
 			notUsersWithLoginAsSearchQuery,
 			query.NewNotMembersSearchQuery(),
+			userNotStateSearchQuery,
 		},
 	}
 
