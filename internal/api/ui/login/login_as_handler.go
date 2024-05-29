@@ -167,10 +167,11 @@ func (l *Login) updateAuthRequest(r *http.Request, request *domain.AuthRequest) 
 
 func (l *Login) checkLoginNameAndGetAuthRequest(r *http.Request, id, loginName, userAgentID string) (*domain.AuthRequest, error) {
 	err := l.authRepo.CheckLoginName(r.Context(), id, loginName, userAgentID)
+	authReq, authReqErr := l.getAuthRequest(r)
 	if err != nil {
-		return nil, err
+		return authReq, err
 	}
-	return l.getAuthRequest(r)
+	return authReq, authReqErr
 }
 
 func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string, page int) ([]domain.UserLoginAs, bool, error) {
