@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: реєструвати
   NextButtonText: наступний
 
+LoginAs:
+  Title: Увійти як
+  SelectUserLogin: Виберіть логін користувача.
+
 LDAP:
   Title: Увійти
   Description: Введіть ваші дані для входу.
