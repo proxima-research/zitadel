@@ -211,7 +211,7 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 	}
 
 	if search != "" {
-		userDisplayNameSearchQuery, err := query.NewUserUsernameSearchQuery(search, query.TextContainsIgnoreCase)
+		userDisplayNameSearchQuery, err := query.NewUserDisplayNameSearchQuery(search, query.TextContainsIgnoreCase)
 		if err != nil {
 			return nil, false, err
 		}
@@ -266,7 +266,7 @@ func (l *Login) usersForLoginAs(ctx context.Context, orgId string, search string
 		usersLoginAs = append(usersLoginAs, domain.UserLoginAs{
 			UserID:        user.ID,
 			LoginName:     loginName,
-			Username:      user.Username,
+			Username:      user.Human.DisplayName,
 			Email:         string(user.Human.Email),
 			AvatarKey:     user.Human.AvatarKey,
 			ResourceOwner: user.ResourceOwner,
