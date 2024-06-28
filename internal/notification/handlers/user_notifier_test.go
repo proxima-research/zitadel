@@ -1117,6 +1117,7 @@ func Test_userNotifier_reducePasswordChanged(t *testing.T) {
 				PasswordChange: true,
 			}, nil)
 			expectTemplateQueries(queries, givenTemplate)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).Return(&query.Org{}, nil)
 			commands.EXPECT().PasswordChangeSent(gomock.Any(), orgID, userID).Return(nil)
 			return fields{
 					queries:  queries,
@@ -1155,6 +1156,7 @@ func Test_userNotifier_reducePasswordChanged(t *testing.T) {
 				}},
 			}, nil)
 			expectTemplateQueries(queries, givenTemplate)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).Return(&query.Org{}, nil)
 			commands.EXPECT().PasswordChangeSent(gomock.Any(), orgID, userID).Return(nil)
 			return fields{
 					queries:  queries,
