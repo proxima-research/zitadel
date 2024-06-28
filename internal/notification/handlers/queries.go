@@ -25,6 +25,8 @@ type Queries interface {
 	SMTPConfigActive(ctx context.Context, resourceOwner string) (*query.SMTPConfig, error)
 	GetDefaultLanguage(ctx context.Context) language.Tag
 	GetInstanceRestrictions(ctx context.Context) (restrictions query.Restrictions, err error)
+
+	OrgByID(context.Context, bool, string) (*query.Org, error)
 }
 
 type NotificationQueries struct {
