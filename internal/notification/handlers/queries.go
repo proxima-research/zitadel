@@ -27,6 +27,7 @@ type Queries interface {
 	GetInstanceRestrictions(ctx context.Context) (restrictions query.Restrictions, err error)
 
 	OrgByID(context.Context, bool, string) (*query.Org, error)
+	LoginPolicyByID(context.Context, bool, string, bool) (*query.LoginPolicy, error)
 }
 
 type NotificationQueries struct {
