@@ -160,6 +160,9 @@ func (l *Login) renderInitUser(w http.ResponseWriter, r *http.Request, authReq *
 		user, err := l.query.GetUserByID(r.Context(), false, userID)
 		if err == nil {
 			l.customTexts(r.Context(), translator, user.ResourceOwner)
+			if preferredLanguage := user.Human.PreferredLanguage.String(); preferredLanguage != "" {
+				translator.SetPreferredLanguages(preferredLanguage)
+			}
 		}
 	}
 	l.renderer.RenderTemplate(w, r, translator, l.renderer.Templates[tmplInitUser], data, nil)
