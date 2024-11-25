@@ -175,6 +175,7 @@ func Setup(config *Config, steps *Steps, masterKey string) {
 		steps.s22ActiveInstancesIndex,
 		steps.s23CorrectGlobalUniqueConstraints,
 		steps.s24AddActorToAuthTokens,
+		steps.s25AddAuthRequestIdToAuthTokens,
 	} {
 		mustExecuteMigration(ctx, eventstoreClient, step, "migration failed")
 	}

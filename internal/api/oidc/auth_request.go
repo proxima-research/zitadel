@@ -216,6 +216,12 @@ func (o *OPStorage) CreateAccessToken(ctx context.Context, req op.TokenRequest) 
 		err = oidcError(err)
 		span.EndWithError(err)
 	}()
+
+	ctx, err = o.setAuthRequestIdToCtx(ctx, req)
+	if err != nil {
+		return "", time.Time{}, err
+	}
+
 	if authReq, ok := req.(*AuthRequestV2); ok {
 		activity.Trigger(ctx, "", authReq.CurrentAuthRequest.UserID, activity.OIDCAccessToken, o.eventstore.FilterToQueryReducer)
 		return o.command.AddOIDCSessionAccessToken(setContextUserSystem(ctx), authReq.GetID())
@@ -243,6 +249,11 @@ func (o *OPStorage) CreateAccessAndRefreshTokens(ctx context.Context, req op.Tok
 		err = oidcError(err)
 		span.EndWithError(err)
 	}()
+
+	ctx, err = o.setAuthRequestIdToCtx(ctx, req)
+	if err != nil {
+		return "", "", time.Time{}, err
+	}
 
 	// handle V2 request directly
 	switch tokenReq := req.(type) {
@@ -541,6 +552,28 @@ func setContextUserSystem(ctx context.Context) context.Context {
 		UserID: "SYSTEM",
 	}
 	return authz.SetCtxData(ctx, data)
+}
+
+func (o *OPStorage) setAuthRequestIdToCtx(ctx context.Context, req op.TokenRequest) (context.Context, error) {
+	switch r := req.(type) {
+	case *AuthRequest:
+		return authz.SetAuthRequestIdToCtx(ctx, r.ID), nil
+	case *AuthRequestV2:
+		return authz.SetAuthRequestIdToCtx(ctx, r.ID), nil
+	case *RefreshTokenRequest:
+		token, err := o.repo.TokenByRefreshTokenId(ctx, r.UserID, r.ID)
+		if err != nil {
+			return nil, op.ErrInvalidRefreshToken
+		}
+		return authz.SetAuthRequestIdToCtx(ctx, token.AuthRequestID), nil
+	case *RefreshTokenRequestV2:
+		token, err := o.repo.TokenByRefreshTokenId(ctx, r.UserID, r.RefreshTokenID)
+		if err != nil {
+			return nil, op.ErrInvalidRefreshToken
+		}
+		return authz.SetAuthRequestIdToCtx(ctx, token.AuthRequestID), nil
+	}
+	return ctx, nil
 }
 
 func (o *OPStorage) getOIDCSettings(ctx context.Context) (accessTokenLifetime, idTokenLifetime, refreshTokenIdleExpiration, refreshTokenExpiration time.Duration, _ error) {
