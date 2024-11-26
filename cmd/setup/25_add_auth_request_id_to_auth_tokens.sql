@@ -1,0 +1,1 @@
+ALTER TABLE auth.tokens ADD COLUMN IF NOT EXISTS auth_request_id TEXT NULL;
