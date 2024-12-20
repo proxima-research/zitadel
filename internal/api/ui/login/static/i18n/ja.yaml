@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: 登録
   NextButtonText: 次へ
 
+LoginAs:
+  Title: としてログイン
+  SelectUserLogin: ユーザーログインを選択します。
+
 SelectAccount:
   Title: アカウントの選択
   Description: ZITADELアカウントを使用します。

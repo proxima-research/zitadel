@@ -12,6 +12,9 @@ Login:
   MustBeMemberOfOrg: 'Потребителят трябва да е член на {{.OrgName}} организация.'
   RegisterButtonText: регистрирам
   NextButtonText: следващия
+LoginAs:
+  Title: Влезте като
+  SelectUserLogin: Изберете потребителско влизане.
 LDAP:
   Title: Влизам
   Description: Въведете вашите данни за вход.
