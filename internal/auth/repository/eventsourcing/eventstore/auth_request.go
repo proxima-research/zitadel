@@ -1228,7 +1228,7 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 	if err != nil {
 		return nil, err
 	}
-	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.RequestedOrgID, userSessions)
+	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.ApplicationResourceOwner, userSessions)
 	if err != nil {
 		return nil, err
 	}
@@ -1259,7 +1259,7 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 	return users, nil
 }
 
-func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
+func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, resourceOwner string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
 	ctx := authz.WithInstanceID(context.Background(), instanceID)
 
 	m := make(map[string]bool)
@@ -1269,39 +1269,12 @@ func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, requestedOrgID s
 			return nil, err
 		}
 
-		for _, userSession := range userSessions {
-			queries := &query.UserMetadataSearchQueries{}
-			metadata, _ := repo.Query.SearchUserMetadata(ctx, true, userSession.UserID, queries, false)
-			var loginAs, loginAsOrgs *query.UserMetadata
-			if metadata != nil {
-				for _, um := range metadata.Metadata {
-					if um != nil {
-						switch um.Key {
-						case "LOGIN_AS":
-							loginAs = um
-						case "LOGIN_AS_ORGS":
-							loginAsOrgs = um
-						}
-					}
-				}
-			}
-
-			if loginAs != nil && strings.ToUpper(string(loginAs.Value)) == "ON" && (loginAs.ResourceOwner == requestedOrgID || loginAs.ResourceOwner == i.DefaultOrgID) {
-				loginAsPossible := true
-				if loginAsOrgs != nil {
-					loginAsPossible = false
-					loginAsOrgsValue := strings.TrimSpace(string(loginAsOrgs.Value))
-					if loginAsOrgsValue != "" && requestedOrgID != "" {
-						orgIds := strings.Split(loginAsOrgsValue, ",")
-						for _, orgId := range orgIds {
-							if strings.TrimSpace(orgId) == requestedOrgID {
-								loginAsPossible = true
-								break
-							}
-						}
-					}
-				}
-				m[userSession.UserID] = loginAsPossible
+		now := time.Now().UTC().Truncate(24 * time.Hour)
+		for _, us := range userSessions {
+			loginAsConfig, _ := repo.Query.GetUserLoginAsConfigMetadata(ctx, us.UserID)
+			loginAs, ok := loginAsConfig[resourceOwner]
+			if ok && !now.After(time.Time(loginAs.ExpiresAt)) && (us.ResourceOwner == resourceOwner || us.ResourceOwner == i.DefaultOrgID) {
+				m[us.UserID] = true
 			}
 		}
 	}
@@ -1317,11 +1290,14 @@ func (repo *AuthRequestRepo) checkLoginAsNameInput(ctx context.Context, request 
 	if err != nil {
 		return nil, err
 	}
-	um, err := repo.Query.GetUserMetadataByKey(ctx, false, user.ID, "LOGIN_AS", false)
+	loginAsConfig, err := repo.Query.GetUserLoginAsConfigMetadata(ctx, user.ID)
 	if err != nil {
 		return nil, err
 	}
-	if um != nil && strings.ToUpper(string(um.Value)) == "ON" && user.ResourceOwner != "" && (user.ResourceOwner == request.RequestedOrgID || user.ResourceOwner == i.DefaultOrgID) {
+	resourceOwner := request.ApplicationResourceOwner
+	loginAs, ok := loginAsConfig[resourceOwner]
+	now := time.Now().UTC().Truncate(24 * time.Hour)
+	if ok && !now.After(time.Time(loginAs.ExpiresAt)) && user.ResourceOwner != "" && (user.ResourceOwner == resourceOwner || user.ResourceOwner == i.DefaultOrgID) {
 		return user, nil
 	}
 	return nil, nil
@@ -1350,7 +1326,7 @@ func (repo *AuthRequestRepo) getUserIdFromRequest(ctx context.Context, request *
 			if err != nil {
 				return "", err
 			}
-			loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.RequestedOrgID, userSessions)
+			loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.ApplicationResourceOwner, userSessions)
 			if err != nil {
 				return "", err
 			}
