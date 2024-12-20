@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Registreren
   NextButtonText: Volgende
 
+LoginAs:
+  Title: Inloggen als
+  SelectUserLogin: Selecteer gebruikersaanmelding.
+
 LDAP:
   Title: Inloggen
   Description: Voer uw inloggegevens in.

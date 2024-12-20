@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: registrar
   NextButtonText: siguiente
 
+LoginAs:
+  Title: Iniciar sesión como
+  SelectUserLogin: Seleccione inicio de sesión de usuario.
+
 LDAP:
   Title: Inicio de sesión
   Description: Introduce tus datos de inicio de sesión.

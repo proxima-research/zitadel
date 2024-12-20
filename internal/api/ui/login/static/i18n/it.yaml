@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: registrare
   NextButtonText: Avanti
 
+LoginAs:
+  Title: Accedi come
+  SelectUserLogin: Seleziona l'accesso utente.
+
 LDAP:
   Title: Accesso
   Description: Inserisci i tuoi dati di accesso.

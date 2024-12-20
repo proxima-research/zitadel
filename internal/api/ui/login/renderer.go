@@ -48,6 +48,7 @@ func CreateRenderer(pathPrefix string, staticStorage static.Storage, cookieName 
 		tmplError:                        "error.html",
 		tmplSuccess:                      "success.html",
 		tmplLogin:                        "login.html",
+		tmplLoginAs:                      "login_as.html",
 		tmplUserSelection:                "select_user.html",
 		tmplPassword:                     "password.html",
 		tmplPasswordlessVerification:     "passwordless.html",
@@ -127,6 +128,9 @@ func CreateRenderer(pathPrefix string, staticStorage static.Storage, cookieName 
 		},
 		"loginUrl": func() string {
 			return path.Join(r.pathPrefix, EndpointLogin)
+		},
+		"loginAsUrl": func() string {
+			return path.Join(r.pathPrefix, EndpointLoginAs)
 		},
 		"externalIDPAuthURL": func(authReqID, idpConfigID string) string {
 			return path.Join(r.pathPrefix, fmt.Sprintf("%s?%s=%s&%s=%s", EndpointExternalLogin, QueryAuthRequestID, authReqID, queryIDPConfigID, idpConfigID))
@@ -286,6 +290,8 @@ func (l *Login) chooseNextStep(w http.ResponseWriter, r *http.Request, authReq *
 			return
 		}
 		l.renderLogin(w, r, authReq, err)
+	case *domain.LoginAsStep:
+		l.renderLoginAs(w, r, authReq, err)
 	case *domain.RegistrationStep:
 		l.renderRegisterOption(w, r, authReq, nil)
 	case *domain.SelectUserStep:

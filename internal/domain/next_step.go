@@ -9,6 +9,7 @@ type NextStepType int32
 const (
 	NextStepUnspecified NextStepType = iota
 	NextStepLogin
+	NextStepLoginAs
 	NextStepUserSelection
 	NextStepInitUser
 	NextStepPassword
@@ -37,6 +38,23 @@ func (s *LoginStep) Type() NextStepType {
 	return NextStepLogin
 }
 
+type LoginAsStep struct {
+	Users []UserLoginAs
+}
+
+func (s *LoginAsStep) Type() NextStepType {
+	return NextStepLoginAs
+}
+
+type UserLoginAs struct {
+	UserID        string
+	LoginName     string
+	Username      string
+	Email         string
+	AvatarKey     string
+	ResourceOwner string
+}
+
 type RegistrationStep struct{}
 
 func (s *RegistrationStep) Type() NextStepType {
@@ -58,6 +76,7 @@ type UserSelection struct {
 	LoginName         string
 	UserSessionState  UserSessionState
 	SelectionPossible bool
+	LoginAsPossible   bool
 	AvatarKey         string
 	ResourceOwner     string
 }
