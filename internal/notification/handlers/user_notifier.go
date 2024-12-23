@@ -658,8 +658,16 @@ func (u *userNotifier) reducePasswordChanged(event eventstore.Event) (*handler.S
 		if err != nil {
 			return err
 		}
+		userOrg, err := u.queries.OrgByID(ctx, false, notifyUser.ResourceOwner)
+		if err != nil {
+			return err
+		}
+		loginPolicy, err := u.queries.LoginPolicyByID(ctx, false, userOrg.ID, false)
+		if err != nil {
+			return err
+		}
 		err = types.SendEmail(ctx, u.channels, string(template.Template), translator, notifyUser, colors, e).
-			SendPasswordChange(ctx, notifyUser)
+			SendPasswordChange(ctx, notifyUser, userOrg, loginPolicy)
 		if err != nil {
 			return err
 		}

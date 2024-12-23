@@ -637,7 +637,8 @@
       "DELETEACCOUNT": "Smazat účet",
       "DELETEACCOUNT_DESC": "Pokud provedete tuto akci, budete odhlášeni a už nebudete mít přístup k vašemu účtu. Tato akce je nevratná, prosím pokračujte s opatrností.",
       "DELETEACCOUNT_BTN": "Smazat účet",
-      "DELETEACCOUNT_SUCCESS": "Účet byl úspěšně smazán!"
+      "DELETEACCOUNT_SUCCESS": "Účet byl úspěšně smazán!",
+      "NOPERMISSIONTOEDIT": "Chybí vám požadovaná oprávnění k úpravě účtu!"
     },
     "DETAILS": {
       "DATECREATED": "Vytvořeno",
@@ -1378,7 +1379,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1604,7 +1606,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Ověření e-mailu dokončeno",
@@ -2536,7 +2539,8 @@
     "mk": "Македонски",
     "cs": "Čeština",
     "ru": "Русский",
-    "nl": "Nederlands"
+    "nl": "Nederlands",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Přidat manažera",

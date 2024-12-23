@@ -637,7 +637,8 @@
       "DELETEACCOUNT": "Excluir Conta",
       "DELETEACCOUNT_DESC": "Se você realizar esta ação, será desconectado e não terá mais acesso à sua conta. Essa ação não pode ser desfeita, portanto, prossiga com cautela.",
       "DELETEACCOUNT_BTN": "Excluir Conta",
-      "DELETEACCOUNT_SUCCESS": "Conta excluída com sucesso!"
+      "DELETEACCOUNT_SUCCESS": "Conta excluída com sucesso!",
+      "NOPERMISSIONTOEDIT": "Você não tem as permissões necessárias para editar o perfil!"
     },
     "DETAILS": {
       "DATECREATED": "Criado",
@@ -1379,7 +1380,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1605,7 +1607,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Verificação de email concluída",
@@ -2522,7 +2525,8 @@
     "mk": "Македонски",
     "cs": "Čeština",
     "ru": "Русский",
-    "nl": "Nederlands"
+    "nl": "Nederlands",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Adicionar um Gerente",

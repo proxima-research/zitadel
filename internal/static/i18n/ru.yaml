@@ -524,11 +524,11 @@ Errors:
       Expired: Срок действия токена истек
     InvalidClient: Токен не был выпущен для этого клиента
   Feature:
-    NotExisting: ункция не существует
+    NotExisting: Функция не существует
     TypeNotSupported: Тип объекта не поддерживается
-    InvalidValue: Недопустимое значение для этой функции.
+    InvalidValue: Недопустимое значение для этой функции
   Target:
-    Invalid: Цель недействительна.
+    Invalid: Цель недействительна
     NoTimeout: У цели нет тайм-аута
     InvalidURL: Цель имеет неверный URL-адрес
     NotFound: Цель не найдена
@@ -554,9 +554,9 @@ Errors:
       Missing: Токен отсутствует
       Invalid: Токен недействителен
       TypeMissing: Тип токена отсутствует
-      TypeNotAllowed: Тип токена недопустим.
+      TypeNotAllowed: Тип токена недопустим
       TypeNotSupported: Тип токена не поддерживается
-      NotForAPI: Олицетворенные токены не разрешены для API.
+      NotForAPI: Олицетворенные токены не разрешены для API
     Impersonation:
       PolicyDisabled: Олицетворение отключено в политике безопасности экземпляра.
 
@@ -570,7 +570,7 @@ AggregateTypes:
   usergrant: Допуск пользователя
   quota: Квота
   feature: Особенность
-  target: мишень
+  target: Цель
   execution: Исполнение
   user_schema: Пользовательская схема
   auth_request: Запрос на аутентификацию

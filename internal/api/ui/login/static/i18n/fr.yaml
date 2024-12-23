@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: s'inscrire
   NextButtonText: suivant
 
+LoginAs:
+  Title: Se connecter en tant que
+  SelectUserLogin: Sélectionnez la connexion utilisateur.
+
 LDAP:
   Title: Connexion
   Description: Entrez vos données de connexion.
@@ -20,7 +24,7 @@ LDAP:
 
 SelectAccount:
   Title: Sélectionner un compte
-  Description: Utilisez votre compte ZITADEL
+  Description: Utilisez votre compte
   TitleLinking: Sélectionnez le compte pour le lien avec l'utilisateur
   DescriptionLinking: Sélectionnez votre compte pour établir un lien avec votre utilisateur externe.
   OtherUser: Autre utilisateur
@@ -249,6 +253,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Genre
   Female: Femme
   Male: Homme
@@ -288,6 +293,7 @@ ExternalRegistrationUserOverview:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Termes et conditions
   TosConfirm: J'accepte les
   TosLinkText: TOS
@@ -361,6 +367,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
 
 DeviceAuth:
   Title: Autorisation de l'appareil

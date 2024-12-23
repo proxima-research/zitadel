@@ -100,7 +100,7 @@ func (l *Login) checkUserInitCode(w http.ResponseWriter, r *http.Request, authRe
 		l.renderInitUser(w, r, authReq, data.UserID, data.LoginName, "", data.PasswordSet, err)
 		return
 	}
-	l.renderInitUserDone(w, r, authReq, userOrgID)
+	l.renderInitUserDone(w, r, authReq, data.UserID, userOrgID)
 }
 
 func (l *Login) resendUserInit(w http.ResponseWriter, r *http.Request, authReq *domain.AuthRequest, userID string, loginName string, showPassword bool) {
@@ -160,16 +160,25 @@ func (l *Login) renderInitUser(w http.ResponseWriter, r *http.Request, authReq *
 		user, err := l.query.GetUserByID(r.Context(), false, userID)
 		if err == nil {
 			l.customTexts(r.Context(), translator, user.ResourceOwner)
+			if preferredLanguage := user.Human.PreferredLanguage.String(); preferredLanguage != "" {
+				translator.SetPreferredLanguages(preferredLanguage)
+			}
 		}
 	}
 	l.renderer.RenderTemplate(w, r, translator, l.renderer.Templates[tmplInitUser], data, nil)
 }
 
-func (l *Login) renderInitUserDone(w http.ResponseWriter, r *http.Request, authReq *domain.AuthRequest, orgID string) {
+func (l *Login) renderInitUserDone(w http.ResponseWriter, r *http.Request, authReq *domain.AuthRequest, userID, orgID string) {
 	translator := l.getTranslator(r.Context(), authReq)
 	data := l.getUserData(r, authReq, translator, "InitUserDone.Title", "InitUserDone.Description", "", "")
 	if authReq == nil {
 		l.customTexts(r.Context(), translator, orgID)
+		user, err := l.query.GetUserByID(r.Context(), false, userID)
+		if err == nil {
+			if preferredLanguage := user.Human.PreferredLanguage.String(); preferredLanguage != "" {
+				translator.SetPreferredLanguages(preferredLanguage)
+			}
+		}
 	}
 	l.renderer.RenderTemplate(w, r, translator, l.renderer.Templates[tmplInitUserDone], data, nil)
 }

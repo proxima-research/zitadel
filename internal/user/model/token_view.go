@@ -24,6 +24,8 @@ type TokenView struct {
 	IsPAT             bool
 	Reason            domain.TokenReason
 	Actor             *domain.TokenActor
+
+	AuthRequestID string
 }
 
 type TokenSearchRequest struct {

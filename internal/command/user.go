@@ -315,6 +315,8 @@ func (c *Commands) addUserToken(ctx context.Context, userWriteModel *UserWriteMo
 		user.NewUserTokenAddedEvent(ctx, userAgg, tokenID, clientID, agentID, preferredLanguage, refreshTokenID, audience, scopes, authMethodsReferences, authTime, expiration, reason, actor),
 	)
 
+	cmds[len(cmds)-1].(*user.UserTokenAddedEvent).AuthRequestID = authz.GetAuthRequestIdFromCtx(ctx)
+
 	return cmds, &domain.Token{
 		ObjectRoot: models.ObjectRoot{
 			AggregateID: userWriteModel.AggregateID,

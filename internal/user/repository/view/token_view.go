@@ -24,6 +24,20 @@ func TokenByIDs(db *gorm.DB, table, tokenID, userID, instanceID string) (*usr_mo
 	return token, err
 }
 
+func TokenByRefreshTokenID(db *gorm.DB, table, refreshTokenID, userID, instanceID string) (*usr_model.TokenView, error) {
+	token := new(usr_model.TokenView)
+	query := repository.PrepareGetByQuery(table,
+		&usr_model.TokenSearchQuery{Key: model.TokenSearchKeyRefreshTokenID, Method: domain.SearchMethodEquals, Value: refreshTokenID},
+		&usr_model.TokenSearchQuery{Key: model.TokenSearchKeyUserID, Method: domain.SearchMethodEquals, Value: userID},
+		&usr_model.TokenSearchQuery{Key: model.TokenSearchKeyInstanceID, Method: domain.SearchMethodEquals, Value: instanceID},
+	)
+	err := query(db, token)
+	if zerrors.IsNotFound(err) {
+		return nil, zerrors.ThrowNotFound(nil, "VIEW-6ub3p", "Errors.Token.NotFound")
+	}
+	return token, err
+}
+
 func TokensByUserID(db *gorm.DB, table, userID, instanceID string) ([]*usr_model.TokenView, error) {
 	tokens := make([]*usr_model.TokenView, 0)
 	userIDQuery := &model.TokenSearchQuery{

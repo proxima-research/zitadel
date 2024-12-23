@@ -222,6 +222,8 @@ type UserTokenAddedEvent struct {
 	PreferredLanguage     string             `json:"preferredLanguage,omitempty"`
 	Reason                domain.TokenReason `json:"reason,omitempty"`
 	Actor                 *domain.TokenActor `json:"actor,omitempty"`
+
+	AuthRequestID string `json:"authRequestID,omitempty"`
 }
 
 func (e *UserTokenAddedEvent) Payload() interface{} {

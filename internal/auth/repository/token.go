@@ -8,4 +8,5 @@ import (
 
 type TokenRepository interface {
 	TokenByIDs(ctx context.Context, userID, tokenID string) (*usr_model.TokenView, error)
+	TokenByRefreshTokenId(ctx context.Context, userID, tokenID string) (*usr_model.TokenView, error)
 }

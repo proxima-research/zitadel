@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Register
   NextButtonText: Next
 
+LoginAs:
+  Title: Login as
+  SelectUserLogin: Select user login.
+
 LDAP:
   Title: Login
   Description: Enter your login data.
@@ -249,6 +253,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Gender
   Female: Female
   Male: Male
@@ -288,6 +293,7 @@ ExternalRegistrationUserOverview:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Terms and conditions
   TosConfirm: I accept the
   TosLinkText: TOS
@@ -361,6 +367,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
 DeviceAuth:
   Title: Device Authorization
   UserCode:

@@ -12,6 +12,9 @@ Login:
   MustBeMemberOfOrg: 'Потребителят трябва да е член на {{.OrgName}} организация.'
   RegisterButtonText: регистрирам
   NextButtonText: следващия
+LoginAs:
+  Title: Влезте като
+  SelectUserLogin: Изберете потребителско влизане.
 LDAP:
   Title: Влизам
   Description: Въведете вашите данни за вход.
@@ -20,7 +23,7 @@ LDAP:
   NextButtonText: следващия
 SelectAccount:
   Title: Изберете акаунт
-  Description: Използвайте вашия ZITADEL-акаунт
+  Description: Използвайте вашия акаунт
   TitleLinking: Изберете акаунт за свързване на потребител
   DescriptionLinking: 'Изберете своя акаунт, който да свържете с вашия външен потребител.'
   OtherUser: Друг потребител
@@ -245,6 +248,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Пол
   Female: Женски пол
   Male: Мъжки
@@ -283,6 +287,7 @@ ExternalRegistrationUserOverview:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Правила и условия
   TosConfirm: Приемам
   TosLinkText: TOS
@@ -350,6 +355,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
 DeviceAuth:
   Title: Упълномощаване на устройството
   UserCode:

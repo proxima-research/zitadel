@@ -44,6 +44,8 @@ type TokenView struct {
 	Deactivated       bool                       `json:"-" gorm:"-"`
 	InstanceID        string                     `json:"instanceID" gorm:"column:instance_id;primary_key"`
 	Actor             TokenActor                 `json:"actor" gorm:"column:actor"`
+
+	AuthRequestID string `json:"authRequestId" gorm:"column:auth_request_id"`
 }
 
 type TokenActor struct {
@@ -96,6 +98,8 @@ func TokenViewToModel(token *TokenView) *usr_model.TokenView {
 		RefreshTokenID:    token.RefreshTokenID,
 		IsPAT:             token.IsPAT,
 		Actor:             token.Actor.TokenActor,
+
+		AuthRequestID: token.AuthRequestID,
 	}
 }
 

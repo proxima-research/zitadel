@@ -637,7 +637,8 @@
       "DELETEACCOUNT": "Delete Account",
       "DELETEACCOUNT_DESC": "If you perform this action, you will be logged out and will no longer have access to your account. This action is not reversible, so please continue with caution.",
       "DELETEACCOUNT_BTN": "Delete Account",
-      "DELETEACCOUNT_SUCCESS": "Account deleted successfully!"
+      "DELETEACCOUNT_SUCCESS": "Account deleted successfully!",
+      "NOPERMISSIONTOEDIT": "You are missing the required permissions to edit account!"
     },
     "DETAILS": {
       "DATECREATED": "Created",
@@ -1378,7 +1379,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1604,7 +1606,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Email verification done",
@@ -2545,7 +2548,8 @@
     "mk": "Македонски",
     "cs": "Čeština",
     "ru": "Русский",
-    "nl": "Nederlands"
+    "nl": "Nederlands",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Add a Manager",

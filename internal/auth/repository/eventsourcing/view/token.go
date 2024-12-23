@@ -19,6 +19,10 @@ func (v *View) TokenByIDs(tokenID, userID, instanceID string) (*model.TokenView,
 	return usr_view.TokenByIDs(v.Db, tokenTable, tokenID, userID, instanceID)
 }
 
+func (v *View) TokenByRefreshTokenID(tokenID, userID, instanceID string) (*model.TokenView, error) {
+	return usr_view.TokenByRefreshTokenID(v.Db, tokenTable, tokenID, userID, instanceID)
+}
+
 func (v *View) TokensByUserID(userID, instanceID string) ([]*model.TokenView, error) {
 	return usr_view.TokensByUserID(v.Db, tokenTable, userID, instanceID)
 }
