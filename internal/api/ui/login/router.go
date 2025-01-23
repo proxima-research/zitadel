@@ -11,6 +11,7 @@ const (
 	EndpointHealthz                       = "/healthz"
 	EndpointReadiness                     = "/ready"
 	EndpointLogin                         = "/login"
+	EndpointLoginAs                       = "/login-as"
 	EndpointExternalLogin                 = "/login/externalidp"
 	EndpointExternalLoginCallback         = "/login/externalidp/callback"
 	EndpointExternalLoginCallbackFormPost = "/login/externalidp/callback/form"
@@ -73,6 +74,7 @@ func CreateRouter(login *Login, interceptors ...mux.MiddlewareFunc) *mux.Router 
 	router.HandleFunc(EndpointHealthz, login.handleHealthz).Methods(http.MethodGet)
 	router.HandleFunc(EndpointReadiness, login.handleReadiness).Methods(http.MethodGet)
 	router.HandleFunc(EndpointLogin, login.handleLogin).Methods(http.MethodGet, http.MethodPost)
+	router.HandleFunc(EndpointLoginAs, login.handleLoginAsCheck).Methods(http.MethodPost)
 	router.HandleFunc(EndpointExternalLogin, login.handleExternalLogin).Methods(http.MethodGet)
 	router.HandleFunc(EndpointExternalLoginCallback, login.handleExternalLoginCallback).Methods(http.MethodGet)
 	router.HandleFunc(EndpointExternalLoginCallbackFormPost, login.handleExternalLoginCallbackForm).Methods(http.MethodPost)
