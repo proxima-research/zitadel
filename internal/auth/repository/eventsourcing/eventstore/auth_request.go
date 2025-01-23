@@ -1300,7 +1300,7 @@ func (repo *AuthRequestRepo) checkLoginAsNameInput(ctx context.Context, request 
 	if ok && !now.After(time.Time(loginAs.ExpiresAt)) && user.ResourceOwner != "" && (user.ResourceOwner == resourceOwner || user.ResourceOwner == i.DefaultOrgID) {
 		return user, nil
 	}
-	return nil, nil
+	return nil, zerrors.ThrowNotFound(nil, "LOGIN-q5cmp", "Errors.User.NotFound")
 }
 
 func (repo *AuthRequestRepo) getUserIdFromRequest(ctx context.Context, request *domain.AuthRequest) (string, error) {
