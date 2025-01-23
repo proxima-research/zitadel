@@ -635,7 +635,8 @@
       "DELETEACCOUNT": "Elimina account personale",
       "DELETEACCOUNT_DESC": "Se esegui questa azione, sarai disconnesso e non avrai più accesso al tuo account. Questa azione non può essere invertita.",
       "DELETEACCOUNT_BTN": "Elimina",
-      "DELETEACCOUNT_SUCCESS": "Account eliminato con successo!"
+      "DELETEACCOUNT_SUCCESS": "Account eliminato con successo!",
+      "NOPERMISSIONTOEDIT": "Ti mancano le autorizzazioni necessarie per modificare il profilo!"
     },
     "DETAILS": {
       "DATECREATED": "Creato",
@@ -1377,7 +1378,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1603,7 +1605,8 @@
         "mk": "Македонски",
         "cs": "Čeština",
         "ru": "Русский",
-        "nl": "Nederlands"
+        "nl": "Nederlands",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Verifica dell'e-mail terminata con successo.",
@@ -2527,7 +2530,8 @@
     "mk": "Македонски",
     "cs": "Čeština",
     "ru": "Русский",
-    "nl": "Nederlands"
+    "nl": "Nederlands",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Aggiungi un manager",

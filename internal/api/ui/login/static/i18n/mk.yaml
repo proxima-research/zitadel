@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: регистрирај се
   NextButtonText: следно
 
+LoginAs:
+  Title: Најавете се како
+  SelectUserLogin: Изберете корисничко најавување.
+
 LDAP:
   Title: Најава
   Description: Внесете ги вашите податоци за најава.
@@ -20,7 +24,7 @@ LDAP:
 
 SelectAccount:
   Title: Изберете корисничка сметка
-  Description: Користете ја вашата ZITADEL корисничка сметка
+  Description: Користете ја вашата корисничка сметка
   TitleLinking: Изберете корисничка сметка за поврзување на корисник
   DescriptionLinking: Изберете ја вашата корисничка сметка за да ја поврзете со вашиот надворешен корисник.
   OtherUser: Друг корисник
@@ -249,6 +253,7 @@ RegistrationUser:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   GenderLabel: Пол
   Female: Женски
   Male: Машки
@@ -288,6 +293,7 @@ ExternalRegistrationUserOverview:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
   TosAndPrivacyLabel: Правила и услови
   TosConfirm: Се согласувам со
   TosLinkText: правилата за користење
@@ -361,6 +367,7 @@ ExternalNotFound:
   Czech: Čeština
   Russian: Русский
   Dutch: Nederlands
+  Ukrainian: Українська
 
 DeviceAuth:
   Title: Овластување преку уред

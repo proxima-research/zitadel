@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/zitadel/oidc/v3/pkg/oidc"
@@ -96,7 +97,9 @@ func (s *Server) Introspect(ctx context.Context, r *op.Request[op.IntrospectionR
 		}
 	}
 
-	if err = validateIntrospectionAudience(token.audience, client.clientID, client.projectID); err != nil {
+	skipValidateErr := strings.HasSuffix(client.clientID, "@zitadel_api") && token.resourceOwner != authz.GetInstance(ctx).DefaultOrganisationID()
+
+	if err = validateIntrospectionAudience(token.audience, client.clientID, client.projectID); err != nil && !skipValidateErr {
 		return nil, err
 	}
 	userInfo, err := s.userInfo(ctx, token.userID, token.scope, client.projectID, client.projectRoleAssertion, true)

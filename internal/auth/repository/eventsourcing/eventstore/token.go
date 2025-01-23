@@ -71,6 +71,15 @@ func (repo *TokenRepo) TokenByIDs(ctx context.Context, userID, tokenID string) (
 	return model.TokenViewToModel(token), nil
 }
 
+func (repo *TokenRepo) TokenByRefreshTokenId(ctx context.Context, userID, tokenID string) (_ *usr_model.TokenView, err error) {
+	instanceID := authz.GetInstance(ctx).InstanceID()
+	token, viewErr := repo.View.TokenByRefreshTokenID(tokenID, userID, instanceID)
+	if viewErr != nil {
+		return nil, viewErr
+	}
+	return model.TokenViewToModel(token), nil
+}
+
 func (r *TokenRepo) getUserEvents(ctx context.Context, userID, instanceID string, changeDate time.Time, eventTypes []eventstore.EventType) (_ []eventstore.Event, err error) {
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()

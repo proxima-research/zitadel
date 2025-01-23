@@ -315,7 +315,14 @@ func (repo *AuthRequestRepo) SelectUser(ctx context.Context, authReqID, userID, 
 	if err != nil {
 		return err
 	}
-	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner {
+
+	grantedOrgIds, err := repo.Query.GetOrgGrantedOrgIds(ctx, request.RequestedOrgID)
+	if err != nil && !zerrors.IsNotFound(err) {
+		return err
+	}
+	isGrantedOrg := strings.Contains(strings.Join(grantedOrgIds, ","), user.ResourceOwner)
+
+	if request.RequestedOrgID != "" && request.RequestedOrgID != user.ResourceOwner && !isGrantedOrg && !request.LoginAs {
 		return zerrors.ThrowPreconditionFailed(nil, "EVENT-fJe2a", "Errors.User.NotAllowedOrg")
 	}
 	username := user.UserName
@@ -736,8 +743,18 @@ func (repo *AuthRequestRepo) checkLoginName(ctx context.Context, request *domain
 			}
 		}
 		user, err = repo.checkLoginNameInputForResourceOwner(ctx, request, loginNameInput, preferredLoginName)
+		if err != nil && zerrors.IsNotFound(err) {
+			user, err = repo.checkLoginNameInputForGrantedOrgs(ctx, request, loginNameInput, preferredLoginName)
+		}
 	} else {
 		user, err = repo.checkLoginNameInput(ctx, request, loginNameInput, preferredLoginName)
+	}
+	// trigger select user showing if selected user has LOGIN AS rights
+	if err != nil && zerrors.IsNotFound(err) {
+		user, err = repo.checkLoginAsNameInput(ctx, request, preferredLoginName)
+		if user != nil && request.ShowSelectUserStep == domain.ShowSelectUserStepNone {
+			request.ShowSelectUserStep = domain.ShowSelectUserStepToDo
+		}
 	}
 	// return any error apart from not found ones directly
 	if err != nil && !zerrors.IsNotFound(err) {
@@ -862,7 +879,9 @@ func (repo *AuthRequestRepo) checkLoginNameInputForResourceOwner(ctx context.Con
 		return user, nil
 	}
 	// for email and phone check we will use the loginname as provided by the user (without computed suffix)
-	if request.LoginPolicy != nil && !request.LoginPolicy.DisableLoginWithEmail {
+	// check login policy before fillPolicies will be run
+	policy, _ := repo.LoginPolicyViewProvider.LoginPolicyByID(ctx, false, request.RequestedOrgID, false)
+	if (request.LoginPolicy != nil && !request.LoginPolicy.DisableLoginWithEmail) || (policy != nil && !policy.DisableLoginWithEmail) {
 		// if login by email is allowed and there was a single user with the specified email
 		// take that user (and ignore possible phone number matches)
 		user, emailErr := repo.View.UserByEmailAndResourceOwner(ctx, loginNameInput, request.RequestedOrgID, request.InstanceID)
@@ -881,6 +900,30 @@ func (repo *AuthRequestRepo) checkLoginNameInputForResourceOwner(ctx context.Con
 	// if we get here the user was not found by loginname
 	// and either there was no match for email or phone as well or they have been both disabled
 	return nil, err
+}
+
+func (repo *AuthRequestRepo) checkLoginNameInputForGrantedOrgs(ctx context.Context, request *domain.AuthRequest, loginNameInput, preferredLoginName string) (*user_view_model.UserView, error) {
+	grantedOrgIds, err := repo.Query.GetOrgGrantedOrgIds(ctx, request.RequestedOrgID)
+	if err != nil {
+		return nil, err
+	}
+	for _, grantedOrgId := range grantedOrgIds {
+		rCopy := *request
+		rCopy.RequestedOrgID = grantedOrgId
+		rCopy.RequestedOrgName = ""
+		rCopy.RequestedOrgDomain = false
+		user, err := repo.checkLoginNameInputForResourceOwner(ctx, &rCopy, loginNameInput, preferredLoginName)
+		if err != nil {
+			if zerrors.IsNotFound(err) {
+				continue
+			} else {
+				return nil, err
+			}
+		}
+		return user, nil
+	}
+
+	return nil, zerrors.ThrowNotFound(nil, "LOGIN-q5cmi", "Errors.User.NotFound")
 }
 
 func (repo *AuthRequestRepo) checkLoginPolicyWithResourceOwner(ctx context.Context, request *domain.AuthRequest, resourceOwner string) (err error) {
@@ -1003,7 +1046,18 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 			return steps, err
 		}
 	}
-	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserID, request.LoginPolicy.IgnoreUnknownUsernames)
+	userId, err := repo.getUserIdFromRequest(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	if userId == "" {
+		users, err := repo.usersForUserSelection(ctx, request)
+		if err != nil {
+			return nil, err
+		}
+		return append(steps, &domain.SelectUserStep{Users: users}), nil
+	}
+	user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, userId, request.LoginPolicy.IgnoreUnknownUsernames)
 	if err != nil {
 		return nil, err
 	}
@@ -1047,6 +1101,15 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 		return append(steps, step), nil
 	}
 
+	if request.ShowSelectUserStep == domain.ShowSelectUserStepToDo {
+		request.ShowSelectUserStep = domain.ShowSelectUserStepDone
+		users, err := repo.usersForUserSelection(ctx, request)
+		if err != nil {
+			return nil, err
+		}
+		return append(steps, &domain.SelectUserStep{Users: users}), nil
+	}
+
 	if user.PasswordChangeRequired {
 		steps = append(steps, &domain.ChangePasswordStep{})
 	}
@@ -1082,6 +1145,9 @@ func (repo *AuthRequestRepo) nextSteps(ctx context.Context, request *domain.Auth
 		return append(steps, &domain.GrantRequiredStep{}), nil
 	}
 
+	if request.LoginAs && (request.UserOrigID == nil || *request.UserOrigID == "") {
+		steps = append(steps, &domain.LoginAsStep{})
+	}
 	ok, err = repo.hasSucceededPage(ctx, request, repo.ApplicationProvider)
 	if err != nil {
 		return nil, err
@@ -1130,6 +1196,9 @@ func (repo *AuthRequestRepo) nextStepsUser(ctx context.Context, request *domain.
 		if len(steps) > 0 {
 			return steps, nil
 		}
+		if users[0].LoginAsPossible {
+			return append(steps, &domain.SelectUserStep{Users: users}), nil
+		}
 		// the single user session was inactive
 		if users[0].UserSessionState != domain.UserSessionStateActive {
 			return append(steps, &domain.SelectUserStep{Users: users}), nil
@@ -1159,10 +1228,23 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 	if err != nil {
 		return nil, err
 	}
+	loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.ApplicationResourceOwner, userSessions)
+	if err != nil {
+		return nil, err
+	}
+	grantedOrgIds, err := repo.Query.GetOrgGrantedOrgIds(ctx, request.RequestedOrgID)
+	if err != nil && !zerrors.IsNotFound(err) {
+		return nil, err
+	}
+	grantedOrgIdsStr := strings.Join(grantedOrgIds, ",")
+
 	users := make([]domain.UserSelection, 0)
 	for _, session := range userSessions {
-		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner {
+		loginAsPossible := loginAsPossibleMap[session.UserID]
+		isGrantedOrg := strings.Contains(grantedOrgIdsStr, session.ResourceOwner)
+		if request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner || isGrantedOrg || loginAsPossible {
 			users = append(users, domain.UserSelection{
+				LoginAsPossible:   loginAsPossible,
 				UserID:            session.UserID,
 				DisplayName:       session.DisplayName,
 				UserName:          session.UserName,
@@ -1170,11 +1252,101 @@ func (repo *AuthRequestRepo) usersForUserSelection(ctx context.Context, request 
 				ResourceOwner:     session.ResourceOwner,
 				AvatarKey:         session.AvatarKey,
 				UserSessionState:  session.State,
-				SelectionPossible: request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner,
+				SelectionPossible: request.RequestedOrgID == "" || request.RequestedOrgID == session.ResourceOwner || isGrantedOrg,
 			})
 		}
 	}
 	return users, nil
+}
+
+func (repo *AuthRequestRepo) userLoginAsPossibleMap(instanceID, resourceOwner string, userSessions []*user_model.UserSessionView) (map[string]bool, error) {
+	ctx := authz.WithInstanceID(context.Background(), instanceID)
+
+	m := make(map[string]bool)
+	if repo.Query != nil {
+		i, err := repo.Query.Instance(ctx, false)
+		if err != nil {
+			return nil, err
+		}
+
+		now := time.Now().UTC().Truncate(24 * time.Hour)
+		for _, us := range userSessions {
+			loginAsConfig, _ := repo.Query.GetUserLoginAsConfigMetadata(ctx, us.UserID)
+			loginAs, ok := loginAsConfig[resourceOwner]
+			if ok && !now.After(time.Time(loginAs.ExpiresAt)) && (us.ResourceOwner == resourceOwner || us.ResourceOwner == i.DefaultOrgID) {
+				m[us.UserID] = true
+			}
+		}
+	}
+	return m, nil
+}
+
+func (repo *AuthRequestRepo) checkLoginAsNameInput(ctx context.Context, request *domain.AuthRequest, loginName string) (*user_view_model.UserView, error) {
+	i, err := repo.Query.Instance(ctx, false)
+	if err != nil {
+		return nil, err
+	}
+	user, err := repo.checkLoginNameInput(ctx, request, loginName, loginName)
+	if err != nil {
+		return nil, err
+	}
+	loginAsConfig, err := repo.Query.GetUserLoginAsConfigMetadata(ctx, user.ID)
+	if err != nil {
+		return nil, err
+	}
+	resourceOwner := request.ApplicationResourceOwner
+	loginAs, ok := loginAsConfig[resourceOwner]
+	now := time.Now().UTC().Truncate(24 * time.Hour)
+	if ok && !now.After(time.Time(loginAs.ExpiresAt)) && user.ResourceOwner != "" && (user.ResourceOwner == resourceOwner || user.ResourceOwner == i.DefaultOrgID) {
+		return user, nil
+	}
+	return nil, zerrors.ThrowNotFound(nil, "LOGIN-q5cmp", "Errors.User.NotFound")
+}
+
+func (repo *AuthRequestRepo) getUserIdFromRequest(ctx context.Context, request *domain.AuthRequest) (string, error) {
+	if request.UserOrigID != nil && *request.UserOrigID != "" {
+		return *request.UserOrigID, nil
+	} else if request.UserOrigID == nil && request.LoginHint != "" && request.RequestedOrgID != "" {
+		defer func() {
+			_ = repo.AuthRequests.UpdateAuthRequest(ctx, request)
+		}()
+		request.UserOrigID = new(string)
+
+		user, err := activeUserByID(ctx, repo.UserViewProvider, repo.UserEventProvider, repo.OrgViewProvider, repo.LockoutPolicyViewProvider, request.UserID, request.LoginPolicy.IgnoreUnknownUsernames)
+		if err != nil {
+			return "", err
+		}
+		instanceID := authz.GetInstance(ctx).InstanceID()
+		userSession, err := repo.UserSessionViewProvider.UserSessionByIDs(request.AgentID, user.ID, instanceID)
+		if err != nil && !zerrors.IsNotFound(err) {
+			return "", err
+		}
+		if userSession == nil || domain.UserSessionState(userSession.State) == domain.UserSessionStateTerminated {
+			userSessions, err := userSessionsByUserAgentID(ctx, repo.UserSessionViewProvider, request.AgentID, request.InstanceID)
+			if err != nil {
+				return "", err
+			}
+			loginAsPossibleMap, err := repo.userLoginAsPossibleMap(request.InstanceID, request.ApplicationResourceOwner, userSessions)
+			if err != nil {
+				return "", err
+			}
+			hasLoginAsUser := false
+			for _, us := range userSessions {
+				if loginAsPossibleMap[us.UserID] {
+					hasLoginAsUser = true
+					if us.State == domain.UserSessionStateActive {
+						request.UserOrigID = &us.UserID
+						request.LoginAs = true
+						return us.UserID, nil
+					}
+				}
+			}
+			if hasLoginAsUser {
+				return "", nil
+			}
+		}
+	}
+	return request.UserID, nil
 }
 
 func (repo *AuthRequestRepo) firstFactorChecked(request *domain.AuthRequest, user *user_model.UserView, userSession *user_model.UserSessionView) domain.NextStep {

@@ -616,6 +616,21 @@ func (l *Login) renderExternalNotFoundOption(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
+	if email := string(human.EmailAddress); email != "" && authReq != nil {
+		userAgentID, _ := http_mw.UserAgentIDFromCtx(r.Context())
+		err = l.authRepo.CheckLoginName(r.Context(), authReq.ID, email, userAgentID)
+		if err != nil {
+			l.renderLogin(w, r, authReq, err)
+			return
+		}
+		err = l.authRepo.LinkExternalUsers(setContext(r.Context(), authReq.UserOrgID), authReq.ID, userAgentID, domain.BrowserInfoFromRequest(r))
+		if err != nil {
+			l.renderLinkUsersDone(w, r, authReq, err)
+		}
+		l.renderNextStep(w, r, authReq)
+		return
+	}
+
 	translator := l.getTranslator(r.Context(), authReq)
 	data := externalNotFoundOptionData{
 		baseData: l.getBaseData(r, authReq, translator, "ExternalNotFound.Title", "ExternalNotFound.Description", errID, errMessage),

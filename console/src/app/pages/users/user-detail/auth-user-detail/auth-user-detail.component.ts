@@ -10,6 +10,7 @@ import { from, Observable, Subscription, take } from 'rxjs';
 import { ChangeType } from 'src/app/modules/changes/changes.component';
 import { phoneValidator, requiredValidator } from 'src/app/modules/form-field/validators/validators';
 import { InfoDialogComponent } from 'src/app/modules/info-dialog/info-dialog.component';
+import { InfoSectionType } from 'src/app/modules/info-section/info-section.component';
 import { MetadataDialogComponent } from 'src/app/modules/metadata/metadata-dialog/metadata-dialog.component';
 import { PolicyComponentServiceType } from 'src/app/modules/policies/policy-component-types.enum';
 import { SidenavSetting } from 'src/app/modules/sidenav/sidenav.component';
@@ -65,6 +66,7 @@ export class AuthUserDetailComponent implements OnDestroy {
   public currentSetting: string | undefined = this.settingsList[0].id;
   public loginPolicy?: LoginPolicy.AsObject;
   private savedLanguage?: string;
+  public readonly InfoSectionType: typeof InfoSectionType = InfoSectionType;
 
   constructor(
     public translate: TranslateService,
