@@ -384,16 +384,20 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 					expectFilter(), // token lifetime
 					expectPush(
 						authrequest.NewCodeExchangedEvent(context.Background(), &authrequest.NewAggregate("V2_authRequestID", "instanceID").Aggregate),
-						oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
-							"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
-							[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
-							&domain.UserAgent{
-								FingerprintID: gu.Ptr("fp1"),
-								IP:            net.ParseIP("1.2.3.4"),
-								Description:   gu.Ptr("firefox"),
-								Header:        http.Header{"foo": []string{"bar"}},
-							},
-						),
+						func() *oidcsession.AddedEvent {
+							ev := oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
+								"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
+								[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
+								&domain.UserAgent{
+									FingerprintID: gu.Ptr("fp1"),
+									IP:            net.ParseIP("1.2.3.4"),
+									Description:   gu.Ptr("firefox"),
+									Header:        http.Header{"foo": []string{"bar"}},
+								},
+							)
+							ev.AuthRequestID = "V2_authRequestID"
+							return ev
+						}(),
 						oidcsession.NewAccessTokenAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
 							"at_accessTokenID", []string{"openid", "offline_access"}, time.Hour, domain.TokenReasonAuthRequest, nil),
 						user.NewUserTokenV2AddedEvent(context.Background(), &user.NewAggregate("userID", "org1").Aggregate, "at_accessTokenID"),
@@ -518,16 +522,20 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 					expectFilter(), // token lifetime
 					expectPush(
 						authrequest.NewCodeExchangedEvent(context.Background(), &authrequest.NewAggregate("V2_authRequestID", "instanceID").Aggregate),
-						oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
-							"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
-							[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
-							&domain.UserAgent{
-								FingerprintID: gu.Ptr("fp1"),
-								IP:            net.ParseIP("1.2.3.4"),
-								Description:   gu.Ptr("firefox"),
-								Header:        http.Header{"foo": []string{"bar"}},
-							},
-						),
+						func() *oidcsession.AddedEvent {
+							ev := oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
+								"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
+								[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
+								&domain.UserAgent{
+									FingerprintID: gu.Ptr("fp1"),
+									IP:            net.ParseIP("1.2.3.4"),
+									Description:   gu.Ptr("firefox"),
+									Header:        http.Header{"foo": []string{"bar"}},
+								},
+							)
+							ev.AuthRequestID = "V2_authRequestID"
+							return ev
+						}(),
 						sessionlogout.NewBackChannelLogoutRegisteredEvent(context.Background(),
 							&sessionlogout.NewAggregate("sessionID", "instanceID").Aggregate,
 							"V2_oidcSessionID",
@@ -663,16 +671,20 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 					expectFilter(), // token lifetime
 					expectPush(
 						authrequest.NewCodeExchangedEvent(context.Background(), &authrequest.NewAggregate("V2_authRequestID", "instanceID").Aggregate),
-						oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
-							"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
-							[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
-							&domain.UserAgent{
-								FingerprintID: gu.Ptr("fp1"),
-								IP:            net.ParseIP("1.2.3.4"),
-								Description:   gu.Ptr("firefox"),
-								Header:        http.Header{"foo": []string{"bar"}},
-							},
-						),
+						func() *oidcsession.AddedEvent {
+							ev := oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
+								"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid", "offline_access"},
+								[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
+								&domain.UserAgent{
+									FingerprintID: gu.Ptr("fp1"),
+									IP:            net.ParseIP("1.2.3.4"),
+									Description:   gu.Ptr("firefox"),
+									Header:        http.Header{"foo": []string{"bar"}},
+								},
+							)
+							ev.AuthRequestID = "V2_authRequestID"
+							return ev
+						}(),
 						oidcsession.NewAccessTokenAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
 							"at_accessTokenID", []string{"openid", "offline_access"}, time.Hour, domain.TokenReasonAuthRequest, nil),
 						oidcsession.NewRefreshTokenAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
@@ -797,16 +809,20 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 					),
 					expectFilter(), // token lifetime
 					expectPush(
-						oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
-							"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid"},
-							[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
-							&domain.UserAgent{
-								FingerprintID: gu.Ptr("fp1"),
-								IP:            net.ParseIP("1.2.3.4"),
-								Description:   gu.Ptr("firefox"),
-								Header:        http.Header{"foo": []string{"bar"}},
-							},
-						),
+						func() *oidcsession.AddedEvent {
+							ev := oidcsession.NewAddedEvent(context.Background(), &oidcsession.NewAggregate("V2_oidcSessionID", "org1").Aggregate,
+								"userID", "org1", "sessionID", "clientID", []string{"audience"}, []string{"openid"},
+								[]domain.UserAuthMethodType{domain.UserAuthMethodTypePassword}, testNow, "nonce", &language.Afrikaans,
+								&domain.UserAgent{
+									FingerprintID: gu.Ptr("fp1"),
+									IP:            net.ParseIP("1.2.3.4"),
+									Description:   gu.Ptr("firefox"),
+									Header:        http.Header{"foo": []string{"bar"}},
+								},
+							)
+							ev.AuthRequestID = "V2_authRequestID"
+							return ev
+						}(),
 						authrequest.NewSucceededEvent(context.Background(), &authrequest.NewAggregate("V2_authRequestID", "instanceID").Aggregate),
 					),
 				),

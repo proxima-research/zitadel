@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: 등록
   NextButtonText: 다음
 
+LoginAs:
+  Title: 로그인
+  SelectUserLogin: 사용자 로그인을 선택하세요.
+
 LDAP:
   Title: 로그인
   Description: 로그인 정보를 입력하세요.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: 성별
   Female: 여성
   Male: 남성
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: 동의사항
   TosConfirm: 이용 약관에 동의합니다.
   TosLinkText: 이용 약관
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: 기기 인증
   UserCode:

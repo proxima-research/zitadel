@@ -10,6 +10,9 @@ Login:
   MustBeMemberOfOrg: 'Pengguna harus menjadi anggota {{.OrgName}} organisasi.'
   RegisterButtonText: Daftar
   NextButtonText: Berikutnya
+LoginAs:
+  Title: Login sebagai
+  SelectUserLogin: Pilih login pengguna.
 LDAP:
   Title: Login
   Description: Masukkan data masuk Anda.
@@ -235,6 +238,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Jenis kelamin
   Female: Perempuan
   Male: Pria
@@ -276,6 +280,7 @@ ExternalRegistrationUserOverview:
   Swedish: Svenska
   Indonesian: Bahasa Indonesia
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Syarat dan Ketentuan
   TosConfirm: Saya menerima itu
   TosLinkText: KL
@@ -347,6 +352,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: Otorisasi Perangkat
   UserCode:

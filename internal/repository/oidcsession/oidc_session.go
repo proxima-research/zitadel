@@ -34,6 +34,8 @@ type AddedEvent struct {
 	Nonce             string                      `json:"nonce,omitempty"`
 	PreferredLanguage *language.Tag               `json:"preferredLanguage,omitempty"`
 	UserAgent         *domain.UserAgent           `json:"userAgent,omitempty"`
+
+	AuthRequestID string `json:"authRequestID,omitempty"`
 }
 
 func (e *AddedEvent) Payload() interface{} {

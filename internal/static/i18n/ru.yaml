@@ -55,7 +55,7 @@ Errors:
     AlreadyDeactivated: Конфигурация SMS уже деактивирована
   SMTP:
     NotEmailMessage: сообщение не является EmailMessage
-    RequiredAttributes: тема, получатели и контент должны быть заданы, но некоторые или все из них пусты.
+    RequiredAttributes: тема, получатели и контент должны быть заданы, но некоторые или все из них пусты
     CouldNotSplit: не удалось разделить хост и порт для подключения к smtp
     CouldNotDial: не удалось связаться с SMTP-сервером, проверить порт, проблемы с брандмауэром...
     CouldNotDialTLS: не удалось связаться с SMTP-сервером с помощью TLS, проверьте порт, проблемы с брандмауэром...
@@ -94,7 +94,7 @@ Errors:
     NoChanges: Изменения не найдены
     InitCodeNotFound: Код инициализации не найден
     UsernameNotChanged: Имя пользователя не изменено
-    InvalidURLTemplate: Шаблон URL-адреса недействителен.
+    InvalidURLTemplate: Шаблон URL-адреса недействителен
     Profile:
       NotFound: Профиль не найден
       NotChanged: Профиль не изменён
@@ -280,7 +280,7 @@ Errors:
       AlreadyExists: Политика уведомлений уже существует
     LabelPolicy:
       NotFound: Политика частных торговых марок не найдена
-      NotChanged: Политика использования частных торговых марок не изменилась.
+      NotChanged: Политика использования частных торговых марок не изменилась
   Project:
     ProjectIDMissing: ID Проекта отсутствует
     AlreadyExists: Проект уже существует в организации
@@ -552,11 +552,11 @@ Errors:
     NotFound: Запрос авторизации устройства не существует
     AlreadyHandled: Запрос авторизации устройства уже обработан
   Feature:
-    NotExisting: ункция не существует
+    NotExisting: Функция не существует
     TypeNotSupported: Тип объекта не поддерживается
-    InvalidValue: Недопустимое значение для этой функции.
+    InvalidValue: Недопустимое значение для этой функции
   Target:
-    Invalid: Цель недействительна.
+    Invalid: Цель недействительна
     NoTimeout: У цели нет тайм-аута
     InvalidURL: Цель имеет неверный URL-адрес
     NotFound: Цель не найдена
@@ -589,11 +589,11 @@ Errors:
       Missing: Токен отсутствует
       Invalid: Токен недействителен
       TypeMissing: Тип токена отсутствует
-      TypeNotAllowed: Тип токена недопустим.
+      TypeNotAllowed: Тип токена недопустим
       TypeNotSupported: Тип токена не поддерживается
-      NotForAPI: Олицетворенные токены не разрешены для API.
+      NotForAPI: Олицетворенные токены не разрешены для API
     Impersonation:
-      PolicyDisabled: Олицетворение отключено в политике безопасности экземпляра.
+      PolicyDisabled: Олицетворение отключено в политике безопасности экземпляра
   WebKey:
     ActiveDelete: Невозможно удалить активный веб-ключ
     Config: Неверная конфигурация веб-ключа
@@ -612,7 +612,7 @@ AggregateTypes:
   usergrant: Допуск пользователя
   quota: Квота
   feature: Особенность
-  target: мишень
+  target: Цель
   execution: Исполнение
   user_schema: Пользовательская схема
   auth_request: Запрос на аутентификацию
@@ -635,7 +635,7 @@ EventTypes:
   target:
     added: Цель создана
     changed: Цель изменена
-    removed: Цель удалена.
+    removed: Цель удалена
   user:
     added: Пользователь добавлен
     selfregistered: Пользователь зарегистрирован самостоятельно
@@ -673,7 +673,7 @@ EventTypes:
         removed: Ключ удалён
       secret:
         set: Ключ установлен
-        updated: Секретный хеш обновлен.
+        updated: Секретный хеш обновлен
         removed: Ключ удалён
         check:
           succeeded: Проверка ключа прошла успешно
@@ -1072,13 +1072,13 @@ EventTypes:
           changed: Конфигурация OIDC изменена
           secret:
             changed: Ключ OIDC изменён
-            updated: Секретный хеш OIDC обновлен.
+            updated: Секретный хеш OIDC обновлен
         api:
           added: Конфигурация API добавлена
           changed: Конфигурация API изменена
           secret:
             changed: Ключ API изменён
-            updated: Секретный хэш API обновлен.
+            updated: Секретный хэш API обновлен
   policy:
     password:
       complexity:
@@ -1175,7 +1175,7 @@ EventTypes:
         changed: Конфигурация SMTP изменена
         activated: Конфигурация SMTP активирована
         deactivated: Конфигурация SMTP деактивирована
-        removed: Конфигурация SMTP удалена.
+        removed: Конфигурация SMTP удалена
         password:
           changed: Ключ конфигурации SMTP изменён
     sms:

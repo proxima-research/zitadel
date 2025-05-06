@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Registreren
   NextButtonText: Volgende
 
+LoginAs:
+  Title: Inloggen als
+  SelectUserLogin: Selecteer gebruikersaanmelding.
+
 LDAP:
   Title: Inloggen
   Description: Voer uw inloggegevens in.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Geslacht
   Female: Vrouw
   Male: Man
@@ -303,11 +308,12 @@ ExternalRegistrationUserOverview:
   Macedonian: Македонски
   Czech: Čeština
   Russian: Русский
-  Nederlands: Nederlands
+  Dutch: Nederlands
   Swedish: Svenska
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Algemene voorwaarden
   TosConfirm: Ik accepteer de
   TosLinkText: AV
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: Apparaat Autorisatie
   UserCode:

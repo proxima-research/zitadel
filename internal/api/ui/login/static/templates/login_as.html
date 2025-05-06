@@ -1,0 +1,82 @@
+{{template "main-top" .}}
+
+<div class="lgn-head">
+    <h1>{{t "LoginAs.Title"}}</h1>
+
+    {{ template "user-profile" . }}
+
+    <p>{{t "LoginAs.SelectUserLogin" }}</p>
+</div>
+
+{{template "error-message" .}}
+<form class="lng-login-as-search" action="{{ userSelectionUrl }}" method="POST">
+    {{ .CSRF }}
+    <input type="hidden" name="authRequestID" value="{{ .AuthReqID }}" />
+    <input type="hidden" name="userID" value="{{ .UserId }}" />
+    <input type="hidden" name="loginAs" value="1" />
+    <input type="hidden" name="page" value="0" />
+    <input type="text" autocomplete="off" class="lng-login-as-search-field" name="search" value="{{ .Search }}" />
+    <button class="lng-login-as-search-clear-button" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 256 256">
+            <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+        </svg>
+    </button>
+    <button class="lng-login-as-search-button" type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+    </button>
+</form>
+
+<form class="lng-login-as-users" action="{{ loginAsUrl }}" method="POST">
+
+    {{ .CSRF }}
+
+    <input type="hidden" name="authRequestID" value="{{ .AuthReqID }}" />
+    <input type="hidden" name="userID" value="{{ .UserId }}" />
+    <input type="hidden" name="loginAs" value="1" />
+    <input type="hidden" name="page" value="{{ .Page }}" />
+    <input type="hidden" name="search" value="{{ .Search }}" />
+
+    <div class="lgn-account-selection">
+        {{ range $user := .Users }}
+        <button type="submit" name="loginAsName" value="{{ $user.LoginName }}" class="lgn-account">
+            <div class="left">
+                <div class="lgn-avatar" {{if not $user.AvatarKey}}loginname="{{ $user.LoginName }}"{{end}}>
+                    {{if $user.AvatarKey}}
+                    <img class="avatar-img" src="{{ avatarResource $user.ResourceOwner $user.AvatarKey }}" alt="user-avatar">
+                    {{else}}
+                    <span class="initials">A</span>
+                    {{end}}
+                </div>
+            </div>
+            <div class="lgn-names">
+                <p class="lgn-displayname">{{$user.Username}}</p>
+                <p class="lgn-loginname">{{$user.Email}}</p>
+            </div>
+            <span class="fill-space"></span>
+            <i class="lgn-icon-angle-right-solid"></i>
+        </button>
+        {{ end }}
+    </div>
+</form>
+
+<form class="lng-login-as-nav" action="{{ userSelectionUrl }}" method="POST">
+    {{ .CSRF }}
+    <input type="hidden" name="authRequestID" value="{{ .AuthReqID }}" />
+    <input type="hidden" name="userID" value="{{ .UserId }}" />
+    <input type="hidden" name="loginAs" value="1" />
+    <input type="hidden" name="search" value="{{ .Search }}" />
+    {{if (gt .PrevPage -1) }}
+    <button type="submit" name="page" value="{{ .PrevPage }}" class="lgn-raised-button lgn-primary"><<<</button>
+    {{ end }}
+    {{if (gt .NextPage 0) }}
+    <button type="submit" name="page" value="{{ .NextPage }}" class="lgn-raised-button lgn-primary right">>>></button>
+    {{ end }}
+</form>
+
+{{template "main-bottom" .}}
+
+<script src="{{ resourceUrl "scripts/form_submit.js" }}"></script>
+<script src="{{ resourceUrl "scripts/default_form_validation.js" }}"></script>
+<script src="{{ resourceUrl "scripts/login_as.js" }}"></script>

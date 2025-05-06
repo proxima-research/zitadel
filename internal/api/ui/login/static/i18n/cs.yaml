@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Registrovat
   NextButtonText: Další
 
+LoginAs:
+  Title: Přihlásit se jako
+  SelectUserLogin: Vyberte přihlášení uživatele.
+
 LDAP:
   Title: Přihlášení
   Description: Zadejte své přihlašovací údaje.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Pohlaví
   Female: Žena
   Male: Muž
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Obchodní podmínky
   TosConfirm: Souhlasím s
   TosLinkText: obchodními podmínkami
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: Autorizace zařízení
   UserCode:

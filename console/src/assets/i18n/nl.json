@@ -644,7 +644,8 @@
       "DELETEACCOUNT": "Account verwijderen",
       "DELETEACCOUNT_DESC": "Als u deze actie uitvoert, wordt u uitgelogd en heeft u geen toegang meer tot uw account. Deze actie is niet omkeerbaar, dus ga voorzichtig verder.",
       "DELETEACCOUNT_BTN": "Account verwijderen",
-      "DELETEACCOUNT_SUCCESS": "Account succesvol verwijderd!"
+      "DELETEACCOUNT_SUCCESS": "Account succesvol verwijderd!",
+      "NOPERMISSIONTOEDIT": "U mist de vereiste rechten om uw account te bewerken!"
     },
     "DETAILS": {
       "DATECREATED": "Gemaakt",
@@ -1397,7 +1398,8 @@
         "ru": "Русский",
         "nl": "Nederlands",
         "sv": "Svenska",
-        "hu": "Magyar"
+        "hu": "Magyar",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1637,7 +1639,8 @@
         "nl": "Nederlands",
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "E-mail verificatie voltooid",
@@ -2604,7 +2607,8 @@
     "nl": "Nederlands",
     "sv": "Svenska",
     "id": "Bahasa Indonesia",
-    "ko": "한국어"
+    "ko": "한국어",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Voeg een Manager toe",

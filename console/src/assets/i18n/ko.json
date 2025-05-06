@@ -644,7 +644,8 @@
       "DELETEACCOUNT": "계정 삭제",
       "DELETEACCOUNT_DESC": "이 작업을 수행하면 로그아웃되며 계정에 다시 접근할 수 없습니다. 이 작업은 되돌릴 수 없으므로 신중히 진행하세요.",
       "DELETEACCOUNT_BTN": "계정 삭제",
-      "DELETEACCOUNT_SUCCESS": "계정이 성공적으로 삭제되었습니다!"
+      "DELETEACCOUNT_SUCCESS": "계정이 성공적으로 삭제되었습니다!",
+      "NOPERMISSIONTOEDIT": "계정을 편집하는 데 필요한 권한이 없습니다!"
     },
     "DETAILS": {
       "DATECREATED": "생성일",
@@ -1399,7 +1400,8 @@
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
         "hu": "Magyar",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1639,7 +1641,8 @@
         "nl": "Nederlands",
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "이메일 인증 완료",
@@ -2609,7 +2612,8 @@
     "nl": "Nederlands",
     "sv": "Svenska",
     "id": "Bahasa Indonesia",
-    "ko": "한국어"
+    "ko": "한국어",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "매니저 추가",

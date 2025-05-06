@@ -647,7 +647,8 @@
       "DELETEACCOUNT": "Удалить учётную запись",
       "DELETEACCOUNT_DESC": "Если вы выполните данное действие, вы выйдете из системы и больше не будете иметь доступа к своей учетной записи. Данное действие не может быть отменено!",
       "DELETEACCOUNT_BTN": "Удалить учётную запись",
-      "DELETEACCOUNT_SUCCESS": "Учётная запись успешно удалена!"
+      "DELETEACCOUNT_SUCCESS": "Учётная запись успешно удалена!",
+      "NOPERMISSIONTOEDIT": "У вас отсутствуют необходимые разрешения для редактирования учетной записи!"
     },
     "DETAILS": {
       "DATECREATED": "Создан",
@@ -1443,7 +1444,8 @@
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
         "hu": "Magyar",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1695,7 +1697,8 @@
         "nl": "Nederlands",
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "LOCALE": "Код языка",
       "LOCALES": {
@@ -2696,7 +2699,8 @@
     "nl": "Nederlands",
     "sv": "Svenska",
     "id": "Bahasa Indonesia",
-    "ko": "한국어"
+    "ko": "한국어",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Добавить менеджера",

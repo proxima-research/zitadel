@@ -297,3 +297,33 @@ func (mr *MockQueriesMockRecorder) SessionByID(arg0, arg1, arg2, arg3, arg4 any)
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SessionByID", reflect.TypeOf((*MockQueries)(nil).SessionByID), arg0, arg1, arg2, arg3, arg4)
 }
+
+// OrgByID mocks base method
+func (m *MockQueries) OrgByID(arg0 context.Context, arg1 bool, arg2 string) (*query.Org, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "OrgByID", arg0, arg1, arg2)
+	ret0, _ := ret[0].(*query.Org)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// OrgByID indicates an expected call of OrgByID
+func (mr *MockQueriesMockRecorder) OrgByID(arg0, arg1, arg2 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrgByID", reflect.TypeOf((*MockQueries)(nil).OrgByID), arg0, arg1, arg2)
+}
+
+// OrgByID mocks base method
+func (m *MockQueries) LoginPolicyByID(arg0 context.Context, arg1 bool, arg2 string, arg3 bool) (*query.LoginPolicy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LoginPolicyByID", arg0, arg1, arg2, arg3)
+	ret0, _ := ret[0].(*query.LoginPolicy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// OrgByID indicates an expected call of OrgByID
+func (mr *MockQueriesMockRecorder) LoginPolicyByID(arg0, arg1, arg2, arg3 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LoginPolicyByID", reflect.TypeOf((*MockQueries)(nil).LoginPolicyByID), arg0, arg1, arg2, arg3)
+}

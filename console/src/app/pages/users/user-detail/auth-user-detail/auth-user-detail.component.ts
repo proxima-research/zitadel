@@ -9,6 +9,7 @@ import { defer, EMPTY, fromEvent, mergeWith, Observable, of, shareReplay, Subjec
 import { ChangeType } from 'src/app/modules/changes/changes.component';
 import { phoneValidator, requiredValidator } from 'src/app/modules/form-field/validators/validators';
 import { InfoDialogComponent } from 'src/app/modules/info-dialog/info-dialog.component';
+import { InfoSectionType } from 'src/app/modules/info-section/info-section.component';
 import {
   MetadataDialogComponent,
   MetadataDialogData,
@@ -78,6 +79,7 @@ export class AuthUserDetailComponent implements OnInit {
   protected readonly currentSetting$: Observable<string | undefined>;
   protected readonly loginPolicy$: Observable<LoginPolicy>;
   protected readonly userName$: Observable<string>;
+  public readonly InfoSectionType: typeof InfoSectionType = InfoSectionType;
 
   constructor(
     private translate: TranslateService,

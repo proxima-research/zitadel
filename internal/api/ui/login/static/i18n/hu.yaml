@@ -10,6 +10,9 @@ Login:
   MustBeMemberOfOrg: A felhasználónak az {{.OrgName}} szervezet tagjának kell lennie.
   RegisterButtonText: Regisztráció
   NextButtonText: Következő
+LoginAs:
+  Title: Bejelentkezés másként
+  SelectUserLogin: Felhasználói bejelentkezés kiválasztása.
 LDAP:
   Title: Bejelentkezés
   Description: Add meg a bejelentkezési adataidat.
@@ -235,6 +238,7 @@ RegistrationUser:
   Indonesian: Indonéz
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Nem
   Female: Nő
   Male: Férfi
@@ -277,6 +281,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Indonéz
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Felhasználási feltételek
   TosConfirm: Elfogadom a
   TosLinkText: TOS
@@ -348,6 +353,7 @@ ExternalNotFound:
   Indonesian: Indonéz
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: Eszköz engedélyezése
   UserCode:

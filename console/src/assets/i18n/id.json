@@ -597,7 +597,8 @@
       "DELETEACCOUNT": "Hapus Akun",
       "DELETEACCOUNT_DESC": "Jika Anda melakukan tindakan ini, Anda akan keluar dan tidak lagi memiliki akses ke akun Anda. Tindakan ini tidak dapat dibatalkan, jadi lanjutkan dengan hati-hati.",
       "DELETEACCOUNT_BTN": "Hapus Akun",
-      "DELETEACCOUNT_SUCCESS": "Akun berhasil dihapus!"
+      "DELETEACCOUNT_SUCCESS": "Akun berhasil dihapus!",
+      "NOPERMISSIONTOEDIT": "Anda kehilangan izin yang diperlukan untuk mengedit akun!"
     },
     "DETAILS": { "DATECREATED": "Dibuat", "DATECHANGED": "Berubah" },
     "DIALOG": {
@@ -1277,7 +1278,8 @@
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
         "hu": "Magyar",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1504,7 +1506,8 @@
         "nl": "Nederlands",
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "Verifikasi email selesai",
@@ -2297,7 +2300,8 @@
     "nl": "Nederlands",
     "sv": "Svenska",
     "id": "Bahasa Indonesia",
-    "ko": "한국어"
+    "ko": "한국어",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Tambahkan Manajer",

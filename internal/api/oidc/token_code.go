@@ -7,6 +7,7 @@ import (
 
 	"github.com/zitadel/oidc/v3/pkg/oidc"
 	"github.com/zitadel/oidc/v3/pkg/op"
+	"github.com/zitadel/zitadel/internal/api/authz"
 
 	"github.com/zitadel/zitadel/internal/api/http/middleware"
 	"github.com/zitadel/zitadel/internal/command"
@@ -61,6 +62,7 @@ func (s *Server) codeExchangeV1(ctx context.Context, client *Client, req *oidc.A
 	if err != nil {
 		return nil, err
 	}
+	ctx = authz.SetAuthRequestIdToCtx(ctx, authReq.ID)
 
 	if challenge := authReq.GetCodeChallenge(); challenge != nil || client.AuthMethod() == oidc.AuthMethodNone {
 		if err = op.AuthorizeCodeChallenge(req.CodeVerifier, challenge); err != nil {

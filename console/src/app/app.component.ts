@@ -267,12 +267,7 @@ export class AppComponent {
   }
 
   public changedOrg(org: Org.AsObject): void {
-    // Reference: https://stackoverflow.com/a/58114797
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      // We use navigateByUrl as our urls may have queryParams
-      this.router.navigateByUrl(currentUrl).then();
-    });
+    this.router.navigate(['/org']);
   }
 
   private setLanguage(): void {

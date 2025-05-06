@@ -644,7 +644,8 @@
       "DELETEACCOUNT": "Radera Konto",
       "DELETEACCOUNT_DESC": "Om du utför denna åtgärd kommer du att loggas ut och inte längre ha tillgång till ditt konto. Denna åtgärd är inte reversibel, så fortsätt med försiktighet.",
       "DELETEACCOUNT_BTN": "Radera Konto",
-      "DELETEACCOUNT_SUCCESS": "Konto raderat framgångsrikt!"
+      "DELETEACCOUNT_SUCCESS": "Konto raderat framgångsrikt!",
+      "NOPERMISSIONTOEDIT": "Du saknar de nödvändiga behörigheterna för att redigera konto!"
     },
     "DETAILS": {
       "DATECREATED": "Skapad",
@@ -1403,7 +1404,8 @@
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
         "hu": "Magyar",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1643,7 +1645,8 @@
         "nl": "Nederlands",
         "sv": "Svenska",
         "id": "Bahasa Indonesia",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "E-postverifiering klar",
@@ -2617,7 +2620,8 @@
     "nl": "Nederlands",
     "sv": "Svenska",
     "id": "Bahasa Indonesia",
-    "ko": "한국어"
+    "ko": "한국어",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Lägg till en administratör",

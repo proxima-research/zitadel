@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Skapa nytt konto
   NextButtonText: Fortsätt
 
+LoginAs:
+  Title: Logga in som
+  SelectUserLogin: Välj användarinloggning.
+
 LDAP:
   Title: Logga in
   Description: Ange dina användaruppgifter.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Kön
   Female: Man
   Male: Kvinna
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Användarvillkor
   TosConfirm: Jag accepterar
   TosLinkText: Användarvillkoren
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 DeviceAuth:
   Title: Tillgång från hårdvaruenhet
   UserCode:

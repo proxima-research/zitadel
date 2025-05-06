@@ -644,7 +644,8 @@
       "DELETEACCOUNT": "Fiók törlése",
       "DELETEACCOUNT_DESC": "Ha végrehajtod ezt a műveletet, kijelentkezel és többé nem lesz hozzáférésed a fiókodhoz. Ez a művelet nem visszafordítható, kérlek folytasd óvatosan.",
       "DELETEACCOUNT_BTN": "Fiók törlése",
-      "DELETEACCOUNT_SUCCESS": "A fiók sikeresen törölve!"
+      "DELETEACCOUNT_SUCCESS": "A fiók sikeresen törölve!",
+      "NOPERMISSIONTOEDIT": "Hiányoznak a fiók szerkesztéséhez szükséges engedélyek!"
     },
     "DETAILS": {
       "DATECREATED": "Létrehozva",
@@ -1399,7 +1400,8 @@
         "sv": "Svéd",
         "id": "Indonéz",
         "hu": "Magyar",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       }
     },
     "SMTP": {
@@ -1637,7 +1639,8 @@
         "nl": "Holland",
         "sv": "Svéd",
         "id": "Indonéz",
-        "ko": "한국어"
+        "ko": "한국어",
+        "uk": "Українська"
       },
       "KEYS": {
         "emailVerificationDoneText": "E-mail ellenőrzés kész",
@@ -2611,7 +2614,8 @@
     "nl": "Holland",
     "sv": "Svéd",
     "id": "Indonéz",
-    "hu": "Magyar"
+    "hu": "Magyar",
+    "uk": "Українська"
   },
   "MEMBER": {
     "ADD": "Hozzáadás egy menedzsert",

@@ -33,6 +33,9 @@ type Queries interface {
 	ActivePrivateSigningKey(ctx context.Context, t time.Time) (keys *query.PrivateKeys, err error)
 
 	ActiveInstances() []string
+
+	OrgByID(context.Context, bool, string) (*query.Org, error)
+	LoginPolicyByID(context.Context, bool, string, bool) (*query.LoginPolicy, error)
 }
 
 type NotificationQueries struct {

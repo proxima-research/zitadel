@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: 登録
   NextButtonText: 次へ
 
+LoginAs:
+  Title: としてログイン
+  SelectUserLogin: ユーザーログインを選択します。
+
 LDAP:
   Title: ようこそ！
   Description: LDAPのログイン情報を入力してください
@@ -20,7 +24,7 @@ LDAP:
 
 SelectAccount:
   Title: アカウントの選択
-  Description: ZITADELアカウントを使用します。
+  Description: アカウントを使用します。
   TitleLinking: ユーザーリンクのアカウント選択
   DescriptionLinking: アカウントを選択して、外部ユーザーにリンクします。
   OtherUser: その他のユーザー
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: 性別
   Female: 女性
   Male: 男性
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: 利用規約
   TosConfirm: 私は利用規約を承諾します。
   TosLinkText: TOS
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
 
 DeviceAuth:
   Title: デバイス認証

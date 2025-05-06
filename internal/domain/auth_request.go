@@ -66,6 +66,10 @@ type AuthRequest struct {
 	policyOrgID string
 	// SessionID is set to the computed sessionID of the login session table
 	SessionID string
+
+	LoginAs            bool
+	UserOrigID         *string
+	ShowSelectUserStep ShowSelectUserStep
 }
 
 func (a *AuthRequest) SetPolicyOrgID(id string) {
@@ -283,3 +287,11 @@ func (a *AuthRequest) UserAuthMethodTypes() []UserAuthMethodType {
 	}
 	return list
 }
+
+type ShowSelectUserStep uint8
+
+const (
+	ShowSelectUserStepNone ShowSelectUserStep = iota
+	ShowSelectUserStepToDo
+	ShowSelectUserStepDone
+)

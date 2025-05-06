@@ -73,6 +73,7 @@ func (c *Commands) CreateOIDCSessionFromAuthRequest(
 	if err != nil {
 		return nil, "", err
 	}
+	ctx = authz.SetAuthRequestIdToCtx(ctx, authReqId)
 
 	if authReqModel.ResponseType == domain.OIDCResponseTypeCode && authReqModel.AuthRequestState != domain.AuthRequestStateCodeAdded {
 		return nil, "", zerrors.ThrowPreconditionFailed(nil, "COMMAND-Iung5", "Errors.AuthRequest.NoCode")
@@ -429,6 +430,7 @@ func (c *OIDCSessionEvents) AddSession(
 		preferredLanguage,
 		userAgent,
 	))
+	c.events[len(c.events)-1].(*oidcsession.AddedEvent).AuthRequestID = authz.GetAuthRequestIdFromCtx(ctx)
 }
 
 func (c *OIDCSessionEvents) SetAuthRequestCodeExchanged(ctx context.Context, model *AuthRequestWriteModel) error {

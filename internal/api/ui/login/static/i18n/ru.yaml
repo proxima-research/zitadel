@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: Зарегистрироваться
   NextButtonText: Продолжить
 
+LoginAs:
+  Title: Войти как
+  SelectUserLogin: Выберите логин пользователя.
+
 LDAP:
   Title: Войти
   Description: Введите свои данные для входа.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Пол
   Female: Женский
   Male: Мужской
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Условия использования
   TosConfirm: Я согласен с
   TosLinkText: Пользовательским соглашением
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   
 DeviceAuth:
   Title: Авторизация устройства
@@ -440,26 +447,26 @@ Errors:
       FirstNameEmpty: Поле имени пусто
       LastNameEmpty: Поле фамилии пусто
       IDMissing: Отсутствует идентификатор профиля
-      Email:
-        NotFound: Электронная почта не найдена
-        Invalid: Некорректный адрес электронной почты
-        AlreadyVerified: Электронная почта уже подтверждена
-        NotChanged: Адрес электронной почты не изменился
-        Empty: Электронная почта не указана
-        IDMissing: Отсутствует идентификатор электронной почты
-      Phone:
-        NotFound: Номер телефона не найден
-        Invalid: Неверный номер телефона
-        AlreadyVerified: Номер телефона уже подтвержден
-        Empty: Номер телефона не указан
-        NotChanged: Номер телефона не изменился
-      Address:
-        NotFound: Адрес не найден
-        NotChanged: Адрес не изменился
-      Username:
-        AlreadyExists: Логин уже занят
-        Reserved: Логин уже занят
-        Empty: Логин не указан
+    Email:
+      NotFound: Электронная почта не найдена
+      Invalid: Некорректный адрес электронной почты
+      AlreadyVerified: Электронная почта уже подтверждена
+      NotChanged: Адрес электронной почты не изменился
+      Empty: Электронная почта не указана
+      IDMissing: Отсутствует идентификатор электронной почты
+    Phone:
+      NotFound: Номер телефона не найден
+      Invalid: Неверный номер телефона
+      AlreadyVerified: Номер телефона уже подтвержден
+      Empty: Номер телефона не указан
+      NotChanged: Номер телефона не изменился
+    Address:
+      NotFound: Адрес не найден
+      NotChanged: Адрес не изменился
+    Username:
+      AlreadyExists: Логин уже занят
+      Reserved: Логин уже занят
+      Empty: Логин не указан
     Password:
       ConfirmationWrong: Указанные пароли не совпадают
       Empty: Пароль не указан

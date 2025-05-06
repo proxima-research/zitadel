@@ -248,6 +248,7 @@ func Test_userNotifierLegacy_reduceInitCodeAdded(t *testing.T) {
 					IsPrimary: true,
 				}},
 			}, nil)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.Org{}, nil)
 			expectTemplateWithNotifyUserQueries(queries, givenTemplate)
 			return fields{
 					queries:  queries,
@@ -1387,6 +1388,8 @@ func Test_userNotifierLegacy_reducePasswordChanged(t *testing.T) {
 			}, nil)
 			expectTemplateWithNotifyUserQueries(queries, givenTemplate)
 			commands.EXPECT().PasswordChangeSent(gomock.Any(), orgID, userID).Return(nil)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.Org{}, nil)
+			queries.EXPECT().LoginPolicyByID(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.LoginPolicy{}, nil)
 			return fields{
 					queries:  queries,
 					commands: commands,
@@ -1427,6 +1430,8 @@ func Test_userNotifierLegacy_reducePasswordChanged(t *testing.T) {
 			}, nil)
 			expectTemplateWithNotifyUserQueries(queries, givenTemplate)
 			commands.EXPECT().PasswordChangeSent(gomock.Any(), orgID, userID).Return(nil)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.Org{}, nil)
+			queries.EXPECT().LoginPolicyByID(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.LoginPolicy{}, nil)
 			return fields{
 					queries:  queries,
 					commands: commands,
@@ -1465,6 +1470,8 @@ func Test_userNotifierLegacy_reducePasswordChanged(t *testing.T) {
 					IsPrimary: true,
 				}},
 			}, nil)
+			queries.EXPECT().OrgByID(gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.Org{}, nil)
+			queries.EXPECT().LoginPolicyByID(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes().Return(&query.LoginPolicy{}, nil)
 			expectTemplateWithNotifyUserQueries(queries, givenTemplate)
 			return fields{
 					queries:  queries,

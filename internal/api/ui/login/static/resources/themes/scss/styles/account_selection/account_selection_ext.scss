@@ -1,0 +1,65 @@
+  .lgn-account-selection .lgn-account-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 -1px var(--zitadel-color-footer-line);
+
+    .lgn-account {
+      box-shadow: none;
+    }
+
+    .lgn-checkbox {
+      margin-left: 30px;
+    }
+  }
+
+  form.lng-login-as-search {
+    position: relative;
+
+    .lng-login-as-search-field {
+      padding: 10px 50px;
+      border-radius: 50vw;
+      border-color: var(--zitadel-color-divider);
+      background-color: var(--zitadel-color-background);
+      color: var(--zitadel-color-text);
+    }
+
+    .lng-login-as-search-button, .lng-login-as-search-clear-button {
+      position: absolute;
+      padding: 0;
+      display: block;
+      height: 18px;
+      width: 18px;
+      fill: var(--zitadel-color-text);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font: unset;
+    }
+
+    .lng-login-as-search-button {
+      right: 10px;
+      top: 12px;
+    }
+
+    .lng-login-as-search-clear-button{
+      right: 32px;
+      top: 11px;
+      display: none;
+    }
+  }
+
+  form.lng-login-as-users .lgn-account-selection {
+    height: 330px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  form.lng-login-as-nav {
+    margin: 10px;
+
+    button.right {
+      float: right;
+    }
+  }

@@ -11,6 +11,10 @@ Login:
   RegisterButtonText: registrar
   NextButtonText: siguiente
 
+LoginAs:
+  Title: Iniciar sesión como
+  SelectUserLogin: Seleccione inicio de sesión de usuario.
+
 LDAP:
   Title: Inicio de sesión
   Description: Introduce tus datos de inicio de sesión.
@@ -265,6 +269,7 @@ RegistrationUser:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   GenderLabel: Género
   Female: Mujer
   Male: Hombre
@@ -308,6 +313,7 @@ ExternalRegistrationUserOverview:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   TosAndPrivacyLabel: Términos y condiciones
   TosConfirm: Acepto los
   TosLinkText: TDS
@@ -385,6 +391,7 @@ ExternalNotFound:
   Indonesian: Bahasa Indonesia
   Hungarian: Magyar
   Korean: 한국어
+  Ukrainian: Українська
   
 Footer:
   PoweredBy: Powered By

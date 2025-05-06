@@ -697,8 +697,16 @@ func (u *userNotifierLegacy) reducePasswordChanged(event eventstore.Event) (*han
 		if err != nil {
 			return err
 		}
+		userOrg, err := u.queries.OrgByID(ctx, false, notifyUser.ResourceOwner)
+		if err != nil {
+			return err
+		}
+		loginPolicy, err := u.queries.LoginPolicyByID(ctx, false, userOrg.ID, false)
+		if err != nil {
+			return err
+		}
 		err = types.SendEmail(ctx, u.channels, string(template.Template), translator, notifyUser, colors, event.Type()).
-			SendPasswordChange(ctx, notifyUser)
+			SendPasswordChange(ctx, notifyUser, userOrg, loginPolicy)
 		if err != nil {
 			if errors.Is(err, &channels.CancelError{}) {
 				// if the notification was canceled, we don't want to return the error, so there is no retry
